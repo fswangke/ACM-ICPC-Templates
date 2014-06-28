@@ -2,6 +2,9 @@ Templates
 =========
 
 # Computational Geometry
-* Polygon Circle Intersection.cpp
-* Half Plane Intersection.cpp
+* Point
+* Circle
+* Polygon
+* Polygon Circle Intersection
+* Half Plane Intersection
 
