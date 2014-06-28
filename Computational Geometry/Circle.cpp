@@ -3,16 +3,8 @@ struct circle {
 	point o;
 	double r2; // r ^ 2
 
-	bool inside(const point &a) {
-		return sqr(a.x - o.x) + sqr(a.y - o.y) <= r2;
-	}
-
-	void set(const point &a, const point &b) {
-		o.x = (a.x + b.x) * 0.5;
-		o.y = (a.y + b.y) * 0.5;
-		r2 = sqr(a.x - o.x) + sqr(a.y - o.y);
-	}
-
+	bool inside(const point &a);
+	void set(const point &a, const point &b);
 	void set(const point &a, const point &b, const point &c) { // a, b, c not on the same line
 		double a1 = 2 * (a.x - b.x), b1 = 2 * (a.y - b.y);
 		double a2 = 2 * (a.x - c.x), b2 = 2 * (a.y - c.y);
@@ -35,14 +27,8 @@ struct circle {
 		B = mm + vv;
 		return true;
 	}
-
-	bool contain(const circle &a) const {
-		return sign(Sqrt(a.r2) + (o - a.o).len() - Sqrt(r2)) < 0;
-	}
-
-	bool disjunct(const circle &a) const {
-		return sign(Sqrt(a.r2) + Sqrt(r2) - (o - a.o).len()) < 0;
-	}
+	bool contain(const circle &a) const { return sign(Sqrt(a.r2) + (o - a.o).len() - Sqrt(r2)) < 0; }
+	bool disjunct(const circle &a) const { return sign(Sqrt(a.r2) + Sqrt(r2) - (o - a.o).len()) < 0; }
 };
 
 bool twoCircleIntersect(const circle &a, const circle &b, point &A, point &B) { // a, b should not be the same
