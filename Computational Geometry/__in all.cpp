@@ -73,11 +73,11 @@ inline int sign(const double &a, const double &eps = EPS) {
 	return a < -eps ? -1 : int(a > eps);
 }
 
-inline double sqr(double x) {
+inline double sqr(const double &x) {
 	return x * x;
 }
 
-inline double Sqrt(double x) {
+inline double Sqrt(const double &x) {
 	return x < 0 ? 0 : sqrt(x);
 }
 
@@ -95,7 +95,7 @@ inline double arcCos(const double &a) {
 struct point {
 	double x, y;
 	point(): x(0.0), y(0.0) {}
-	point(double x, double y): x(x), y(y) {}
+	point(const double &x, const double &y): x(x), y(y) {}
 	point operator + (const point &rhs) const { return point(x + rhs.x, y + rhs.y); }
 	point operator - (const point &rhs) const { return point(x - rhs.x, y - rhs.y); }
 	point operator * (const double &k) const { return point(x * k, y * k); }
