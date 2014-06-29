@@ -1,8 +1,9 @@
+
 int N;
-double R; // 以原点为圆心
+double R; // circle: x ^ 2 + y ^ 2 <= R ^ 2
 point info[maxn];
 
-double area2(point pa, point pb) { // 用有向面积，划分成一个三角形和圆的面积的交
+double triangleCircleIntersection(point pa, point pb) {
 	if (pa.len() < pb.len()) swap(pa, pb);
 	if (pb.len() < eps) return 0;
 	point pc = pb - pa;
@@ -24,9 +25,9 @@ double area2(point pa, point pb) { // 用有向面积，划分成一个三角形和圆的面积的交
 	return S;
 }
 
-double area() { // 点保存在info[0, N)里面
+double polygonCircleIntersection() {
 	double S = 0;
 	info[N] = info[0];
-	for (int i = 0; i < N; ++i) S += area2(info[i], info[i + 1]) * sign(det(info[i], info[i + 1]));
+	for (int i = 0; i < N; ++i) S += triangleCircleIntersection(info[i], info[i + 1]) * sign(det(info[i], info[i + 1]));
 	return fabs(S);
 }

@@ -1,3 +1,4 @@
+
 struct Border {
 	point p1, p2; double alpha;
 	Border() : p1(), p2(), alpha(0.0) {}

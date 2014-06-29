@@ -1,24 +1,35 @@
+#define EPS 1e-7
+#define PI 3.1415926535897932384626
 
-inline int sign(double a, const double &eps = EPS);
-inline double sqr(double a);
-inline double Sqrt(double a);
-inline double arcSin(double a) {
+inline int sign(const double &a, const double &eps = EPS) { return a < -eps ? -1 : int(a > eps); }
+inline double sqr(double x) { return x * x; }
+inline double Sqrt(double x) { return x < 0 ? 0 : sqrt(x); }
+
+inline double arcSin(const double &a) {
 	if (sign(a + 1) <= 0) return -PI / 2;
 	if (sign(a - 1) >= 0) return PI / 2;
 	return asin(a);
 }
-inline double arcCos(double a) {
+
+inline double arcCos(const double &a) {
 	if (sign(a + 1) <= 0) return PI;
 	if (sign(a - 1) >= 0) return 0;
 	return acos(a);
 }
-
 struct point {
 	double x, y;
-	point rot(const double &a) const { // counter-clockwise
-		return point(x * cos(a) - y * sin(a), x * sin(a) + y * cos(a));
-	}
-	// +-*/ 以及 len() 叉积点积省略
+	point(): x(0.0), y(0.0) {}
+	point(double x, double y): x(x), y(y) {}
+	point operator + (const point &rhs) const { return point(x + rhs.x, y + rhs.y); }
+	point operator - (const point &rhs) const { return point(x - rhs.x, y - rhs.y); }
+	point operator * (const double &k) const { return point(x * k, y * k); }
+	point operator / (const double &k) const { return point(x / k, y / k); }
+	double len() const { return hypot(x, y); }
+	double norm() const { return x * x + y * y; }
+	point unit() const { double k = len(); return point(x / k, y / k); }
+	point rot(const double &a) const { return point(x * cos(a) - y * sin(a), x * sin(a) + y * cos(a)); }
+	friend double dot(const point &a, const point &b) { return a.x * b.x + a.y * b.y; }
+	friend double det(const point &a, const point &b) { return a.x * b.y - a.y * b.x; }
 	friend double dist(const point &a, const point &b, const point &c) { // dist from C to AB
 		return fabs(det(a - c, b - c) / (a - b).len());
 	}
