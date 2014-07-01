@@ -73,11 +73,11 @@ inline int sign(const double &a, const double &eps = EPS) {
 	return a < -eps ? -1 : int(a > eps);
 }
 
-inline double sqr(const double &x) {
+inline double sqr(double x) {
 	return x * x;
 }
 
-inline double Sqrt(const double &x) {
+inline double Sqrt(double x) {
 	return x < 0 ? 0 : sqrt(x);
 }
 
@@ -94,18 +94,42 @@ inline double arcCos(const double &a) {
 }
 struct point {
 	double x, y;
-	point(): x(0.0), y(0.0) {}
-	point(const double &x, const double &y): x(x), y(y) {}
-	point operator + (const point &rhs) const { return point(x + rhs.x, y + rhs.y); }
-	point operator - (const point &rhs) const { return point(x - rhs.x, y - rhs.y); }
-	point operator * (const double &k) const { return point(x * k, y * k); }
-	point operator / (const double &k) const { return point(x / k, y / k); }
-	double len() const { return hypot(x, y); }
-	double norm() const { return x * x + y * y; }
-	point unit() const { double k = len(); return point(x / k, y / k); }
-	point rot(const double &a) const { return point(x * cos(a) - y * sin(a), x * sin(a) + y * cos(a)); }
-	friend double dot(const point &a, const point &b) { return a.x * b.x + a.y * b.y; }
-	friend double det(const point &a, const point &b) { return a.x * b.y - a.y * b.x; }
+
+	point(): x(0.0), y(0.0) {
+	}
+	point(double x, double y): x(x), y(y) {
+	}
+	point operator + (const point &rhs) const {
+		return point(x + rhs.x, y + rhs.y);
+	}
+	point operator - (const point &rhs) const {
+		return point(x - rhs.x, y - rhs.y);
+	}
+	point operator * (const double &k) const {
+		return point(x * k, y * k);
+	}
+	point operator / (const double &k) const {
+		return point(x / k, y / k);
+	}
+	double len() const {
+		return hypot(x, y);
+	}
+	double norm() const {
+		return x * x + y * y;
+	}
+	point unit() const {
+		double k = len();
+		return point(x / k, y / k);
+	}
+	point rot(const double &a) const {
+		return point(x * cos(a) - y * sin(a), x * sin(a) + y * cos(a));
+	}
+	friend double dot(const point &a, const point &b) {
+		return a.x * b.x + a.y * b.y;
+	}
+	friend double det(const point &a, const point &b) {
+		return a.x * b.y - a.y * b.x;
+	}
 	friend double dist(const point &a, const point &b, const point &c) { // dist from C to AB
 		return fabs(det(a - c, b - c) / (a - b).len());
 	}
@@ -285,13 +309,64 @@ struct Polygon { // stored in [0, n)
 	}
 };
 
-int main() {
-	static point p[1033];
-	int X, Y, N;
-	while (scanf("%d %d %d", &X, &Y, &N) == 3) {
-		Rep(i, 1, N) scanf("%lf%lf", &p[i].x, &p[i].y);
-		circle ans = minCircle(p, N);
-		printf("(%.1f,%.1f).\n%.1f\n", ans.o.x, ans.o.y, ans.r);
+inline bool toUpLeft(const point &a, const point &b) {
+	int c = sign(b.y - a.y);
+	if (c > 0) return true;
+	return c == 0 && sign(b.x - a.x) > 0;
+}
+
+inline bool cmpByPolarAngle(const point &a, const point &b) { // counter-clockwise, shorter first if they share the same polar angle
+	int c = sign(det(a, b));
+	if (c != 0) return c > 0;
+    return sign(b.len() - a.len()) > 0;
+}
+
+double maxEmptyConvexHull(point p[], int N) {
+	static double dp[133][133];
+	static point vec[133];
+	static int seq[133]; // empty triangles formed with (0, 0), vec[o], vec[ seq[i] ]
+
+	double ans = 0.0;
+	Rep(o, 1, N) {
+		int totVec = 0;
+		Rep(i, 1, N) if (toUpLeft(p[o], p[i])) 
+			vec[++totVec] = p[o] - p[i];
+		sort(vec + 1, vec + totVec + 1, cmpByPolarAngle);
+		Rep(i, 1, totVec) Rep(j, 1, totVec) dp[i][j] = 0.0;
+		
+		Rep(k, 2, totVec) {
+			int i = k - 1;
+			while (i > 0 && sign( det(vec[k], vec[i]) ) == 0) --i;
+			
+			int totSeq = 0;
+			for (int j; i > 0; i = j) {
+				seq[++totSeq] = i;
+				for (j = i - 1; j > 0 && sign(det(vec[i] - vec[k], vec[j] - vec[k])) > 0; --j);
+
+				double v = det(vec[i], vec[k]) * 0.5;
+				if (j > 0) v += dp[i][j];
+				dp[k][i] = v;
+				Up(ans, v);
+			}
+			for (int i = totSeq - 1; i >= 1; --i)
+				Up( dp[k][ seq[i] ], dp[k][seq[i + 1]] );
+		}
 	}
+	
+	return ans;
+}
+
+void solve() {
+	static point p[133];
+	static int N;
+	scanf("%d", &N);
+	Rep(i, 1, N) scanf("%lf %lf", &p[i].x, &p[i].y);
+	printf("%.1f\n", maxEmptyConvexHull(p, N));
+}
+
+int main() {
+	int T;
+	scanf("%d", &T);
+	while (T--) solve();
 	return 0;
 }
