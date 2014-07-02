@@ -1,7 +1,7 @@
 Templates
 =========
 
-# Computational Geometry
+## Computational Geometry
 * Point
 * Circle
 * Polygon
