@@ -11,3 +11,5 @@ Templates
 * Closest Pair
 * Convex Hull && Convex Diameter
 
+## Data Structure
+* Dynamic Convex Hull (Insertion Only)
