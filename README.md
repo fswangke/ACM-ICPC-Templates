@@ -16,3 +16,6 @@ Templates
 
 ## Graph Theory
 * Blossom Algorithm
+
+## Others
+* K Disjoint LIS
