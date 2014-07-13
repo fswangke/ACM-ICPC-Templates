@@ -14,6 +14,7 @@ Templates
 
 ## Data Structure
 * Dynamic Convex Hull (Insertion Only)
+* Usage Of Rope
 
 ## Graph Theory
 * Blossom Algorithm
