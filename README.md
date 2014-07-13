@@ -4,6 +4,7 @@ Templates
 ## Computational Geometry
 * Point
 * Circle
+* Circle K-Cover
 * Polygon
 * Polygon Circle Intersection
 * Half Plane Intersection

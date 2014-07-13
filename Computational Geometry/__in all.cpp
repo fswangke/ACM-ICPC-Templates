@@ -212,8 +212,14 @@ struct circle {
 		B = mm + vv;
 		return true;
 	}
-	bool contain(const circle &b) const { return sign(b.r + (o - b.o).len() - r) < 0; }
-	bool disjunct(const circle &b) const { return sign(b.r + r - (o - b.o).len()) < 0; }
+
+	bool contain(const circle &b) const {
+		return sign(b.r + (o - b.o).len() - r) <= 0;
+	}
+
+	bool disjunct(const circle &b) const {
+		return sign(b.r + r - (o - b.o).len()) <= 0;
+	}
 };
 
 bool twoCircleIntersect(const circle &a, const circle &b, point &A, point &B) { // a, b should not be the same
