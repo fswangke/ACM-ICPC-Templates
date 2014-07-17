@@ -16,6 +16,7 @@ Templates
 * Farmland
 * Voronoi (Unchecked)
 * Fermat Point Of A Quadrilateral (Unchecked)
+
 ### 3-D Geometry
 
 
