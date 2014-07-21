@@ -6,16 +6,17 @@ inline double sqr(const double &x) { return x * x; }
 inline double Sqrt(const double &x) { return x < 0 ? 0 : sqrt(x); }
 
 inline double arcSin(const double &a) {
-	if (sign(a + 1) <= 0) return -PI / 2;
-	if (sign(a - 1) >= 0) return PI / 2;
+	if (a <= -1.0) return -PI / 2;
+	if (a >=  1.0) return PI / 2;
 	return asin(a);
 }
 
 inline double arcCos(const double &a) {
-	if (sign(a + 1) <= 0) return PI;
-	if (sign(a - 1) >= 0) return 0;
+	if (a <= -1.0) return PI;
+	if (a >=  1.0) return 0;
 	return acos(a);
 }
+
 struct point {
 	double x, y;
 	point(): x(0.0), y(0.0) {}
