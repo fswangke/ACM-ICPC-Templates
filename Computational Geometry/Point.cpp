@@ -69,9 +69,9 @@ int segIntersectCheck(const point &a, const point &b, const point &c, const poin
 		return 1;
 	}
 	iCnt = 0;
-	if (d1 == 0 && onSeg(c, a, b)) o = c, ++iCnt;
-	if (d2 == 0 && onSeg(d, a, b)) o = d, ++iCnt;
-	if (d3 == 0 && onSeg(a, c, d)) o = a, ++iCnt;
-	if (d4 == 0 && onSeg(b, c, d)) o = b, ++iCnt;
+	if (d1 == 0 && onSeg(a, b, c)) o = c, ++iCnt;
+	if (d2 == 0 && onSeg(a, b, d)) o = d, ++iCnt;
+	if (d3 == 0 && onSeg(c, d, a)) o = a, ++iCnt;
+	if (d4 == 0 && onSeg(c, d, b)) o = b, ++iCnt;
 	return iCnt ? 2 : 0;
 }
