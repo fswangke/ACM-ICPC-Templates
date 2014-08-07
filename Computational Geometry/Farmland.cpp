@@ -60,7 +60,7 @@ void work() {
 			if (visit[x][y]) continue;
 			if (check(x, y)) ++ans;
 		}
-s	}
+	}
 	printf("%d\n", ans);      
 }
 
