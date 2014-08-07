@@ -28,5 +28,8 @@ Templates
 ## Graph Theory
 * Blossom Algorithm
 
+## Math
+* Simplex
+
 ## Others
 * K Disjoint LIS
