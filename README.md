@@ -30,6 +30,7 @@ Templates
 
 ## Math
 * Simplex
+* FFT
 
 ## Others
 * K Disjoint LIS
