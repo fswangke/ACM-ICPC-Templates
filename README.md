@@ -28,6 +28,7 @@ Templates
 
 ## Graph Theory
 * Blossom Algorithm
+* Maxflow
 
 ## Math
 * Simplex
