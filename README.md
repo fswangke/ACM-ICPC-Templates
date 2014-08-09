@@ -30,6 +30,7 @@ Templates
 * Blossom Algorithm
 * Maxflow
 * KM
+* Two-Sat & SCC
 
 ## Math
 * Simplex
