@@ -24,7 +24,7 @@ Templates
 * Dynamic Convex Hull (Insertion Only)
 * Usage Of Rope
 * Functional Treap
-* LCT
+* Link Cut Tree
 
 ## Graph Theory
 * Blossom Algorithm
