@@ -25,6 +25,7 @@ Templates
 * Usage Of Rope
 * Functional Treap
 * Link Cut Tree
+* K-D Tree
 
 ## Graph Theory
 * Blossom Algorithm
