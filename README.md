@@ -3,6 +3,10 @@ Templates
 
 ## Computational Geometry
 ### 2-D Geometry
+* 2D Geometry Base
+	* Point
+	* Circle
+	* Polygon Circle Intersection
 * Point
 * Circle
 * Circle K-Cover

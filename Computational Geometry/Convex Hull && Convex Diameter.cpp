@@ -53,9 +53,9 @@ double convexDiameter(const vector<point> &ps) {
 			k = det(ps[nx] - ps[x], ps[ny] - ps[y]);
 			if (k <= 0) break;
 		}
-		Up(ans, (ps[x] - ps[y]).len());
+		ans = max(ans, (ps[x] - ps[y]).len());
 		if (sign(k) == 0)
-			Up(ans, (ps[x] - ps[ny]).len());
+			ans = max(ans, (ps[x] - ps[ny]).len());
 	}
 	return ans;
 }

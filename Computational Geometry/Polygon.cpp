@@ -26,7 +26,7 @@ struct Polygon { // stored in [0, n)
 		for (int i = 0; i < n; ++i) {
 			A = list[i];
 			B = list[(i + 1) % n];
-			if (onSeg(A, B, p)) return 1;
+			if (p.onSeg(A, B)) return 1;
 			if (sign(A.y - B.y) <= 0) swap(A, B);
 			if (sign(p.y - A.y) > 0) continue;
 			if (sign(p.y - B.y) <= 0) continue;
