@@ -22,7 +22,7 @@ Templates
 * Fermat Point Of A Quadrilateral (Unchecked)
 
 ### 3-D Geometry
-
+* 3D Geometry Base (Warning: Unchecked!!!)
 
 ## Data Structure
 * Dynamic Convex Hull (Insertion Only)
@@ -35,8 +35,8 @@ Templates
 * Blossom Algorithm
 * Maxflow
 * KM
-* Two-Sat & SCC
-* Stoer-Wagner
+* Two-SAT & SCC
+* Stoer-Wagner (Warning: Unchecked!!!)
 
 ## Math
 * Simplex
