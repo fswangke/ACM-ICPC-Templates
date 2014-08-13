@@ -42,6 +42,7 @@ Templates
 ## Math
 * Simplex
 * FFT
+* ExGcd
 
 ## Others
 * K Disjoint LIS
