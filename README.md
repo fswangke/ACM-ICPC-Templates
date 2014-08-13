@@ -23,6 +23,7 @@ Templates
 
 ### 3-D Geometry
 * 3D Geometry Base (Warning: Unchecked!!!)
+* 3D Convex Cut (Warning: Unchecked!!!)
 
 ## Data Structure
 * Dynamic Convex Hull (Insertion Only)
