@@ -44,6 +44,7 @@ Templates
 * FFT
 * ExGcd
 * Linear Congruence (Warning: Unchecked!!!)
+* modLog (Warning: Unchecked!!!)
 
 ## Others
 * K Disjoint LIS
