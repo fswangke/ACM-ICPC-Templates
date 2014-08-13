@@ -36,6 +36,7 @@ Templates
 * Maxflow
 * KM
 * Two-Sat & SCC
+* Stoer-Wagner
 
 ## Math
 * Simplex
