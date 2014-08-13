@@ -35,7 +35,7 @@ Templates
 ## String Related
 * Aho Corasick Automaton
 * Suffix Automaton
-* Manacher
+* Manacher (Warning: Unchecked!!!)
 
 ## Graph Theory
 * Blossom Algorithm
@@ -56,3 +56,4 @@ Templates
 * K Disjoint LIS
 * Generate nCk
 * nextPermutation
+* Josephus number & Inverse Josephus number
