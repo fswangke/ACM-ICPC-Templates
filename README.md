@@ -16,7 +16,7 @@ Templates
 * Maximum Area Empty Convex Hull
 * Closest Pair
 * Convex Hull && Convex Diameter
-* Five Centres in Triangle
+* Five Centers in Triangle
 * Farmland
 * Voronoi (Unchecked)
 * Fermat Point Of A Quadrilateral (Unchecked)
@@ -44,7 +44,7 @@ Templates
 * FFT
 * ExGcd
 * Linear Congruence (Warning: Unchecked!!!)
-* modLog (Warning: Unchecked!!!)
+* ModLog (Warning: Unchecked!!!)
 
 ## Others
 * K Disjoint LIS
