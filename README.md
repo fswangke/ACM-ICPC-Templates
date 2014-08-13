@@ -34,6 +34,7 @@ Templates
 
 ## String Related
 * Aho Corasick Automaton
+* Suffix Automaton
 
 ## Graph Theory
 * Blossom Algorithm
