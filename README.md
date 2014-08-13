@@ -3,7 +3,7 @@ Templates
 
 ## Computational Geometry
 ### 2-D Geometry
-* 2D Geometry Base
+* 2D Geometry Base (Warning: Unchecked!!!)
 	* Point
 	* Circle
 	* Polygon Circle Intersection
