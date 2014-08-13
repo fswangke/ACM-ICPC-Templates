@@ -43,6 +43,7 @@ Templates
 * Simplex
 * FFT
 * ExGcd
+* Linear Congruence (Warning: Unchecked!!!)
 
 ## Others
 * K Disjoint LIS
