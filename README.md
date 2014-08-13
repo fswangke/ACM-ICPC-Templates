@@ -45,6 +45,7 @@ Templates
 * ExGcd
 * Linear Congruence (Warning: Unchecked!!!)
 * ModLog (Warning: Unchecked!!!)
+* Linear Recursive Equation (Warning: Unchecked!!!)
 
 ## Others
 * K Disjoint LIS
