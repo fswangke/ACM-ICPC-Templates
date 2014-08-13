@@ -17,6 +17,7 @@ void exGcd(int a, int b, int &x, int &y) {
 // O(sqrt(C) * log(C)), log(C) for sort & binary-search
 
 int modLog(int A, int B, int C) {
+	static pii baby[MAX_SQRT_C + 11];
 	if (B >= C) return -1;
 	int d = 0;
 	LL k = 1 % C, D = 1 % C;

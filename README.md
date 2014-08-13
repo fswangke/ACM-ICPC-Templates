@@ -7,13 +7,13 @@ Templates
 	* Point
 	* Circle
 	* Polygon Circle Intersection
-* Point
-* Circle
+* Point (To be deleted)
+* Circle (To be deleted)
 * Circle K-Cover
 * Polygon
-* Polygon Circle Intersection
-* Half Plane Intersection
-* Maximum Area Empty Convex Hull (Dynamic Programming)
+* Polygon Circle Intersection (To be deleted)
+* Half Plane Intersection (To be Modified)
+* Maximum Area Empty Convex Hull
 * Closest Pair
 * Convex Hull && Convex Diameter
 * Five Centres in Triangle
