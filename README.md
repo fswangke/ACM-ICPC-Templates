@@ -54,3 +54,4 @@ Templates
 
 ## Others
 * K Disjoint LIS
+* Generate nCk
