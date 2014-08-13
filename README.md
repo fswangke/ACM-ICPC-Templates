@@ -56,4 +56,5 @@ Templates
 * K Disjoint LIS
 * Generate nCk
 * nextPermutation
-* Josephus number & Inverse Josephus number
+* Josephus number & Inverse Josephus number (Warning: Unchecked)
+* Minimal Coloring (Warning: Unchecked & Too Strange)
