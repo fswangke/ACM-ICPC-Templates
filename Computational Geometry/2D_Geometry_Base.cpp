@@ -241,14 +241,18 @@ vector<pair<point, point> > tanCC(const circle &cir1, const circle &cir2) {
 		p = (c2 * r1 - c1 * r2) / (r1 - r2);
 		s1 = cir1.tanCP(p, a1, b1);
 		s2 = cir2.tanCP(p, a2, b2);
-		if (s1 >= 1 && s2 >= 1) list.push_back(make_pair(a1, a2));
-		if (s1 >= 2 && s2 >= 2) list.push_back(make_pair(b1, b2));
+		if (s1 >= 1 && s2 >= 1) {
+			list.push_back(make_pair(a1, a2));
+			list.push_back(make_pair(b1, b2));
+		}
 	}
 	p = (c1 * r2 + c2 * r1) / (r1 + r2);
 	s1 = cir1.tanCP(p, a1, b1);
 	s2 = cir2.tanCP(p, a2, b2);
-	if (s1 >= 1 && s2 >= 1) list.push_back(make_pair(a1, a2));
-	if (s1 >= 2 && s2 >= 2) list.push_back(make_pair(b1, b2));
+	if (s1 >= 1 && s2 >= 1) {
+		list.push_back(make_pair(a1, a2));
+		list.push_back(make_pair(b1, b2));
+	}
 	return list;
 }
 
