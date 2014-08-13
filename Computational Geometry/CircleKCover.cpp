@@ -9,7 +9,7 @@ struct Event {
 	}
 };
 
-void circleKCover(circle *c, int N, double *area) { // area[k] : covered more than k times
+void circleKCover(circle *c, int N, double *area) { // area[k] : covered not less than k times
 	static bool overlap[MAXN][MAXN], g[MAXN][MAXN];
 	Rep(i, 0, N + 1) area[i] = 0.0;
 	Rep(i, 1, N) Rep(j, 1, N) overlap[i][j] = c[i].contain(c[j]);
