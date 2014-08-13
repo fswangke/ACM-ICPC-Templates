@@ -3,13 +3,12 @@ namespace Maxflow {
 
 	int h[MAXNODE], vh[MAXNODE];
 	int S, T, Ncnt;
+	edge cur[MAXNODE], pe[MAXNODE];
 
 	void init(int _S, int _T, int _Ncnt) {
 		S = _S;
 		T = _T;
 		Ncnt = _Ncnt;
-		etop = ebase;
-		Rep(i, 0, Ncnt) fir[i] = NULL;
 	}
 
 	int maxflow() {
