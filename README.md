@@ -32,6 +32,9 @@ Templates
 * Link Cut Tree
 * K-D Tree
 
+## String Related
+* Aho Corasick Automaton
+
 ## Graph Theory
 * Blossom Algorithm
 * Maxflow
