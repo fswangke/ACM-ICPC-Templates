@@ -94,10 +94,35 @@ double distLL(const point &p1, const point &p2, const point &q1, const point &q2
 	point u = p2 - p1;
 	point v = q2 - q1;
 	double d = u.norm() * v.norm() - dot(u, v) * dot(u, v);
-	if (sign(d) < EPS)
+	if (sign(d) == 0)
 		return p1.distLP(q1, q2);
 	double s = (dot(p, u) * v.norm() - dot(p, v) * dot(u, v)) / d;
 	return (p1 + u * s).distLP(q1, q2);
+}
+
+double distSS(const point &p1, const point &p2, const point &q1, const point &q2) {
+	point p = q1 - p1;
+	point u = p2 - p1;
+	point v = q2 - q1;
+	double d = u.norm() * v.norm() - dot(u, v) * dot(u, v);
+	if (sign(d) == 0) {
+		return min(
+			min((p1 - q1).len(),
+				(p1 - q2).len()
+			),
+			min((p2 - q1).len(),
+				(p2 - q2).len()
+			));
+	}
+	double s1 = (dot(p, u) * v.norm() - dot(p, v) * dot(u, v)) / d;
+	double s2 = (dot(p, v) * u.norm() - dot(p, u) * dot(u, v)) / d;
+	if (s1 < 0.0) s1 = 0.0;
+	if (s1 > 1.0) s1 = 1.0;
+	if (s2 < 0.0) s2 = 0.0;
+	if (s2 > 1.0) s2 = 1.0;
+	point r1 = p1 + u * s1;
+	point r2 = q1 + v * s2;
+	return (r1 - r2).len();
 }
 
 bool isFL(const point &p, const point &o, const point &q1, const point &q2, point &res) {
