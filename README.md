@@ -45,6 +45,7 @@ Templates
 * Stoer-Wagner (Warning: Unchecked!!!)
 * Hopcroft-Karp (Warning: Unchecked!!!)
 * EulerianWalk (Warning: Unchecked!!!)
+* Tree Decomposition
 
 ## Math
 * Simplex
