@@ -44,6 +44,7 @@ Templates
 * Two-SAT & SCC
 * Stoer-Wagner (Warning: Unchecked!!!)
 * Hopcroft-Karp (Warning: Unchecked!!!)
+* EulerianWalk (Warning: Unchecked!!!)
 
 ## Math
 * Simplex
