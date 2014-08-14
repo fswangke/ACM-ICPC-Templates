@@ -43,6 +43,7 @@ Templates
 * KM
 * Two-SAT & SCC
 * Stoer-Wagner (Warning: Unchecked!!!)
+* Hopcroft-Karp (Warning: Unchecked!!!)
 
 ## Math
 * Simplex
