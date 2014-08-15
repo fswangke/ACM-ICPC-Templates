@@ -51,6 +51,7 @@ Templates
 * Tree Decomposition
 * Stable Matching
 * Maximal Clique Problem
+* Maximal Clique Counting (Warning: I do not know what it is)
 
 ## Math
 * Simplex
