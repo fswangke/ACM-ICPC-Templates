@@ -87,6 +87,11 @@ struct point {
 		return det(p2 - p1, *this - p1).len() / (p2 - p1).len();
 	}
 
+	double distFP(const point &p1, const point &p2, const point &p3) const {
+		point n = det(p2 - p1, p3 - p1);
+		return fabs( dot(n, *this - p1) / n.len() );
+	}
+
 };
 
 double distLL(const point &p1, const point &p2, const point &q1, const point &q2) {
