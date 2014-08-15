@@ -22,6 +22,7 @@ Templates
 * Fermat Point Of A Quadrilateral (Unchecked)
 * DistOnBall
 * DistOnCuboid (Unchecked)
+* 3D Convex Hull (Warning: Unchecked!!!)
 
 ### 3-D Geometry
 * 3D Geometry Base (Warning: Unchecked!!!)
