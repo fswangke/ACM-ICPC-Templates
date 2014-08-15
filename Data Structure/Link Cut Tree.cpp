@@ -93,7 +93,13 @@ inline void Cut(tree t) {
 	t->ch[0] = null;
 	Update(t);
 }
-
+inline void Cut_simp(tree a, tree b) //simple version
+{
+	MakeRoot(a);
+	Access(a);
+	Splay(b);
+	b -> pre = null;
+}
 inline void Cut(tree x, tree y) {
 	tree upper = (Access(x), Access(y));
 	if (upper == x) {
