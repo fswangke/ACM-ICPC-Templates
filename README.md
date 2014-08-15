@@ -36,6 +36,7 @@ Templates
 * Aho Corasick Automaton
 * Suffix Automaton
 * Manacher (Warning: Unchecked!!!)
+* Suffix Array (Warning: Unchecked!!)
 
 ## Graph Theory
 * Blossom Algorithm
@@ -46,7 +47,7 @@ Templates
 * Hopcroft-Karp (Warning: Unchecked!!!)
 * EulerianWalk (Warning: Unchecked!!!)
 * Tree Decomposition
-* Stable Matching
+* Stable Matching (Warning: Unchecked!!!)
 
 ## Math
 * Simplex
