@@ -20,13 +20,14 @@ Templates
 * Farmland
 * Voronoi (Unchecked)
 * Fermat Point Of A Quadrilateral (Unchecked)
-* DistOnBall
-* DistOnCuboid (Unchecked)
-* 3D Convex Hull (Warning: Unchecked!!!)
 
 ### 3-D Geometry
 * 3D Geometry Base (Warning: Unchecked!!!)
 * 3D Convex Cut (Warning: Unchecked!!!)
+* 3D Convex Hull (Warning: Unchecked!!!)
+* DistOnBall
+* DistOnCuboid (Unchecked)
+* MinBall (Warning: Unchecked!!!)
 
 ## Data Structure
 * Dynamic Convex Hull (Insertion Only)
