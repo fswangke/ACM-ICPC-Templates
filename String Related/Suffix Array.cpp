@@ -1,5 +1,6 @@
 // 待排序的字符串放在 r[0 ... n - 1] 中，最大值小于 m
-// 结果放在 sa[0 ... n - 1]
+// r[0 ... n - 2] > 0, r[n - 1] = 0
+// 结果放在  sa[0 ... n - 1]
 
 namespace SuffixArrayDoubling {
 	int wa[MAXN], wb[MAXN], wv[MAXN], ws[MAXN];
@@ -108,4 +109,16 @@ namespace SuffixArrayDC3 {
 
 	#undef F
 	#undef G
+}
+
+namespace CalcHeight {
+	int rank[MAXN], height[MAXN];
+	void calheight(int *r, int *sa, int n) {
+		int i, j, k = 0;
+		for (i = 1; i <= n; i++)
+			rank[sa[i]] = i;
+		for (i = 0; i < n; height[rank[i++]] = k)
+			for (k ? k-- : 0, j = sa[rank[i] - 1]; r[i + k] == r[j + k]; k++);
+		return;
+	}
 }
