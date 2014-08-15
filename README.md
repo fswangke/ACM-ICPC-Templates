@@ -52,6 +52,10 @@ Templates
 * Stable Matching
 * Maximal Clique Problem
 * Maximal Clique Counting (Warning: I do not know what it is)
+* Minimum Optimum Branchings (Chu–Liu/Edmonds' algorithm)
+* Dynamic MST
+* K-shortest Path (Repeat is allowed)
+* K-shortest Path (Repeat is not allowed)
 
 ## Math
 * Simplex
