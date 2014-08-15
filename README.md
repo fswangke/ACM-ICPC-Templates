@@ -20,6 +20,8 @@ Templates
 * Farmland
 * Voronoi (Unchecked)
 * Fermat Point Of A Quadrilateral (Unchecked)
+* DistOnBall
+* DistOnCuboid (Unchecked)
 
 ### 3-D Geometry
 * 3D Geometry Base (Warning: Unchecked!!!)
