@@ -46,6 +46,7 @@ Templates
 * Hopcroft-Karp (Warning: Unchecked!!!)
 * EulerianWalk (Warning: Unchecked!!!)
 * Tree Decomposition
+* Stable Matching
 
 ## Math
 * Simplex
