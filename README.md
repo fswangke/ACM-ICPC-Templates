@@ -5,7 +5,7 @@ Templates
 
 ## Computational Geometry
 ### 2-D Geometry
-* 2D Geometry Base 
+* 2D Geometry Base
 	* Point
 	* Circle
 	* Polygon Circle Intersection
@@ -17,11 +17,11 @@ Templates
 * Five Centers in Triangle
 * Farmland
 * Voronoi
-* Fermat Point Of A Quadrilateral 
+* Fermat Point Of A Quadrilateral
 
 ### 3-D Geometry
-* 3D Geometry Base 
-* 3D Convex Cut 
+* 3D Geometry Base
+* 3D Convex Cut
 * 3D Convex Hull
 * DistOnBall
 * DistOnCuboid
