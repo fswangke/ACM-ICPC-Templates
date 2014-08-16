@@ -64,6 +64,7 @@ Templates
 * Linear Congruence
 * ModLog
 * Linear Recursive Equation
+* FFT Integer
 
 ## Others
 * K Disjoint LIS
