@@ -33,6 +33,7 @@ Templates
 * Functional Treap
 * Link Cut Tree
 * K-D Tree
+* Tree Decomposition
 
 ## String Related
 * Aho Corasick Automaton
@@ -48,7 +49,6 @@ Templates
 * Stoer-Wagner
 * Hopcroft-Karp
 * EulerianWalk
-* Tree Decomposition
 * Stable Matching
 * Maximal Clique Problem
 * Maximal Clique Counting (Warning: I do not know what it is)
