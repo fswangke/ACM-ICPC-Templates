@@ -1,9 +1,9 @@
 /*
- * ��̬��С������
+ * 动态最小生成树
  * Q(logQ)^2
- * (qx[i], qy[i]) ��ʾ�����Ϊ qx[i] �ıߵ�Ȩֵ��Ϊ qy[i]
- * ɾ��һ�����൱�ڽ���Ȩֵ��Ϊ \infinity
- * ����һ�����൱�ڽ���Ȩֵ�� \infinity ���ĳ��ֵ
+ * (qx[i], qy[i]) 表示将编号为 qx[i] 的边的权值改为 qy[i]
+ * 删除一条边相当于将其权值改为 \infinity
+ * 加入一条边相当于将其权值从 \infinity 变成某个值
  */
 
 #include <cstdio>
