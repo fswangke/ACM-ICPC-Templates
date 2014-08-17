@@ -1,11 +1,11 @@
-
-convert:
-	python convert.py
-
 tex:
 	xelatex main.tex
 	xelatex main.tex
 #	main.pdf
+
+convert:
+	python convert.py
+
 
 clean:
 	del main.aux

@@ -50,7 +50,7 @@ def walkFolder(depth):
 				os.chdir("..")
 				print("Exit")
 		else:
-			if not (depth == 0 and (f == "compiler.py" or f == "main.tex")):
+			if not (depth == 0 and (f == "convert.py" or f == "main.tex")):
 				processFile(f)
 
 def main():
