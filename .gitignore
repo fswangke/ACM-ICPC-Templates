@@ -1,0 +1,8 @@
+*.exe
+*.out
+*.in
+
+*.aux
+*.pdf
+*.log
+*.toc

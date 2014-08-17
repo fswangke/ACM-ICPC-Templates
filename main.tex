@@ -1,0 +1,132 @@
+\documentclass[10pt]{article}
+\usepackage{listings}
+\usepackage{geometry}
+
+\usepackage{ctex, amsmath, amsthm, graphicx, amsfonts, fancyhdr, ctable, pict2e, CJKulem}
+\usepackage[CJKbookmarks, colorlinks = true, linkcolor = red, anchorcolor = blue, citecolor = blue, pdfstartview={FitH}]{hyperref}
+
+%\usepackage[stable]{footmisc}
+%\usepackage{authblk}
+
+\geometry{left=2.7cm, right=2.7cm, top=3cm, bottom=3cm}
+
+\lstset{language=C++, breaklines,numbers=left,frame=leftline,
+		escapeinside=``,extendedchars=false,
+		xleftmargin=0em,xrightmargin=0em,
+		basicstyle=\ttfamily\small, tabsize=2,
+}
+
+\begin{document}
+
+\title{Call It Magic - 模板}
+\date{}
+\tableofcontents
+\newpage
+
+\section{计算几何}
+
+	\subsection{二维计算几何基本操作}
+
+	\subsection{圆的面积模板}
+
+	\subsection{多边形相关}
+
+	\subsection{最大面积空凸包}
+
+	\subsection{最近点对}
+
+	\subsection{凸包与点集直径}
+
+	\subsection{三角形的五心}
+		\input{"Computational Geometry/Five Centers in Triangle.tex"}
+	\subsection{Farmland}
+
+	\subsection{Voronoi图}
+
+	\subsection{四边形费马点}
+
+	\subsection{三维计算几何基本操作}
+
+	\subsection{凸多面体切割}
+
+	\subsection{三维凸包}
+
+	\subsection{球面点表面点距离}
+		
+	\subsection{长方体表面点距离}
+
+	\subsection{最小覆盖球}
+
+\section{数据结构}
+	\subsection{动态凸包(只支持插入)}
+	
+	\subsection{Rope用法}
+	
+	\subsection{可持久化Treap}
+	
+	\subsection{Link-Cut Tree}
+
+	\subsection{K-D Tree}
+
+	\subsection{树链剖分}
+
+\section{字符串相关}
+	\subsection{Manacher}
+
+	\subsection{Aho-Corasick 自动机}
+
+	\subsection{后缀自动机}
+
+	\subsection{后缀数组}
+
+\section{图论}
+	\subsection{带花树}
+
+	\subsection{最大流}
+	
+	\subsection{KM}
+
+	\subsection{2-SAT 与 Kosaraju}
+
+	\subsection{全局最小割 Stoer-Wagner}
+
+	\subsection{Hopcroft-Karp}
+
+	\subsection{欧拉路}
+
+	\subsection{稳定婚姻}
+
+	\subsection{最大团搜索}
+	
+	\subsection{极大团计数}
+
+	\subsection{最小树形图}
+
+	\subsection{动态最小生成树}
+
+	\subsection{K短路(允许重复)}
+
+	\subsection{K短路(不允许重复)}
+
+\section{数学}
+	\subsection{单纯形}
+	
+	\subsection{FFT}
+
+	\subsection{整数FFT}
+
+	\subsection{线性同余方程}
+
+	\subsection{Miller-Rabin 素性测试}
+
+\section{其他}
+	\subsection{Extended LIS}
+	
+	\subsection{生成 nCk}
+	
+	\subsection{nextPermutation}
+	
+	\subsection{Josephus 数与逆 Josephus 数}	
+
+\end{document}
+
