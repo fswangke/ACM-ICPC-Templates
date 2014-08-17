@@ -5,7 +5,7 @@ convert:
 tex:
 	xelatex main.tex
 	xelatex main.tex
-	main.pdf
+#	main.pdf
 
 clean:
 	del main.aux
