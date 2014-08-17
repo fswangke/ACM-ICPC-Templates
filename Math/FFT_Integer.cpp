@@ -10,7 +10,7 @@ const int PRIMITIVE_ROOT = 10;
 const int MAXB = 1 << 20;
 
 namespace PrimitiveRoot {
-
+//	3 * 2 ^ 21 + 1 is a suitable alternate, PrimitiveRoot = 3
 	int powMod(int a, int d, int p) {
 		int res = 1;
 		a %= p;
@@ -29,7 +29,7 @@ namespace PrimitiveRoot {
 		return true;
 	}
 
-	int getMod(int downLimit) { // 3 * 2 ^ 21 + 1 is a suitable alternate
+	int getMod(int downLimit) {
 		for (int c = 3; ; ++c) {
 			int t = (c << 21) | 1;
 			if (isPrime(t) && t >= downLimit)
