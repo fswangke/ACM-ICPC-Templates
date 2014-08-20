@@ -1,11 +1,13 @@
-\documentclass[10pt]{article}
+\documentclass[10pt, a4paper]{article}
 \usepackage{listings}
 \usepackage{geometry}
 
 \usepackage{ctex, amsmath, amsthm, graphicx, amsfonts, fancyhdr, ctable, pict2e, CJKulem}
 \usepackage[CJKbookmarks, colorlinks = true, linkcolor = red, anchorcolor = blue, citecolor = blue, pdfstartview={FitH}]{hyperref}
 
-\geometry{left=2.7cm, right=2.7cm, top=3cm, bottom=3cm}
+%\geometry{left=2.7cm, right=2.7cm, top=3cm, bottom=3cm}
+
+\geometry{left=2.0cm, right=2.0cm, top=2.5cm, bottom=2.5cm}
 
 \lstset{language=C++, breaklines,numbers=left,frame=leftline,
 		escapeinside=``,extendedchars=false,
@@ -112,6 +114,9 @@
 
 	\subsection{后缀数组}
 		\input{"String Related/Suffix Array.tex"}
+	
+	\subsection{环串最小表示}
+		\input{"String Related/Minimial Representation Of A Cyclic String.tex"}
 
 \section{图论}
 	\subsection{带花树}
@@ -185,7 +190,7 @@
 	\subsection{nextPermutation}
 		\input{"Others/nextPermutation.tex"}
 
-	\subsection{Josephus 数与逆 Josephus 数}	
+	\subsection{Josephus 数与逆 Josephus 数}
 		\input{"Others/Josephus.tex"}
 
 \section{Templates}

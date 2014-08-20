@@ -42,6 +42,7 @@ Templates
 * Suffix Automaton
 * Manacher
 * Suffix Array
+* Minimial Representation Of A Cyclic String
 
 ## Graph Theory
 * Blossom Algorithm
