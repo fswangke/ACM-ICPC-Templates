@@ -1,193 +1,155 @@
-struct Rectangle;
+/*
+	test on bzoj 2648 and bzoj 2716
+	`曼哈顿最短路，改成欧几里得只需把sqr改为 x*x 正常即可`
+	`支持插入，查询`
+	`如果要用long long，把LL改为long long即可`
+*/
 
-struct point {
+#include <cstdio>
+#include <cstdlib>
+#include <algorithm>
+using namespace std;
+ 
+typedef int LL;
+struct Point {
 	int x, y;
-
-	point() : x(0), y(0) {
-	}
-
-	point(int x, int y) : x(x), y(y) {
-	}
-
-	bool on(const point &, const point &) const;
-
-	bool in(point *, int) const;
-
-	int operator [] (int i) const {
-		return i ? y : x;
-	}
-
-	int& operator [] (int i) {
-		return i ? y : x;
-	}
-
-	LL norm() const {
-		return (LL)x * x + (LL)y * y;
-	}
-
-	LL to(const Rectangle&) const;
-
-	point operator - (const point &b) const {
-		return point(x - b.x, y - b.y);
-	}
 };
 
-inline LL sqr(LL x) {
-	return x * x;
+inline LL sqr(int x) {
+	return abs(x);
 }
 
-inline LL dot(const point &a, const point &b) {
-	return (LL)a.x * b.x + (LL)a.y * b.y;
-}
-
-inline LL det(const point &a, const point &b) {
-	return (LL)a.x * b.y - (LL)a.y * b.x;
-}
-
-inline bool point::on(const point &a, const point &b) const {
-	const point &p = *this;
-	return det(a - p, b - p) == 0 && dot(a - p, b - p) <= 0;
-}
-
-inline bool point::in(point *polygon, int n) const {
-	const point &p = *this;
-	int cnt = 0;
-	for (int i = 0; i < n; ++i) {
-		const point &a = polygon[i], &b = polygon[(i + 1) % n];
-		if (p.on(a, b)) return true;
-		int d0 = sign(det(b - a, p - a));
-		int d1 = a.y - p.y;
-		int d2 = b.y - p.y;
-		cnt += d0 > 0 && d1 <= 0 && d2 > 0;
-		cnt -= d0 < 0 && d2 <= 0 && d1 > 0;
-	}
-	return cnt != 0;
+inline LL dist(const Point &a, const Point &b) {
+	return sqr(a.x - b.x) + sqr(a.y - b.y);
 }
 
 struct Rectangle {
-	int min[2], max[2];
-	Rectangle() {
-		min[0] = min[1] = INT_MAX;
-		max[0] = max[1] = INT_MIN;
+	int lx , rx , ly , ry;
+	void set(const Point &p) {
+		lx = rx = p.x;
+		ly = ry = p.y;
 	}
+	void merge(const Point &o) {
+		lx = min(lx, o.x);
+		rx = max(rx, o.x);
+		ly = min(ly, o.y);
+		ry = max(ry, o.y);
+	}
+	void merge(const Rectangle &o) {
+		lx = min(lx , o.lx);
+		rx = max(rx , o.rx);
+		ly = min(ly , o.ly);
+		ry = max(ry , o.ry);
+	}
+	LL dist(const Point &p) {
+		LL res = 0;
+		if (p.x < lx) res += sqr(lx - p.x);
+		else if (p.x > rx) res += sqr(p.x - rx);
 
-	void add(const point &p) {
-		for (int i = 0; i < 2; ++i) {
-			min[i] = std::min(min[i], p[i]);
-			max[i] = std::max(max[i], p[i]);
-		}
+		if (p.y < ly) res += sqr(ly - p.y);
+		else if (p.y > ry) res += sqr(p.y - ry);
+		return res;
 	}
 };
 
-LL point::to(const Rectangle &r) const {
-	const point &p = *this;
-	LL res = 0;
-	for (int i = 0; i < 2; ++i)
-		res += sqr( min(max(p[i], r.min[i]), r.max[i]) - p[i] );
-	return res;
+struct Node {
+	int child[2];
+	Point p;
+	Rectangle rect;
+};
+
+const int MAX_N = 1111111;
+const LL INF = 100000000;
+int n, m, tot, root;
+Point a[MAX_N];
+Node tree[MAX_N];
+Point p;
+LL result;
+
+bool cmpX(const Point &a, const Point &b) {
+	if (a.x != b.x) return a.x < b.x;
+	return a.y < b.y;
 }
 
-const int MAXN = 20033;
-int n, pivot, seperator[MAXN * 2 + 1];
-vector<int> order;
-point points[MAXN], polygon[33];
-Rectangle rec[MAXN * 2 + 1];
-
-inline int getId(int l, int r) {
-	return (l + r) | (l != r);
+bool cmpY(const Point &a, const Point &b) {
+	if (a.y != b.y) return a.y < b.y;
+	return a.x < b.x;
 }
 
-bool compare(int i, int j) {
-	if (points[i][pivot] != points[j][pivot])
-		return points[i][pivot] < points[j][pivot];
-	return i < j;
-}
-
-void build(int l, int r, int type) {
-	int id = getId(l, r);
-	rec[id] = Rectangle();
-	Rep(i, l, r) rec[id].add( points[ order[i] ] );
-	if (l < r) {
-		int m = (l + r) >> 1;
-		pivot = type;
-		nth_element(order.begin() + l, order.begin() + m, order.begin() + r + 1, compare);
-		seperator[id] = order[m];
-		build(l, m, type ^ 1);
-		build(m + 1, r, type ^ 1);
+int build(int s, int t, bool d) {
+	int k = ++tot;
+	int mid = (s + t) >> 1;
+	nth_element(a + s, a + mid , a + t, d ? cmpX : cmpY);
+	tree[k].p = a[mid];
+	tree[k].rect.set(a[mid]);
+	tree[k].child[0] = tree[k].child[1] = 0;
+	if (s < mid) {
+		tree[k].child[0] = build(s, mid , d ^ 1);
+		tree[k].rect.merge(tree[tree[k].child[0]].rect);
 	}
+	if (mid + 1 < t) {
+		tree[k].child[1] = build(mid + 1, t, d ^ 1);
+		tree[k].rect.merge(tree[tree[k].child[1]].rect);
+	}
+	return k;
 }
 
-priority_queue<pair<LL, int> > answer;
+int insert(int root, bool d) {
+	if (root == 0) {
+		++tot;
+		tree[tot].p = p;
+		tree[tot].rect.set(p);
+		tree[tot].child[0] = tree[tot].child[1] = 0;
+		return tot;
+	}
+	tree[root].rect.merge(p);
+	if ((d && cmpX(p, tree[root].p)) || (!d && cmpY(p, tree[root].p))) {
+		tree[root].child[0] = insert(tree[root].child[0], d ^ 1);
+	} else {
+		tree[root].child[1] = insert(tree[root].child[1], d ^ 1);
+	}
+	return root;
+}
 
-void query(int l, int r, int type) {
-	const point &p = points[n];
-	int id = getId(l, r);
-	if (answer.size() == 2 && p.to(rec[id]) > answer.top().first)
+void query(int k, bool d) {
+	if (tree[k].rect.dist(p) >= result)
 		return;
-	if (l == r) {
-		answer.push( make_pair((p - points[order[l]]).norm(), order[l] ) );
-		if (answer.size() > 2) answer.pop();
-	}
-	else {
-		int m = (l + r) >> 1;
-		pivot = type;
-		int dir = compare(seperator[id], n);
-		if (dir)
-			query(l, m, type ^ 1);
-		query(m + 1, r, type ^ 1);
-		if (!dir)
-			query(l, m, type ^ 1);
-	}
-}
-
-void queryTree(int size) {
-	answer = priority_queue<pair<LL, int> >();
-	scanf("%d %d", &points[n].x, &points[n].y);
-	query(0, size - 1, 0);
-	vector<pair<LL, int> > buffer;
-	while (!answer.empty()) {
-		buffer.push_back( answer.top() );
-		answer.pop();
-	}
-	sort(buffer.begin(), buffer.end());
-	printf("%d %d\n", buffer[0].second + 1, buffer[1].second + 1);
-}
-
-void solve() {
-	int R;
-
-	scanf("%d", &n);
-	Foru(i, 0, n) scanf("%d %d", &points[i].x, &points[i].y);
-	scanf("%d", &R);
-
-	Rep(region, 1, R) {
-		printf("Region %d\n", region);
-
-		int B;
-		scanf("%d", &B);
-		Foru(i, 0, B) scanf("%d %d", &polygon[i].x, &polygon[i].y);
-
-		order.clear();
-		Foru(i, 0, n)
-			if (points[i].in(polygon, B))
-				order.push_back(i);
-		int size = order.size();
-		build(0, size - 1, 0);
-		order.push_back(n);
-		int M;
-		scanf("%d", &M);
-		while (M--)
-			queryTree(size);
+	int temp = dist(tree[k].p, p);
+	if (temp < result)
+		result = temp;
+	if ((d && cmpX(p, tree[k].p)) || (!d && cmpY(p, tree[k].p))) {
+		if (tree[k].child[0])
+			query(tree[k].child[0], d ^ 1);
+		if (tree[k].child[1])
+			query(tree[k].child[1], d ^ 1);
+	} else {
+		if (tree[k].child[1])
+			query(tree[k].child[1], d ^ 1);
+		if (tree[k].child[0])
+			query(tree[k].child[0], d ^ 1);
 	}
 }
 
 int main() {
-	int T;
-	scanf("%d", &T);
-	Rep(Case, 1, T) {
-		printf("Case #%d:\n", Case);
-		solve();
+	int tests;
+	for (tests = 1; tests --; ) {
+		scanf("%d %d", &n, &m);
+		for (int i = 0; i < n; ++i) {
+			scanf("%d%d", &a[i].x, &a[i].y);
+		}
+		root = tot = 0;
+		root = build(0, n, 0);
+		for (int i = 0; i < m; ++i) {
+			int type, px, py;
+			scanf("%d %d %d", &type, &px, &py);
+			p.x = px; p.y = py;
+			if (type == 1) {
+				root = insert(root, 0);
+			} else {
+				result = INF;
+				query(root, 0);
+				printf("%d\n", result);	
+			}
+		}
 	}
-	return 0;
 }
-
