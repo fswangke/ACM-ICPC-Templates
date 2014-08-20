@@ -6,6 +6,8 @@
 *.pdf
 *.log
 *.toc
+*.tex
 
 *.swp
 
+makefile

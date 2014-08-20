@@ -41,7 +41,15 @@
 		\input{"Computational Geometry/Convex Hull && Convex Diameter.tex"}
 
 	\subsection{三角形的五心}
-		\input{"Computational Geometry/Five Centers in Triangle.tex"}
+		重心 $\overrightarrow{G} = \frac{\overrightarrow{A} + \overrightarrow{B} + \overrightarrow{C}}{3}$
+
+		内心 $\overrightarrow{I} = \frac{a\overrightarrow{A} + b\overrightarrow{B} + c\overrightarrow{C}}{a + b + c}$
+
+		外心 $\overrightarrow{O} = \frac{\overrightarrow{A} + \overrightarrow{B} + \frac{\overrightarrow{AC} \cdot \overrightarrow{BC}}{\overrightarrow{AB} \times \overrightarrow{BC}} \overrightarrow{AB}^{T}}{2}, R = \frac{abc}{4S}$
+
+		垂心 $\overrightarrow{H} = 3\overrightarrow{G} - 2\overrightarrow{O} = \overrightarrow{C} + \frac{\overrightarrow{BC} \cdot \overrightarrow{AC}}{\overrightarrow{BC} \times \overrightarrow{AC}} \overrightarrow{AB} ^ {T}$
+
+		旁心(三个) $\frac{-a\overrightarrow{A} + b\overrightarrow{B} + c\overrightarrow{C}}{-a + b + c}$
 
 	\subsection{Farmland}
 		\input{"Computational Geometry/Farmland.tex"}
