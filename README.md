@@ -33,6 +33,8 @@ Templates
 * Functional Treap
 * Link Cut Tree
 * K-D Tree
+	* For nearest search
+	* For farthest search
 * Tree Decomposition
 
 ## String Related
