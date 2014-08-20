@@ -1,5 +1,4 @@
-﻿\begin{lstlisting}
-
+﻿
 syntax on
 syntax enable
 set nocompatible
@@ -63,6 +62,3 @@ autocmd BufRead,BufNewFile *.py map<F5> : !./% <CR>
 
 autocmd BufRead,BufNewFile *.markdown set sw=8 sts=8 ts=8 sta
 autocmd BufRead,BufNewFile *.markdown map<F9> : !markdown % >%<.html <CR>
-
-
-\end{lstlisting}
