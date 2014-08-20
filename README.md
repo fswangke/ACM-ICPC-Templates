@@ -77,3 +77,4 @@ Templates
 * nextPermutation
 * Josephus number & Inverse Josephus number
 * Minimal Vertex Coloring (Warning: Too Strange!!!)
+* Expression Evaluation

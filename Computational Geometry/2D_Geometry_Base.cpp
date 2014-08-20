@@ -300,9 +300,9 @@ circle minCircle(point P[], int N) {
 	if (N == 1) return circle(P[1], 0.0);
 	random_shuffle(P + 1, P + N + 1);
 	circle O = minCircle(P[1], P[2]);
-	Rep(i, 3, N) if(!O.inside(P[i])) {
+	Rep(i, 1, N) if(!O.inside(P[i])) {
 		O = minCircle(P[1], P[i]);
-		Foru(j, 2, i) if(!O.inside(P[j])) {
+		Foru(j, 1, i) if(!O.inside(P[j])) {
 			O = minCircle(P[i], P[j]);
 			Foru(k, 1, j) if(!O.inside(P[k]))
 				O = minCircle(P[i], P[j], P[k]);
