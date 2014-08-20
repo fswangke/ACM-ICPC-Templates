@@ -68,6 +68,7 @@ Templates
 * Linear Recursive Equation
 * FFT Integer
 * MillerRabin
+* Root Of Polynomial
 
 ## Others
 * K Disjoint LIS
