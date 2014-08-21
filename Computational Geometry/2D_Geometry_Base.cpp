@@ -185,7 +185,7 @@ struct circle {
 		return q2.len() < EPS ? 1 : 2;
 	}
 
-	int tanCP(const point &p, point &a, point &b) const {
+	int tanCP(const point &p, point &a, point &b) const { //Warning: Only Calculate Tangent point
 		double x = (p - o).norm();
 		double d = x - rSqure;
 		if (d < -EPS) return 0;
@@ -226,12 +226,14 @@ int isCC(const circle &cir1, const circle &cir2, point &a, point &b) {
 	return q2.len() < EPS ? 1 : 2;
 }
 
-vector<pair<point, point> > tanCC(const circle &cir1, const circle &cir2) {
-	vector<pair<point, point> > list;
+vector<pair<point, point> > tanCC(const circle &cir1, const circle &cir2) { 
+//Warning, if there is only 3 tangent line(in other word s1 == 1 && s2 == 1 is true), the program won't calulate correctly, but the tangent point is right
+	vector<pair<point, point> > list; list.clear();
+	if(cir1.contain(cir2) || cir2.contain(cir1))
+		return list;
 	const point &c1 = cir1.o, &c2 = cir2.o;
 	double r1 = cir1.r, r2 = cir2.r;
-	point p, a1, b1, a2, b2;
-	int s1, s2;
+	point p, a1, b1, a2, b2; int s1, s2;
 	if (sign(r1 - r2) == 0) {
 		p = c2 - c1;
 		p = (p * (r1 / p.len())).rot90();
