@@ -34,4 +34,28 @@ struct Polygon { // stored in [0, n)
 		}
 		return res & 1;
 	}
+	
+	bool convex_contain(const point &p) const { // sort by polar angle
+		for (int i = 1; i < n; ++ i) list[i] = list[i] - list[0];
+		static point q = p - list[0];
+		
+		if (sign(det(list[1], q)) < 0 || sign(det(list[n - 1], q)) > 0)
+			return false;
+		int l = 2, r = n - 1;
+		while (l <= r) {
+			int mid = (l + r) >> 1;
+			double d1 = sign(det(list[mid], q));
+			double d2 = sign(det(list[mid - 1], q));
+			if (d1 <= 0) {
+				if (d2 <= 0) {
+					if (sign(det(q - list[mid - 1], list[mid] - list[mid - 1]) <= 0) <= 0)
+						return true;
+					break;
+				} else 
+					r = mid - 1;
+			} else l = mid + 1;
+		}
+		return false;
+	}
 };
+
