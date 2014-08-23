@@ -36,6 +36,7 @@ def processFile(f):
 					line = line.replace("）", ") ")
 					line = line.replace("！", "! ")
 					line = line.replace("？", "? ")
+					line = line.replace("：", ": ")
 					toWrite += line
 			with open(f, "w", encoding = "utf-8") as outfile:
 				outfile.write(toWrite)

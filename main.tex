@@ -166,17 +166,17 @@
   
   \subsection{小知识}
   \begin{itemize}
-  \item 平面图：
+  \item 平面图: 
     \begin{enumerate}
     \item 平面图一定存在一个度小于等于$5$的点
     \item $E \le 3V - 6$
-    \item 欧拉公式：$V + F - E = 1 + \mbox{连通块数}$
+    \item 欧拉公式: $V + F - E = 1 + \mbox{连通块数}$
     \end{enumerate}
-  \item 图连通度：
+  \item 图连通度: 
     \begin{enumerate}
-    \item $k-$连通(\emph{k-connected})：对于任意一对结点都至少存在结点各不相同的$k$条路
-    \item 点连通度(\emph{vertex connectivity})：把图变成非连通图所需删除的最少点数
-    \item Whitney定理：一个图是$k-$连通的当且仅当它的点连通度至少为$k$
+    \item $k-$连通(\emph{k-connected}): 对于任意一对结点都至少存在结点各不相同的$k$条路
+    \item 点连通度(\emph{vertex connectivity}): 把图变成非连通图所需删除的最少点数
+    \item Whitney定理: 一个图是$k-$连通的当且仅当它的点连通度至少为$k$
     \end{enumerate}
   \end{itemize}
 
@@ -215,7 +215,7 @@
     \item
       $\sum_{k=1}^{n}k(k+1)(k+2)(k+3) = \frac{n(n+1)(n+2)(n+3)(n+4)}{5} $
     \item
-      $\mbox{错排：}D_n = n!(1-\frac{1}{1!}+\frac{1}{2!}-\frac{1}{3!}+\ldots+\frac{(-1)^n}{n!}) = (n-1)(D_{n-2}-D_{n-1})$
+      $\mbox{错排: }D_n = n!(1-\frac{1}{1!}+\frac{1}{2!}-\frac{1}{3!}+\ldots+\frac{(-1)^n}{n!}) = (n-1)(D_{n-2}-D_{n-1})$
     \end{itemize}
     \subsubsection{三角公式}
     \begin{itemize}
@@ -267,6 +267,12 @@
         p &= \frac{b^2 - 3ac}{3a^2} \\
         q &= \frac{2b ^ 3 - 9 abc + 27 a ^ 2 d}{27 a ^ 3}
       \end{align*}
+
+      卡尔丹判别法: 
+      令$\Delta = (\frac{q}{2}) ^ 2 + (\frac{p}{3}) ^ 3$. 
+      当$\Delta > 0$时, 有一个实根和一对个共轭虚根；
+      当$\Delta = 0$时, 有三个实根, 其中两个相等；
+      当$\Delta < 0$时, 有三个不相等的实根. 
     
     \subsubsection{抛物线}
     \begin{itemize}
@@ -317,9 +323,9 @@
 
   \subsection{小知识}
   \begin{itemize}
-  \item 勾股数：设正整数$n$的质因数分解为$n = \prod p_i ^ {a_i}$, 
+  \item 勾股数: 设正整数$n$的质因数分解为$n = \prod p_i ^ {a_i}$, 
     则$x^2+y^2=n$有整数解的充要条件是$n$中不存在形如$p_i \equiv 3\pmod{4}$且指数$a_i$为奇数的质因数$p_i$
-  \item 勾股数2：
+  \item 勾股数2: 
     \begin{verbatim}
       a[0] := 0;
       s := 0;
@@ -338,9 +344,9 @@
 
     知道\texttt{s}和\texttt{a[n-1]}后, 直接求了\texttt{a[n]}. 神奇了点. 
 
-    其实. 有当$n$为奇数：$n^2+{\lfloor\frac{n^2-1}{2}\rfloor}^2={\lfloor\frac{n^2+1}{2}\rfloor}^2$
+    其实, 有当$n$为奇数: $n^2+{\lfloor\frac{n^2-1}{2}\rfloor}^2={\lfloor\frac{n^2+1}{2}\rfloor}^2$
 
-    若：
+    若: 
 
     $a=k\cdot(s^2 - t^2)$
 
@@ -350,14 +356,14 @@
 
     则$c^2=a^2+b^2$. 
 
-  \item Pick定理：简单多边形, 不自交. 则：$\frac{(\mbox{严格在多边形内部的整点数}\times 2+\mbox{在边上的整点数}-2)}{2}=\mbox{面积}$
-  \item Mersenne素数：$p$是素数且$2^p-1$的数是素数. (10000以内的$p$有: 2, 3, 5, 7, 13, 17, 19, 31, 61, 89, 107, 127, 521, 607, 1279, 2203, 2281, 3217, 4253, 4423, 9689, 9941)
+  \item Pick定理: 简单多边形, 不自交. 则: $\frac{(\mbox{严格在多边形内部的整点数}\times 2+\mbox{在边上的整点数}-2)}{2}=\mbox{面积}$
+  \item Mersenne素数: $p$是素数且$2^p-1$的数是素数. (10000以内的$p$有: 2, 3, 5, 7, 13, 17, 19, 31, 61, 89, 107, 127, 521, 607, 1279, 2203, 2281, 3217, 4253, 4423, 9689, 9941)
   \item 序列差分表: 差分表的第$0$条对角线确定原序列. 
       设原序列为$h_i$, 第$0$条对角线为$c_0,c_1,\ldots,c_p,0,0,\ldots$. 
-      有这样两个公式：
+      有这样两个公式: 
       $h_n = \binom{n}{0}c_0 + \binom{n}{1}c_1 + \ldots + \binom{n}{p} c_p$, 
       $\sum_{k = 0}^{n}h_k = \binom{n+1}{1}c_0 + \binom{n+1}{2}c_2 + \ldots + \binom{n+1}{p+1}c_p$
-  \item Fibonacci数相关：
+  \item Fibonacci数相关: 
     \begin{itemize}
     \item $\gcd(F_n,F_m)=F_{\gcd(n,m)}$
     \item 如果$a$是$b$的倍数, 那么$F_a$是$F_b$的倍数
@@ -374,6 +380,7 @@
     但如果遇到一个素数, 则需要检查$\frac{n + 1}{2} - \sqrt{n}$个整数
   \end{itemize}
 
+  
 \section{其他}
   \subsection{Extended LIS}
     \input{"Others/K Disjoint LIS.tex"}
@@ -394,7 +401,7 @@
     \input{"Others/Manhattan MST.tex"}
 
 \section{Templates}
-  \subsection{vimrc}
+  \subsection{vim配置}
     \input{"Templates/vimrc.tex"}
   \subsection{C++}
     \input{"Templates/cpp_template.tex"}

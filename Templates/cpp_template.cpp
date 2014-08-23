@@ -1,42 +1,13 @@
 #pragma comment(linker, "/STACK:10240000")
 
-#define UseBuffer
-
-#include <cassert>
-#include <cctype>
-#include <climits>
-#include <cmath>
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
-#include <ctime>
-
-#include <algorithm>
-#include <bitset>
-#include <deque>
-#include <functional>
 #include <iostream>
-#include <list>
-#include <map>
-#include <numeric>
-#include <queue>
-#include <sstream>
-#include <string>
-#include <stack>
-#include <set>
-#include <utility>
-#include <vector>
-
-#define Lowbit(x) ((x) & (-(x)))
-#define Pow2(x) (1 << (x))
-#define Pow2LL(x) (1LL << (x))
-#define Contain(a, x) (((a) >> (x)) & 1)
+#include <algorithm>
 
 #define Rep(i, a, b) for(int i = (a); i <= (b); ++i)
 #define Foru(i, a, b) for(int i = (a); i < (b); ++i)
-
-#define Debug(x) (cerr << #x << " = " << (x) << endl)
-#define Debug2(x, y) (cerr << #x << " = " << (x) << ", " << #y << " = " << (y) << endl)
 
 using namespace std;
 
@@ -45,31 +16,21 @@ typedef pair<int, int> pii;
 
 const int INF = 1000000000;
 
-template <class T> inline bool cMin(T &a, const T &b) {
-	return a > b ? (a = b, true) : false;
-}
-
-template <class T> inline bool cMax(T &a, const T &b) {
-	return a < b ? (a = b, true) : false;
-}
-
-#ifdef UseBuffer
-#define MaxBuffer 5
+#ifdef MAX_BUFFER
 
 namespace BufferedReader {
 
-	char buff[MaxBuffer + 5], *buf = buff;
-	char c;
+	char buff[MAX_BUFFER + 5], *ptr = buff, c;
 	bool flag;
 
 	inline bool nextChar(char &c) {
-		if ( (c = *buf++) == 0 ) {
-			int tmp = fread(buff, 1, MaxBuffer, stdin);
+		if ( (c = *ptr++) == 0 ) {
+			int tmp = fread(buff, 1, MAX_BUFFER, stdin);
 			buff[tmp] = 0;
 			if (tmp == 0)
 				return false;
-			buf = buff;			
-			c = *buf++;
+			ptr = buff;
+			c = *ptr++;
 		}
 		return true;
 	}
@@ -119,8 +80,5 @@ namespace BufferedReader {
 #endif
 
 int main() {
-	int x;
-	while (BufferedReader::nextInt(x))
-		printf("%d\n", x);
 	return 0;
 }
