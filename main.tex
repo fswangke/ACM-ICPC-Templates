@@ -1,64 +1,407 @@
-\begin{lstlisting}
-# -*- coding: utf-8 -*-
-"""
-@Author JunruShao(yz_sjr@163.com)
-"""
+\documentclass[10pt, a4paper]{article}
+\usepackage{listings}
+\usepackage{geometry}
 
-import os
+\usepackage{ctex, amsmath, amsthm, graphicx, amsfonts, fancyhdr, ctable, pict2e, CJKulem}
+\usepackage[CJKbookmarks, colorlinks = true, linkcolor = red, anchorcolor = blue, citecolor = blue, pdfstartview={FitH}]{hyperref}
 
-def checkExist(f):
-  f = os.path.splitext(f)[0]
-  return os.path.exists(f + ".cpp") or os.path.exists(f + ".java") or os.path.exists(f + ".py") or os.path.exists(f + ".sh")
+%\geometry{left=2.7cm, right=2.7cm, top=3cm, bottom=3cm}
 
-def processFile(f):
-  if os.path.isfile(f) and not f.startswith("."):
-    if f.endswith((".cpp", ".java", ".sh", ".py")):
-      print("File " + f)
-      toWrite = "\\begin{lstlisting}"
-      toWrite += "\n"
-      with open(f, "r") as infile:
-        for line in infile.readlines():
-          line = line.replace("  ", "  ")
-          toWrite += line
-      toWrite += "\n"
-      toWrite += "\\end{lstlisting}"
-      with open(os.path.splitext(f)[0] + ".tex", "w") as outfile:
-        outfile.write(toWrite)
+\geometry{left=2.0cm, right=2.0cm, top=2.5cm, bottom=2.5cm}
 
-    if f.endswith((".tex")) and not checkExist(f):
-      print("File " + f)
-      toWrite = ""
-      with open(f, "r") as infile:
-        for line in infile.readlines():
-          line = line.replace("  ", "  ")
-          line = line.replace("。", ". ")
-          line = line.replace("，", ", ")
-          line = line.replace("（", "( ")
-          line = line.replace("）", ") ")
-          line = line.replace("！", "! ")
-          line = line.replace("？", "? ")
-          toWrite += line
-      with open(f, "w") as outfile:
-        outfile.write(toWrite)
+\lstset{language=C++, breaklines,numbers=left,frame=leftline,
+    escapeinside=``,extendedchars=false,
+    xleftmargin=0em,xrightmargin=0em,
+    basicstyle=\ttfamily\small, tabsize=2,
+}
 
-def walkFolder(depth):
-  for f in os.listdir(os.getcwd()):
-    if os.path.isdir(f):
-      if not f.startswith("."):
-        print("Enter " + f)
-        os.chdir(f)
-        walkFolder(depth + 1)
-        os.chdir("..")
-        print("Exit")
-    else:
-  #    if not (depth == 0 and (f == "convert.py" or f == "main.tex")):
-      if not (depth == 0 and (f == "convert.py")):
-        processFile(f)
+\begin{document}
 
-def main():
-  walkFolder(0)
+\title{Call It Magic - Standard Code Library}
+\date{}
+\tableofcontents
+\newpage
 
-if __name__ == "__main__":
-  main()
+\section{计算几何}
 
-\end{lstlisting}
+  \subsection{二维计算几何基本操作}
+    \input{"Computational Geometry/2D_Geometry_Base.tex"}
+    
+  \subsection{圆的面积模板}
+    \input{"Computational Geometry/CircleKCover.tex"}
+
+  \subsection{多边形相关}
+    \input{"Computational Geometry/Polygon.tex"}
+
+  \subsection{最大面积空凸包}
+    \input{"Computational Geometry/Max Area Empty Convex Hull.tex"}
+
+  \subsection{最近点对}
+    \input{"Computational Geometry/ClosestPair.tex"}
+
+  \subsection{凸包与点集直径}
+    \input{"Computational Geometry/Convex Hull && Convex Diameter.tex"}
+
+  \subsection{三角形的五心}
+    \begin{itemize}
+    \item
+      重心 $\overrightarrow{G} = \frac{\overrightarrow{A} + \overrightarrow{B} + \overrightarrow{C}}{3}$
+    \item
+      内心 $\overrightarrow{I} = \frac{a\overrightarrow{A} + b\overrightarrow{B} + c\overrightarrow{C}}{a + b + c}$
+    \item
+      外心 $\overrightarrow{O} = \frac{\overrightarrow{A} + \overrightarrow{B} + \frac{\overrightarrow{AC} \cdot \overrightarrow{BC}}{\overrightarrow{AB} \times \overrightarrow{BC}} \overrightarrow{AB}^{T}}{2}, R = \frac{abc}{4S}$
+    \item
+      垂心 $\overrightarrow{H} = 3\overrightarrow{G} - 2\overrightarrow{O} = \overrightarrow{C} + \frac{\overrightarrow{BC} \cdot \overrightarrow{AC}}{\overrightarrow{BC} \times \overrightarrow{AC}} \overrightarrow{AB} ^ {T}$
+    \item
+      旁心(三个) $\frac{-a\overrightarrow{A} + b\overrightarrow{B} + c\overrightarrow{C}}{-a + b + c}$
+    \end{itemize}
+
+  \subsection{Farmland}
+    \input{"Computational Geometry/Farmland.tex"}
+
+  \subsection{Voronoi图}
+    \input{"Computational Geometry/Voronoi.tex"}
+
+  \subsection{四边形费马点}
+    \input{"Computational Geometry/Fermat Point Of A Quadrilateral.tex"}
+
+  \subsection{三维计算几何基本操作}
+    \input{"Computational Geometry/3D_Geometry_Base.tex"}
+
+  \subsection{凸多面体切割}
+    \input{"Computational Geometry/3D Convex Cut.tex"}
+
+  \subsection{三维凸包}
+    \input{"Computational Geometry/3D Convex Hull.tex"}
+
+  \subsection{球面点表面点距离}
+    \input{"Computational Geometry/DistOnBall.tex"}
+    
+  \subsection{长方体表面点距离}
+    \input{"Computational Geometry/DistOnCuboid.tex"}
+
+  \subsection{最小覆盖球}
+    \input{"Computational Geometry/MinBall.tex"}
+
+\section{数据结构}
+  \subsection{动态凸包(只支持插入)}
+    \input{"Data Structure/Dynamic Convex Hull (Insertion Only).tex"}
+    
+  \subsection{Rope用法}
+    \input{"Data Structure/Usage Of Rope.tex"}
+  
+  \subsection{可持久化Treap}
+    \input{"Data Structure/Functional Treap.tex"}
+  
+  \subsection{Link-Cut Tree}
+    \input{"Data Structure/Link Cut Tree.tex"}
+
+  \subsection{K-D Tree Nearest}
+    \input{"Data Structure/KDTree.tex"}
+
+  \subsection{K-D Tree Farthest}
+    \input{"Data Structure/KDTree_2.tex"}
+
+  \subsection{树链剖分}
+    \input{"Data Structure/TreeDecomposition.tex"}
+
+\section{字符串相关}
+  \subsection{Manacher}
+    \input{"String Related/Manacher.tex"}
+
+    \subsection{Aho-Corasick 自动机}
+    \input{"String Related/Aho Corasick Automaton.tex"}
+
+  \subsection{后缀自动机}
+    \input{"String Related/Suffix Automaton.tex"}
+
+  \subsection{后缀数组}
+    \input{"String Related/Suffix Array.tex"}
+  
+  \subsection{环串最小表示}
+    \input{"String Related/Minimial Representation Of A Cyclic String.tex"}
+
+\section{图论}
+  \subsection{带花树}
+    \input{"Graph Theory/Blossom Algorithm.tex"}
+
+  \subsection{最大流}
+    \input{"Graph Theory/Maxflow.tex"}
+  
+  \subsection{KM}
+    \input{"Graph Theory/KM.tex"}
+
+  \subsection{2-SAT 与 Kosaraju}
+    \input{"Graph Theory/TwoSat SCC.tex"}
+
+  \subsection{全局最小割 Stoer-Wagner}
+    \input{"Graph Theory/Stoer-Wagner.tex"}
+
+  \subsection{Hopcroft-Karp}
+    \input{"Graph Theory/HopcroftKarp.tex"}
+
+  \subsection{欧拉路}
+    \input{"Graph Theory/EulerianWalk.tex"}
+
+  \subsection{稳定婚姻}
+    \input{"Graph Theory/StableMatching.tex"}
+
+  \subsection{最大团搜索}
+    \input{"Graph Theory/MaxClique.tex"}
+  
+  \subsection{极大团计数}
+    \input{"Graph Theory/MaxCliqueCounting.tex"}
+
+  \subsection{最小树形图}
+    \input{"Graph Theory/Minimum Optimum branchings.tex"}
+
+  \subsection{动态最小生成树}
+    \input{"Graph Theory/Dynamic MST(Offline).tex"}
+
+  \subsection{K短路(允许重复)}
+    \input{"Graph Theory/K-shortest Path (Repeat is allowed).tex"}
+
+  \subsection{K短路(不允许重复)}
+    \input{"Graph Theory/K-shortest Path (Repeat is not allowed).tex"}
+  
+  \subsection{小知识}
+  \begin{itemize}
+  \item 平面图：
+    \begin{enumerate}
+    \item 平面图一定存在一个度小于等于$5$的点
+    \item $E \le 3V - 6$
+    \item 欧拉公式：$V + F - E = 1 + \mbox{连通块数}$
+    \end{enumerate}
+  \item 图连通度：
+    \begin{enumerate}
+    \item $k-$连通(\emph{k-connected})：对于任意一对结点都至少存在结点各不相同的$k$条路
+    \item 点连通度(\emph{vertex connectivity})：把图变成非连通图所需删除的最少点数
+    \item Whitney定理：一个图是$k-$连通的当且仅当它的点连通度至少为$k$
+    \end{enumerate}
+  \end{itemize}
+
+\section{数学}
+  \subsection{单纯形}
+    \input{"Math/Simplex.tex"}
+
+  \subsection{FFT}
+    \input{"Math/FFT.tex"}
+
+  \subsection{整数FFT}
+    \input{"Math/FFT_Integer.tex"}
+
+  \subsection{线性同余方程}
+    \input{"Math/Linear Congruence.tex"}
+
+  \subsection{Miller-Rabin 素性测试}
+    \input{"Math/MillerRabin.tex"}
+
+  \subsection{多项式求根}
+    \input{"Math/Root Of Polynomial.tex"}
+  
+  \subsection{公式}
+    \subsubsection{级数求和}
+    \begin{itemize}
+    \item
+      $\sum_{k=1}^{n}k^3 = (\frac{n(n+1)}{2})^2  $
+    \item
+      $\sum_{k=1}^{n}k^4 = \frac{n(n+1)(2n+1)(3n^2+3n-1)}{30}  $
+    \item
+      $\sum_{k=1}^{n}k^5 = \frac{n^2(n+1)^2(2n^2+2n-1)}{12}  $
+    \item
+      $\sum_{k=1}^{n}k(k+1) = \frac{n(n+1)(n+2)}{3}  $
+    \item
+      $\sum_{k=1}^{n}k(k+1)(k+2) = \frac{n(n+1)(n+2)(n+3)}{4} $
+    \item
+      $\sum_{k=1}^{n}k(k+1)(k+2)(k+3) = \frac{n(n+1)(n+2)(n+3)(n+4)}{5} $
+    \item
+      $\mbox{错排：}D_n = n!(1-\frac{1}{1!}+\frac{1}{2!}-\frac{1}{3!}+\ldots+\frac{(-1)^n}{n!}) = (n-1)(D_{n-2}-D_{n-1})$
+    \end{itemize}
+    \subsubsection{三角公式}
+    \begin{itemize}
+    \item
+      $\sin(\alpha \pm \beta) = \sin\alpha\cos\beta \pm \cos\alpha\sin\beta $
+    \item
+      $\cos(\alpha \pm \beta) = \cos\alpha\cos\beta \mp \sin\alpha\sin\beta $
+    \item
+      $\tan(\alpha \pm \beta) = \frac{\tan\alpha \pm \tan\beta}{1 \mp \tan\alpha\tan\beta} $
+    \item
+      $\tan\alpha \pm \tan\beta = \frac{\sin(\alpha \pm \beta)}{\cos\alpha\cos\beta} $
+    \item
+      $\sin\alpha+\sin\beta = 2\sin\frac{\alpha+\beta}{2}\cos\frac{\alpha-\beta}{2} $
+    \item
+      $\sin\alpha-\sin\beta = 2\cos\frac{\alpha+\beta}{2}\sin\frac{\alpha-\beta}{2} $
+    \item
+      $\cos\alpha+\cos\alpha = 2\cos\frac{\alpha+\beta}{2}\cos\frac{\alpha-\beta}{2} $
+    \item
+      $\cos\alpha-\cos\beta = -2\sin\frac{\alpha+\beta}{2}\sin\frac{\alpha-\beta}{2} $
+    \item
+      $\cos{n\alpha} =
+          \binom{n}{0} \cos ^ {n} \alpha
+        - \binom{n}{2} \cos ^ {n - 2} \alpha \sin ^ {2} \alpha
+        + \binom{n}{4} \cos ^ {n - 4} \alpha \sin ^ {4} \alpha
+      \cdots $
+    \item
+      $\sin{n\alpha} =
+          \binom{n}{1} \cos ^ {n - 1} \alpha \sin \alpha
+        - \binom{n}{3} \cos ^ {n - 3} \alpha \sin ^ {3} \alpha
+        + \binom{n}{5} \cos ^ {n - 5} \alpha \sin ^ {5} \alpha
+        \cdots $
+    \end{itemize}
+    
+    \subsubsection{三次方程求根公式}
+      对一元三次方程
+      $x ^ 3 + px + q = 0$,
+      令
+      \begin{align*}
+        A &= \sqrt[3]{-\frac{q}{2}+\sqrt{(\frac{q}{2})^2+(\frac{p}{3})^3}} \\
+        B &= \sqrt[3]{-\frac{q}{2}-\sqrt{(\frac{q}{2})^2+(\frac{p}{3})^3}} \\ 
+        \omega &= \frac{(-1 + \mathrm{i} \sqrt{3})}{2}
+      \end{align*}
+      
+      则 $x_j = A\omega^{j} + B\omega^{2j}$ (j = 0, 1, 2).
+      
+      当求解 $ax ^ 3 + bx ^ 2 + cx + d = 0$ 时, 令$x = y - \frac{b}{3a}$, 再求解$y$, 即转化为$y^3 + py + q = 0$ 的形式. 
+      其中, 
+      \begin{align*}
+        p &= \frac{b^2 - 3ac}{3a^2} \\
+        q &= \frac{2b ^ 3 - 9 abc + 27 a ^ 2 d}{27 a ^ 3}
+      \end{align*}
+    
+    \subsubsection{抛物线}
+    \begin{itemize}
+      \item 标准方程$y^2 = 2px$, 曲率半径$ R = \dfrac{(p + 2x)^{\frac{3}{2} }}{\sqrt{p}}$
+      \item 弧长: 设$M(x, y)$是抛物线上一点, 则$L_{OM} = \frac{p}{2} [ \sqrt{\frac{2x}{p}(1 + \frac{2x}{p})} + \ln(\sqrt{\frac{2x}{p}} + \sqrt{1 + \frac{2x}{p}})]$
+      \item 弓形面积: 设$M, D$是抛物线上两点, 且分居一, 四象限. 做一条平行于$MD$且与抛物线相切的直线$L$. 若$M$到$L$的距离为$h$. 则有$S_{MOD} = \frac{2}{3}MD \cdot h$.
+    \end{itemize}
+
+    \subsubsection{重心}
+    \begin{itemize}
+      \item 半径$r$, 圆心角为$\theta$的扇形的重心与圆心的距离为$\dfrac{4r\sin\frac{\theta}{2}}{3\theta}$
+      \item 半径$r$, 圆心角为$\theta$的圆弧的重心与圆心的距离为$\dfrac{4r\sin^3\frac{\theta}{2}}{3(\theta - \sin\theta)}$
+      \item 椭圆上半部分的重心与圆心的距离为$\dfrac{4b}{3\pi}$
+      \item  抛物线中弓形$MOD$的重心满足$CQ = \frac{2}{5} PQ$, $P$是直线$L$与抛物线的切点, $Q$在$MD$上且$PQ$平行$x$轴, $C$是重心
+    \end{itemize}
+
+    \subsubsection{向量恒等式}
+    \begin{itemize}
+      \item $\vec{a} \cdot (\vec{b} \times \vec{c}) = \vec{b} \cdot (\vec{c} \times \vec{a}) = \vec{c} \cdot (\vec{a} \times \vec{b})$
+      \item $\vec{a} \times (\vec{b} \times \vec{c}) = (\vec{c} \times \vec{b}) \times \vec{a} = \vec{b}(\vec{a} \cdot \vec{c}) - \vec{c}(\vec{a} \cdot \vec{b})$
+    \end{itemize}
+
+    \subsubsection{平面几何常用公式}
+    \begin{itemize}
+    \item 四边形: 设$D_1, D_2$为对角线, $M$为对角线中点连线, $A$为对角线夹角
+      \begin{itemize}
+      \item $a^2 + b^2 + c^2 + d^2 = D_1^2 + D_2 ^ 2 + 4 M^2$
+      \item $S = \frac{1}{2} D_1  D_2 \sin A$
+      \item $ac + bd = D_1 D_2$ (内接四边形适用)
+      \item $S = \sqrt{(p - a)(p - b)(p - c)(p - d)}, p$为半周长 (内接四边形适用)
+      \end{itemize}
+    \item 棱台:
+      \begin{itemize}
+      \item 体积$V = \dfrac{(A_1 + A_2 + \sqrt{A_1 A_2}) \cdot h}{3}$, $A_1, A_2$分别为上下底面面积, $h$为高
+      \item 侧面积$S = \frac{1}{2} (p_1 + p_2) \cdot l$, $p_1, p_2$为上下底面周长, $l$为斜高. (正棱台适用)
+      \end{itemize}
+    \end{itemize}
+
+    \subsubsection{树的计数}
+    \begin{itemize}
+      \item 有根数计数: 令$S_{n, j} = \sum\limits_{1 \le i \le n / j} a_{n + 1 - ij} = S_{n - j, j} + a_{n + 1 - j}$\\
+        于是, $n + 1$个结点的有根数的总数为$a_{n + 1} = \dfrac{\sum\limits_{1 \le j \le n} j \cdot a_j \cdot S_{n, j} }{n}$\\
+        附: $a_1 = 1, a_2 = 1, a_3 = 2, a_4 = 4, a_5 = 9, a_6 = 20, a_9 = 286, a_{11} = 1842$
+      \item 无根树计数: 当$n$是奇数时, 则有$a_n - \sum\limits_{1 \le i \le \frac{n}{2}} a_i a_{n - i}$种不同的无根树\\
+        当$n$是偶数时, 则有$a_n - \sum\limits_{1 \le i \le \frac{n}{2}} a_i a_{n - i} + \dfrac{1}{2} a_\frac{n}{2} (a_\frac{n}{2} + 1)$种不同的无根树
+      \item Matrix-Tree定理: 对任意图$G$, 设mat[$i$][$i$] = $i$的度数, mat[$i$][$j$] = $i$与$j$之间边数的相反数, 则mat[$i$][$j$]的任意余子式的行列式就是该图的生成树个数
+    \end{itemize}
+
+  \subsection{小知识}
+  \begin{itemize}
+  \item 勾股数：设正整数$n$的质因数分解为$n = \prod p_i ^ {a_i}$, 
+    则$x^2+y^2=n$有整数解的充要条件是$n$中不存在形如$p_i \equiv 3\pmod{4}$且指数$a_i$为奇数的质因数$p_i$
+  \item 勾股数2：
+    \begin{verbatim}
+      a[0] := 0;
+      s := 0;
+      for i := 1 to n - 2 do
+        begin
+          a[i] := a[i - 1] + 1;
+          s := s + sqr(a[i]);
+        end;
+      {======s + sqr(a[n-1]) + sqr(a[n]) = k^2=======}
+      a[n - 1] := a[n - 2];
+      repeat
+        a[n - 1] := a[n - 1] + 1;
+      until odd(s + sqr(a[n - 1])) and (a[n - 1] > 2);
+      a[n] := (s + sqr(a[n - 1]) - 1) shr 1;
+    \end{verbatim}
+
+    知道\texttt{s}和\texttt{a[n-1]}后, 直接求了\texttt{a[n]}. 神奇了点. 
+
+    其实. 有当$n$为奇数：$n^2+{\lfloor\frac{n^2-1}{2}\rfloor}^2={\lfloor\frac{n^2+1}{2}\rfloor}^2$
+
+    若：
+
+    $a=k\cdot(s^2 - t^2)$
+
+    $b=2\cdot k\cdot s\cdot t$
+
+    $c=k\cdot(s^2 + t^2)$
+
+    则$c^2=a^2+b^2$. 
+
+  \item Pick定理：简单多边形, 不自交. 则：$\frac{(\mbox{严格在多边形内部的整点数}\times 2+\mbox{在边上的整点数}-2)}{2}=\mbox{面积}$
+  \item Mersenne素数：$p$是素数且$2^p-1$的数是素数. (10000以内的$p$有: 2, 3, 5, 7, 13, 17, 19, 31, 61, 89, 107, 127, 521, 607, 1279, 2203, 2281, 3217, 4253, 4423, 9689, 9941)
+  \item 序列差分表: 差分表的第$0$条对角线确定原序列. 
+      设原序列为$h_i$, 第$0$条对角线为$c_0,c_1,\ldots,c_p,0,0,\ldots$. 
+      有这样两个公式：
+      $h_n = \binom{n}{0}c_0 + \binom{n}{1}c_1 + \ldots + \binom{n}{p} c_p$, 
+      $\sum_{k = 0}^{n}h_k = \binom{n+1}{1}c_0 + \binom{n+1}{2}c_2 + \ldots + \binom{n+1}{p+1}c_p$
+  \item Fibonacci数相关：
+    \begin{itemize}
+    \item $\gcd(F_n,F_m)=F_{\gcd(n,m)}$
+    \item 如果$a$是$b$的倍数, 那么$F_a$是$F_b$的倍数
+    \end{itemize}
+  \item GCD:
+    $\gcd(2^a-1,2^b-1)=2^{\gcd(a,b)}-1$
+  \item Fermat分解算法: 
+    从$t=\sqrt{n}$开始, 
+    依次检查$t^2-n,(t+1)^2-n,(t+2)^2-n,\ldots$, 
+    直到出现一个平方数$y$, 
+    由于$t ^ 2 - y ^ 2 = n$, 
+    因此分解得$n = (t -y)(t + y)$. 
+    显然, 当两个因数很接近时这个方法能很快找到结果, 
+    但如果遇到一个素数, 则需要检查$\frac{n + 1}{2} - \sqrt{n}$个整数
+  \end{itemize}
+
+\section{其他}
+  \subsection{Extended LIS}
+    \input{"Others/K Disjoint LIS.tex"}
+
+  \subsection{生成 nCk}
+    \input{"Others/next nCk.tex"}
+
+  \subsection{nextPermutation}
+    \input{"Others/nextPermutation.tex"}
+
+  \subsection{Josephus 数与逆 Josephus 数}
+    \input{"Others/Josephus.tex"}
+  
+  \subsection{表达式求值}
+    \input{"Others/Expression Evaluation.tex"}
+
+  \subsection{曼哈顿最小生成树}
+    \input{"Others/Manhattan MST.tex"}
+
+\section{Templates}
+  \subsection{vimrc}
+    \input{"Templates/vimrc.tex"}
+  \subsection{C++}
+    \input{"Templates/cpp_template.tex"}
+  \subsection{Java}
+    \input{"Templates/java_template.tex"}
+  \subsection{对拍}
+    \input{"Templates/pai.tex"}
+
+\end{document}
+
