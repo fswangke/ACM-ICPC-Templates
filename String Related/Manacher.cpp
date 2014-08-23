@@ -1,4 +1,3 @@
-
 // len[i] : the max length of palindrome whose mid point is (i / 2)
 void Manacher(int n, char cs[], int len[]) { // 0-based, len[] must be double sized
 	for (int i = 0; i < n + n; ++i) len[i] = 0;

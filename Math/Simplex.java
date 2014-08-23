@@ -1,4 +1,3 @@
-
 // max { cx | Ax ≤ b, x ≥ 0}
 
 double[] simplex(double[][] A, double[] b, double[] c) {
@@ -41,4 +40,3 @@ double[] simplex(double[][] A, double[] b, double[] c) {
 	for (int i = m; i < n + m; i++) if (ix[i] < m - 1) x[ix[i]] = D[i - m][m];
 	return x; // 值为 D[n][m]
 }
-

@@ -42,20 +42,6 @@
   \subsection{凸包与点集直径}
     \input{"Computational Geometry/Convex Hull && Convex Diameter.tex"}
 
-  \subsection{三角形的五心}
-    \begin{itemize}
-    \item
-      重心 $\overrightarrow{G} = \frac{\overrightarrow{A} + \overrightarrow{B} + \overrightarrow{C}}{3}$
-    \item
-      内心 $\overrightarrow{I} = \frac{a\overrightarrow{A} + b\overrightarrow{B} + c\overrightarrow{C}}{a + b + c}$
-    \item
-      外心 $\overrightarrow{O} = \frac{\overrightarrow{A} + \overrightarrow{B} + \frac{\overrightarrow{AC} \cdot \overrightarrow{BC}}{\overrightarrow{AB} \times \overrightarrow{BC}} \overrightarrow{AB}^{T}}{2}, R = \frac{abc}{4S}$
-    \item
-      垂心 $\overrightarrow{H} = 3\overrightarrow{G} - 2\overrightarrow{O} = \overrightarrow{C} + \frac{\overrightarrow{BC} \cdot \overrightarrow{AC}}{\overrightarrow{BC} \times \overrightarrow{AC}} \overrightarrow{AB} ^ {T}$
-    \item
-      旁心(三个) $\frac{-a\overrightarrow{A} + b\overrightarrow{B} + c\overrightarrow{C}}{-a + b + c}$
-    \end{itemize}
-
   \subsection{Farmland}
     \input{"Computational Geometry/Farmland.tex"}
 
@@ -178,6 +164,13 @@
     \item 点连通度(\emph{vertex connectivity}): 把图变成非连通图所需删除的最少点数
     \item Whitney定理: 一个图是$k-$连通的当且仅当它的点连通度至少为$k$
     \end{enumerate}
+  \item Lindstroem-Gessel-Viennot Lemma:
+    给定一个图的$n$个起点和$n$个终点, 
+    令$A_{ij} = $第$i$个起点到第$j$个终点的路径条数,
+    则从起点到终点的不相交路径条数为 $det(A)$
+  \item 欧拉回路与树形图的联系: 
+    对于出度等于入度的连通图
+    $s(G) = t_i(G) \prod_{j = 1}^{n} (d^+(v_j) - 1)! $
   \end{itemize}
 
 \section{数学}
@@ -274,51 +267,87 @@
       当$\Delta = 0$时, 有三个实根, 其中两个相等；
       当$\Delta < 0$时, 有三个不相等的实根. 
     
+    \subsubsection{椭圆}
+    \begin{itemize}
+    \item 椭圆$\frac{x^2}{a^2} + \frac{y^2}{b^2} = 1$, 其中离心率$e = \frac{c}{a}, c = \sqrt{a^2 - b^2}$; 焦点参数$p = \frac{b^2}{a}$
+    \item 椭圆上$(x, y)$点处的曲率半径为$R = a^2 b^2 (\dfrac{x^2}{a^4} + \dfrac{y^2}{b^4})^\frac{3}{2} = \dfrac{(r_1 r_2)^\frac{3}{2}}{ab}$, 其中$r_1$和$r_2$分别为$(x, y)$与两焦点$F_1$和$F_2$的距离. 设点$A$和点$M$的坐标分别为$(a, 0)$和$(x, y)$, 则$AM$的弧长为
+    \[ L_{AM} = a \int_0^{\arccos{\frac{x}{a} }} \sqrt{1 - e^2 \cos^2 t} \textrm{d} t = a \int_{\arccos{\frac{x}{a} }}^\frac{\pi}{2} \sqrt{1 - e^2 \sin^2 t} \textrm{d} t\]
+    \item 椭圆的周长$L = 4a \int_0^{\frac{\pi}{2}} \sqrt{1 - e^2 \sin^2 t } \textrm{d} t = 4a E(e, \frac{\pi}{2})$, 其中
+    \[ E(e, \frac{\pi}{2}) = \frac{\pi}{2} [ 1 - (\frac{1}{2})^2 e^2 - (\frac{1 \times 3}{2 \times 4})^2 \frac{e^4}{3} - (\frac{1 \times 3 \times 5}{2 \times 4 \times 6})^2 \frac{e^6}{5} - \cdots\]
+    \item 设椭圆上点$M(x, y), N(x, -y), x, y > 0, A(a, 0)$, 原点$O(0, 0)$, 扇形$OAM$的面积$S_{OAM} = \frac{1}{2} ab \arccos{\frac{x}{a}}$, 弓形$MAN$的面积$S_{MAN} = ab \arccos{\frac{x}{a}} - xy$.
+    \item 需要$5$个点才能确定一个圆锥曲线.
+    \item 设$\theta$为$(x, y)$点关于椭圆中心的极角, $r$为$(x, y)$到椭圆中心的距离, 椭圆极坐标方程:
+    \[ x = r \cos \theta, y = r \sin \theta, r^2 = \frac{b^2 a^2}{b^2 \cos^2 \theta + a^2 \sin^2 \theta}\]
+  \end{itemize}
+  
     \subsubsection{抛物线}
     \begin{itemize}
-      \item 标准方程$y^2 = 2px$, 曲率半径$ R = \dfrac{(p + 2x)^{\frac{3}{2} }}{\sqrt{p}}$
-      \item 弧长: 设$M(x, y)$是抛物线上一点, 则$L_{OM} = \frac{p}{2} [ \sqrt{\frac{2x}{p}(1 + \frac{2x}{p})} + \ln(\sqrt{\frac{2x}{p}} + \sqrt{1 + \frac{2x}{p}})]$
-      \item 弓形面积: 设$M, D$是抛物线上两点, 且分居一, 四象限. 做一条平行于$MD$且与抛物线相切的直线$L$. 若$M$到$L$的距离为$h$. 则有$S_{MOD} = \frac{2}{3}MD \cdot h$.
+    \item 标准方程$y^2 = 2px$, 曲率半径$ R = \dfrac{(p + 2x)^{\frac{3}{2} }}{\sqrt{p}}$
+    \item 弧长: 设$M(x, y)$是抛物线上一点, 则$L_{OM} = \frac{p}{2} [ \sqrt{\frac{2x}{p}(1 + \frac{2x}{p})} + \ln(\sqrt{\frac{2x}{p}} + \sqrt{1 + \frac{2x}{p}})]$
+    \item 弓形面积: 设$M, D$是抛物线上两点, 且分居一, 四象限. 做一条平行于$MD$且与抛物线相切的直线$L$. 若$M$到$L$的距离为$h$. 则有$S_{MOD} = \frac{2}{3}MD \cdot h$.
     \end{itemize}
 
     \subsubsection{重心}
     \begin{itemize}
-      \item 半径$r$, 圆心角为$\theta$的扇形的重心与圆心的距离为$\dfrac{4r\sin\frac{\theta}{2}}{3\theta}$
-      \item 半径$r$, 圆心角为$\theta$的圆弧的重心与圆心的距离为$\dfrac{4r\sin^3\frac{\theta}{2}}{3(\theta - \sin\theta)}$
-      \item 椭圆上半部分的重心与圆心的距离为$\dfrac{4b}{3\pi}$
-      \item  抛物线中弓形$MOD$的重心满足$CQ = \frac{2}{5} PQ$, $P$是直线$L$与抛物线的切点, $Q$在$MD$上且$PQ$平行$x$轴, $C$是重心
+    \item 半径$r$, 圆心角为$\theta$的扇形的重心与圆心的距离为$\dfrac{4r\sin\frac{\theta}{2}}{3\theta}$
+    \item 半径$r$, 圆心角为$\theta$的圆弧的重心与圆心的距离为$\dfrac{4r\sin^3\frac{\theta}{2}}{3(\theta - \sin\theta)}$
+    \item 椭圆上半部分的重心与圆心的距离为$\dfrac{4b}{3\pi}$
+    \item  抛物线中弓形$MOD$的重心满足$CQ = \frac{2}{5} PQ$, $P$是直线$L$与抛物线的切点, $Q$在$MD$上且$PQ$平行$x$轴, $C$是重心
     \end{itemize}
 
     \subsubsection{向量恒等式}
     \begin{itemize}
-      \item $\vec{a} \cdot (\vec{b} \times \vec{c}) = \vec{b} \cdot (\vec{c} \times \vec{a}) = \vec{c} \cdot (\vec{a} \times \vec{b})$
-      \item $\vec{a} \times (\vec{b} \times \vec{c}) = (\vec{c} \times \vec{b}) \times \vec{a} = \vec{b}(\vec{a} \cdot \vec{c}) - \vec{c}(\vec{a} \cdot \vec{b})$
+    \item $\vec{a} \cdot (\vec{b} \times \vec{c}) = \vec{b} \cdot (\vec{c} \times \vec{a}) = \vec{c} \cdot (\vec{a} \times \vec{b})$
+    \item $\vec{a} \times (\vec{b} \times \vec{c}) = (\vec{c} \times \vec{b}) \times \vec{a} = \vec{b}(\vec{a} \cdot \vec{c}) - \vec{c}(\vec{a} \cdot \vec{b})$
     \end{itemize}
 
-    \subsubsection{平面几何常用公式}
+    \subsubsection{常用几何公式}
     \begin{itemize}
+    \item 三角形的五心
+      \begin{itemize}
+      \item 重心 $\overrightarrow{G} = \frac{\overrightarrow{A} + \overrightarrow{B} + \overrightarrow{C}}{3}$
+      \item
+        内心 $\overrightarrow{I} = \frac{a\overrightarrow{A} + b\overrightarrow{B} + c\overrightarrow{C}}{a + b + c}$,
+        $R = \frac{2S}{a + b + c}$
+      \item
+        外心 $\overrightarrow{O} = \frac{\overrightarrow{A} + \overrightarrow{B} + \frac{\overrightarrow{AC} \cdot \overrightarrow{BC}}{\overrightarrow{AB} \times \overrightarrow{BC}} \overrightarrow{AB}^{T}}{2}$,
+        $R = \frac{abc}{4S}$
+      \item
+        垂心 $\overrightarrow{H} = 3\overrightarrow{G} - 2\overrightarrow{O} = \overrightarrow{C} + \frac{\overrightarrow{BC} \cdot \overrightarrow{AC}}{\overrightarrow{BC} \times \overrightarrow{AC}} \overrightarrow{AB} ^ {T}$
+      \item
+        旁心(三个) $\frac{-a\overrightarrow{A} + b\overrightarrow{B} + c\overrightarrow{C}}{-a + b + c}$
+      \end{itemize}
+
     \item 四边形: 设$D_1, D_2$为对角线, $M$为对角线中点连线, $A$为对角线夹角
       \begin{itemize}
       \item $a^2 + b^2 + c^2 + d^2 = D_1^2 + D_2 ^ 2 + 4 M^2$
       \item $S = \frac{1}{2} D_1  D_2 \sin A$
       \item $ac + bd = D_1 D_2$ (内接四边形适用)
-      \item $S = \sqrt{(p - a)(p - b)(p - c)(p - d)}, p$为半周长 (内接四边形适用)
+      \item Bretschneider公式:
+        $S = \sqrt{(p - a)(p - b)(p - c)(p - d) - abcd \cos^2(\frac{\theta}{2})}$, 其中 $\theta$ 为对角和
+%    S=√[(p-a)(p-b)(p-c)(p-d)-abcdcos^2(θ/2)]
+%    $S = \sqrt{(p - a)(p - b)(p - c)(p - d)}, p$为半周长 (内接四边形适用)
+      \end{itemize}
+    \item 棱锥:
+      \begin{itemize}
+      \item 体积 $V = \frac{1}{3}Ah$, $A$为底面积, $h$ 为高
+      \item (对正棱锥) 侧面积 $S = \frac{1}{2} lp $, $l$为斜高, $p$ 为底面周长
       \end{itemize}
     \item 棱台:
       \begin{itemize}
-      \item 体积$V = \dfrac{(A_1 + A_2 + \sqrt{A_1 A_2}) \cdot h}{3}$, $A_1, A_2$分别为上下底面面积, $h$为高
-      \item 侧面积$S = \frac{1}{2} (p_1 + p_2) \cdot l$, $p_1, p_2$为上下底面周长, $l$为斜高. (正棱台适用)
+      \item 体积$V = \dfrac{(A_1 + A_2 + \sqrt{A_1 A_2}) \cdot h}{3}$, $A_1$, $A_2$分别为上下底面面积, $h$为高
+      \item (对正棱台)侧面积$S = \frac{1}{2} (p_1 + p_2) \cdot l$, $p_1$, $p_2$为上下底面周长, $l$为斜高. 
       \end{itemize}
     \end{itemize}
 
     \subsubsection{树的计数}
     \begin{itemize}
-      \item 有根数计数: 令$S_{n, j} = \sum\limits_{1 \le i \le n / j} a_{n + 1 - ij} = S_{n - j, j} + a_{n + 1 - j}$\\
+    \item 有根数计数: 令$S_{n, j} = \sum\limits_{1 \le i \le n / j} a_{n + 1 - ij} = S_{n - j, j} + a_{n + 1 - j}$\\
         于是, $n + 1$个结点的有根数的总数为$a_{n + 1} = \dfrac{\sum\limits_{1 \le j \le n} j \cdot a_j \cdot S_{n, j} }{n}$\\
         附: $a_1 = 1, a_2 = 1, a_3 = 2, a_4 = 4, a_5 = 9, a_6 = 20, a_9 = 286, a_{11} = 1842$
-      \item 无根树计数: 当$n$是奇数时, 则有$a_n - \sum\limits_{1 \le i \le \frac{n}{2}} a_i a_{n - i}$种不同的无根树\\
+    \item 无根树计数: 当$n$是奇数时, 则有$a_n - \sum\limits_{1 \le i \le \frac{n}{2}} a_i a_{n - i}$种不同的无根树\\
         当$n$是偶数时, 则有$a_n - \sum\limits_{1 \le i \le \frac{n}{2}} a_i a_{n - i} + \dfrac{1}{2} a_\frac{n}{2} (a_\frac{n}{2} + 1)$种不同的无根树
-      \item Matrix-Tree定理: 对任意图$G$, 设mat[$i$][$i$] = $i$的度数, mat[$i$][$j$] = $i$与$j$之间边数的相反数, 则mat[$i$][$j$]的任意余子式的行列式就是该图的生成树个数
+    \item Matrix-Tree定理: 对任意图$G$, 设mat[$i$][$i$] = $i$的度数, mat[$i$][$j$] = $i$与$j$之间边数的相反数, 则mat[$i$][$j$]的任意余子式的行列式就是该图的生成树个数
     \end{itemize}
 
   \subsection{小知识}
@@ -378,8 +407,30 @@
     因此分解得$n = (t -y)(t + y)$. 
     显然, 当两个因数很接近时这个方法能很快找到结果, 
     但如果遇到一个素数, 则需要检查$\frac{n + 1}{2} - \sqrt{n}$个整数
+  \item 牛顿迭代:
+    $x_1 = x_0 - \frac{f(x_0)}{f\prime(x_0)}$
+  \item 球与盒子的动人故事: ($n$个球, $m$个盒子, $S$为第二类斯特林数)
+    \begin{enumerate}
+    \item 球同, 盒同, 无空: 整数分拆
+    \item 球同, 盒同, 可空: 整数分拆前缀和
+    \item 球同, 盒不同, 无空: $\binom{n - 1}{m - 1}$
+    \item 球同, 盒不同, 可空: $\binom{n + m - 1}{n - 1}$
+    \item 球不同, 盒同, 无空: $S(n, m)$
+    \item 球不同, 盒同, 可空: $\sum_{k = 1}^{m} S(n, k)$
+    \item 球不同, 盒不同, 无空: $S(n, m)$
+    \item 球不同, 盒不同, 可空: $m^n$
+    \end{enumerate}
+  \item 组合数:
+    \begin{itemize}
+    \item Lucas 定理:
+      对质数p,
+      设$n = n_k p^k + n_{k - 1} p ^ {k - 1} + \cdots + n_1 p + n_0$,
+      $m = m_k p^k + m_{k - 1} p ^ {k - 1} + \cdots + m_1 p + m_0$,
+      则 $ \binom{n}{m} \equiv \prod{i = 0}^{k}\binom{n_i}{m_i}$ (mod $p$)
+    \item 组合数判断奇偶性:
+      若 $(n \& m) = m$, 则 $\binom{n}{m}$ 为奇数, 否则为偶数
+    \end{itemize}
   \end{itemize}
-
   
 \section{其他}
   \subsection{Extended LIS}
@@ -399,6 +450,16 @@
 
   \subsection{曼哈顿最小生成树}
     \input{"Others/Manhattan MST.tex"}
+
+  \subsection{直线下的整点个数}
+    求 $\sum_{i=0}^{n-1} \lfloor\frac{a+bi}{m}\rfloor$
+    \input{"Others/DotsBelowLine.tex"}
+
+  \subsection{Java分数类}
+    \input{"Others/Java Polynomial.tex"}
+
+  \subsection{long long 乘法取模}
+    \input{"Others/Long Long Multi and Mod.tex"}
 
 \section{Templates}
   \subsection{vim配置}

@@ -1,6 +1,3 @@
-
-const int MAXN = 129;
-
 int minCut(int N, int G[MAXN][MAXN]) { // 0-based
 	static int weight[MAXN];
 	static bool used[MAXN];

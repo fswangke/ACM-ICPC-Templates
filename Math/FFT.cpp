@@ -1,13 +1,9 @@
 namespace FFT {
-
 	struct Complex {
 		double a, b;
-		Complex(): a(0.0), b(0.0) {
-		}
-		Complex(double a, double b): a(a), b(b) {
-		}
+		Complex(): a(0.0), b(0.0) {}
+		Complex(double a, double b): a(a), b(b) {}
 	};
-
 	int n, id, *A, *B, *s, len;
 	Complex tmp[MAXLEN], pa[MAXLEN], pb[MAXLEN], *p;
 
@@ -75,4 +71,3 @@ namespace FFT {
 		}
 	}
 }
-

@@ -5,7 +5,6 @@ int josephus(int n, int m, int k) {
 	}
 	return x;
 }
-
 int invJosephus(int n, int m, int x) {
 	for (int i = n; ; i--) {
 		if (x == i) return n - i;

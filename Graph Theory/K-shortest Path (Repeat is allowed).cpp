@@ -1,16 +1,4 @@
-//	Author: Amber
-
-#include <cstdio>
-#include <cstdlib>
-#include <cstring>
-#include <vector>
-#include <algorithm>
-#include <queue>
-
-using namespace std;
-
 #define for_each(it, v) for (vector<Edge*>::iterator it = (v).begin(); it != (v).end(); ++it)
-
 const int MAX_N = 10000;
 const int MAX_M = 50000;
 const int MAX_K = 10000;
@@ -19,7 +7,6 @@ const int INF = 1000000000;
 struct Edge {
 	int from, to, weight;
 };
-
 struct HeapNode {
 	Edge* edge;
 	int depth;

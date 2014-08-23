@@ -1,4 +1,3 @@
-
 namespace EdmondsAlgorithm { // O(ElogE + V^2)
 
 const int N = 1111;
@@ -213,5 +212,4 @@ int main() {
 
 	return 0;
 }
-
 }

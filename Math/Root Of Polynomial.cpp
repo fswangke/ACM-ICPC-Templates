@@ -1,10 +1,3 @@
-#include <iostream>
-#include <cstdio>
-#include <cstdlib>
-#include <cmath>
-#include <algorithm>
-
-using namespace std;
 
 const double error = 1e-12;
 const double infi = 1e+12;

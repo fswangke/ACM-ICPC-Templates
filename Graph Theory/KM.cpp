@@ -1,11 +1,8 @@
-
 namespace KM {
-
 	int n, m; // left && right
 	int ans;
 	int L[MAX_LEFT], R[MAX_RIGHT], v[MAX_RIGHT];
 	bool bx[MAX_LEFT], by[MAX_RIGHT];
-
 	bool find(int x) {
 		bx[x] = true;
 		for (edge e(fir[x]); e; e = e->next) {

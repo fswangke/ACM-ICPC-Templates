@@ -1,4 +1,3 @@
-
 void construct() {
 	static tree Q[MAX_NODE];
 	int head = 0, tail = 0;

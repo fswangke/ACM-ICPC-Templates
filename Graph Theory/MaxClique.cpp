@@ -2,16 +2,8 @@ namespace MaxClique {
 	// 1-based
 	// mc[i]: max clique in [i ... n]
 	// mc[i] = mc[i + 1] or mc[i + 1] + 1
-
-	const int MAXN = 133;
-
-	int g[MAXN][MAXN];
-	int len[MAXN];
-	int list[MAXN][MAXN];
-	int mc[MAXN];
-	int ans;
+	int g[MAXN][MAXN], len[MAXN], list[MAXN][MAXN], mc[MAXN], ans;
 	bool found;
-
 	void DFS(int size) {
 		int i, j, k;
 		if (len[size] == 0) {
@@ -33,7 +25,6 @@ namespace MaxClique {
 			DFS(size + 1);
 		}
 	}
-
 	int work(int n) {
 		int i, j;
 		mc[n] = ans = 1;

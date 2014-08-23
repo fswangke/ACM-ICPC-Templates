@@ -1,10 +1,3 @@
-
-#include <iostream>
-#include <cstdio>
-#include <vector>
-
-using namespace std;
-
 const int MOD = 3 << 18 | 1;
 const int PRIMITIVE_ROOT = 10;
 const int MAXB = 1 << 20;
@@ -21,14 +14,12 @@ namespace PrimitiveRoot {
 		}
 		return res;
 	}
-
 	bool isPrime(int n) {
 		for (int i = 2; i * i <= n; ++i)
 			if (n % i == 0)
 				return false;
 		return true;
 	}
-
 	int getMod(int downLimit) {
 		for (int c = 3; ; ++c) {
 			int t = (c << 21) | 1;
@@ -37,7 +28,6 @@ namespace PrimitiveRoot {
 		}
 		return -1;
 	}
-
 	bool isPrimitiveRoot(int a, int mod) {
 		int phi = mod - 1;
 		for (int i = 1; i * i <= phi; ++i) {
@@ -50,7 +40,6 @@ namespace PrimitiveRoot {
 		}
 		return true;
 	}
-
 	int getPrimitiveRoot(int p) {
 		int g = 2;
 		while ( !isPrimitiveRoot(g, p) ) ++g;
@@ -59,11 +48,9 @@ namespace PrimitiveRoot {
 }
 
 namespace FFT {
-
 	int modinv(int a) {
 		return a <= 1 ? a : (long long) (MOD - MOD / a) * modinv(MOD % a) % MOD;
 	}
-
 	long long powmod(long long a, int b) {
 		a %= MOD;
 		long long r = 1;
@@ -127,6 +114,4 @@ namespace FFT {
 		}
 		return ret;
 	}
-
 }
-

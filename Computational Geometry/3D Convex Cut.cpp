@@ -1,4 +1,3 @@
-
 vector<vector<point> > convexCut(const vector<vector<point> > &pss, const point &p, const point &o) {
 	vector<vector<point> > res;
 	vector<point> sec;

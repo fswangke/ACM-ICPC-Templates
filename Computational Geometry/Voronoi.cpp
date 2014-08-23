@@ -1,4 +1,3 @@
-
 #define Oi(e) ((e)->oi)
 #define Dt(e) ((e)->dt)
 #define On(e) ((e)->on)
@@ -318,4 +317,3 @@ int main() {
 	solve();
 	return 0;
 }
-

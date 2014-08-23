@@ -6,10 +6,6 @@
  * 加入一条边相当于将其权值从 \infinity 变成某个值
  */
 
-#include <cstdio>
-#include <algorithm>
-using namespace std;
-
 const int maxn = 100000 + 5;
 const int maxm = 1000000 + 5;
 const int maxq = 1000000 + 5;
@@ -42,30 +38,23 @@ int find(int x) {
 	}
 	return root;
 }
-inline bool cmp(const int &a, const int &b) {
-	return tz[a] < tz[b];
-}
+inline bool cmp(const int &a, const int &b) { return tz[a] < tz[b]; }
 int kx[maxn], ky[maxn], kt;
 int vd[maxn], id[maxm];
 int app[maxm];
 bool extra[maxm];
-long long printState(int *qx, int *qy, int Q, int n, int *x, int *y, int *z,
-		int m, long long ans) {
+long long printState(int *qx, int *qy, int Q, int n, int *x, int *y, int *z, int m, long long ans) {
 	printf("%d %d\n", n, m);
-	for (int i = 0; i < m; i++)
-		printf("%d %d %d\n", x[i], y[i], z[i]);
+	for (int i = 0; i < m; i++) printf("%d %d %d\n", x[i], y[i], z[i]);
 	printf("Q = %d\n", Q);
-	for (int i = 0; i < Q; i++)
-		printf("%d %d\n", qx[i], qy[i]);
+	for (int i = 0; i < Q; i++) printf("%d %d\n", qx[i], qy[i]);
 	return ans;
 }
 void solve(int *qx, int *qy, int Q, int n, int *x, int *y, int *z, int m, long long ans) {
 	if (Q == 1) {
-		for (int i = 1; i <= n; i++)
-			a[i] = 0;
+		for (int i = 1; i <= n; i++) a[i] = 0;
 		z[qx[0]] = qy[0];
-		for (int i = 0; i < m; i++)
-			id[i] = i;
+		for (int i = 0; i < m; i++) id[i] = i;
 		tz = z;
 		sort(id, id + m, cmp);
 		int ri, rj;
@@ -83,22 +72,16 @@ void solve(int *qx, int *qy, int Q, int n, int *x, int *y, int *z, int m, long l
 	int ri, rj;
 	//contract
 	kt = 0;
-	for (int i = 1; i <= n; i++)
-		a[i] = 0;
+	for (int i = 1; i <= n; i++) a[i] = 0;
 	for (int i = 0; i < Q; i++) {
 		ri = find(x[qx[i]]);
 		rj = find(y[qx[i]]);
-		if (ri != rj)
-			a[ri] = rj;
+		if (ri != rj) a[ri] = rj;
 	}
 	int tm = 0;
-	for (int i = 0; i < m; i++)
-		extra[i] = true;
-	for (int i = 0; i < Q; i++)
-		extra[qx[i]] = false;
-	for (int i = 0; i < m; i++)
-		if (extra[i])
-			id[tm++] = i;
+	for (int i = 0; i < m; i++) extra[i] = true;
+	for (int i = 0; i < Q; i++) extra[qx[i]] = false;
+	for (int i = 0; i < m; i++) if (extra[i]) id[tm++] = i;
 	tz = z;
 	sort(id, id + tm, cmp);
 	for (int i = 0; i < tm; i++) {
@@ -112,23 +95,14 @@ void solve(int *qx, int *qy, int Q, int n, int *x, int *y, int *z, int m, long l
 			kt++;
 		}
 	}
-	for (int i = 1; i <= n; i++)
-		a[i] = 0;
-	for (int i = 0; i < kt; i++)
-		a[find(kx[i])] = find(ky[i]);
+	for (int i = 1; i <= n; i++) a[i] = 0;
+	for (int i = 0; i < kt; i++) a[find(kx[i])] = find(ky[i]);
 	int n2 = 0;
-	for (int i = 1; i <= n; i++)
-		if (a[i] == 0)
-			vd[i] = ++n2;
-	for (int i = 1; i <= n; i++)
-		if (a[i])
-			vd[i] = vd[find(i)];
-	int *Nx = x + m;
-	int *Ny = y + m;
-	int *Nz = z + m;
+	for (int i = 1; i <= n; i++) if (a[i] == 0) vd[i] = ++n2;
+	for (int i = 1; i <= n; i++) if (a[i] != 0) vd[i] = vd[find(i)];
+	int *Nx = x + m, *Ny = y + m, *Nz = z + m;
 	int m2 = 0;
-	for (int i = 0; i < m; i++)
-		app[i] = -1;
+	for (int i = 0; i < m; i++) app[i] = -1;
 	for (int i = 0; i < Q; i++)
 		if (app[qx[i]] == -1) {
 			Nx[m2] = vd[x[qx[i]]];
@@ -141,8 +115,7 @@ void solve(int *qx, int *qy, int Q, int n, int *x, int *y, int *z, int m, long l
 		z[qx[i]] = qy[i];
 		qx[i] = app[qx[i]];
 	}
-	for (int i = 1; i <= n2; i++)
-		a[i] = 0;
+	for (int i = 1; i <= n2; i++) a[i] = 0;
 	for (int i = 0; i < tm; i++) {
 		ri = find(vd[x[id[i]]]);
 		rj = find(vd[y[id[i]]]);
@@ -159,12 +132,6 @@ void solve(int *qx, int *qy, int Q, int n, int *x, int *y, int *z, int m, long l
 	solve(qx + mid, qy + mid, Q - mid, n2, Nx, Ny, Nz, m2, ans);
 }
 
-void work() {
-	if (Q) solve(qx, qy, Q, n, x, y, z, m, 0);
-}
+void work() { if (Q) solve(qx, qy, Q, n, x, y, z, m, 0); }
 
-int main() {
-	init();
-	work();
-	return 0;
-}
+int main() { init(); work(); return 0; }

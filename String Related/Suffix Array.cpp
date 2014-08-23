@@ -106,7 +106,6 @@ namespace SuffixArrayDC3 {
 		for (; j < tbc; p++)
 			sa[p] = wb[j++];
 	}
-
 	#undef F
 	#undef G
 }

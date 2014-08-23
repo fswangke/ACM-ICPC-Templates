@@ -4,11 +4,8 @@ struct Event {
 	int add;
 	Event(): p(), alpha(0.0), add(0) {}
 	Event(const point &p, const double &alpha, const int &add): p(p), alpha(alpha), add(add) {}
-	bool operator < (const Event &other) const {
-		return alpha < other.alpha;
-	}
+	bool operator < (const Event &other) const { return alpha < other.alpha; }
 };
-
 void circleKCover(circle *c, int N, double *area) { // area[k] : covered not less than k times
 	static bool overlap[MAXN][MAXN], g[MAXN][MAXN];
 	Rep(i, 0, N + 1) area[i] = 0.0;

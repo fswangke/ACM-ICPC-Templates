@@ -1,4 +1,3 @@
-
 vector<int> eulerianWalk(int N, int S) {
 	static int res[MAXM];
 	static int stack[MAXN];

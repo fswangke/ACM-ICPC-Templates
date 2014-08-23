@@ -1,15 +1,12 @@
-
 struct node {
 	int begin[MAXN], *end;
 } a[MAXN];
-
 int n, m, S;
 bool visit[MAXN][MAXN];
 point p[MAXN];
 
 inline bool cmp(const int &a, const int &b) {
-	return sign(atan2(p[a].y - p[S].y, p[a].x - p[S].x)
-			  - atan2(p[b].y - p[S].y, p[b].x - p[S].x)) < 0;
+	return sign(atan2(p[a].y - p[S].y, p[a].x - p[S].x) - atan2(p[b].y - p[S].y, p[b].x - p[S].x)) < 0;
 }
 
 void init() {
@@ -26,7 +23,6 @@ void init() {
 	scanf("%d", &m);
 	for (S = 1; S <= n; ++S) sort(a[S].begin, a[S].end, cmp);
 }
-
 bool check(int b1, int b2) {
 	static pii l[MAXN * 2 + 1];
 	static bool valid[MAXN];
@@ -51,7 +47,6 @@ bool check(int b1, int b2) {
 	}
 	return 1;    
 }
-
 void work() {
 	int ans = 0;
 	Rep(x, 1, n) {
@@ -60,17 +55,6 @@ void work() {
 			if (visit[x][y]) continue;
 			if (check(x, y)) ++ans;
 		}
-	}
-	printf("%d\n", ans);      
+	} printf("%d\n", ans);      
 }
-
-int main() {
-	int T;
-	scanf("%d", &T);
-	while (T--) {
-		init();
-		work();
-	}
-	return 0;
-}
-
+int main() { int T; scanf("%d", &T); while (T--) { init(); work(); } return 0; }

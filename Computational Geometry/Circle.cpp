@@ -5,7 +5,6 @@ struct circle {
 	circle(): o(), r(0.0), r2(0.0) {}
 	circle(const point &o, const double &r): o(o), r(r), r2(r * r) {}
 	bool inside(const point &a) { return sign((a - o).norm() - r2) <= 0; }
-
 	bool intersectWithLine(const point &S, const point &T, point &A, point &B) const { // guarantee det(OA, OB) >= 0
 		if (sign(det(o - S, T - S)) > 0)
 			return intersectWithLine(T, S, A, B);
@@ -18,7 +17,6 @@ struct circle {
 		B = mm + vv;
 		return true;
 	}
-
 	bool contain(const circle &b) const {
 		return sign(b.r + (o - b.o).len() - r) <= 0;
 	}

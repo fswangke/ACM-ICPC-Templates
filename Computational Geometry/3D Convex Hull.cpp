@@ -1,14 +1,10 @@
-// please make sure there is no points coincide
-namespace ConvexHull3D {
-
+namespace ConvexHull3D { // make sure there is no points coincide
 	const int MAXN = 1033;
 	struct Facet {
 		int a, b, c;
 		Facet(int a, int b, int c): a(a), b(b), c(c) {}
 	};
-
 	#define volume(a, b, c, d) (mix(ps[b] - ps[a], ps[c] - ps[a], ps[d] - ps[a]))
-
 	vector<Facet> getHull(int n, point ps[]) {
 		static int mark[MAXN][MAXN];
 		int a, b, c, stamp = 0;
@@ -35,7 +31,6 @@ namespace ConvexHull3D {
 			for (int j = 0; j < n; ++j)
 				mark[i][j] = 0;
 		stamp = 0;
-
 		for (int v = 3; v < n; ++v) {
 			vector<Facet> tmp;
 			++stamp;
@@ -67,7 +62,6 @@ namespace ConvexHull3D {
 	}
 	#undef volume
 }
-
 namespace Gravity {
 	using ConvexHull3D::Facet;
 	point findG(point ps[], const vector<Facet> &facet) {

@@ -4,24 +4,9 @@
 	`支持插入，查询`
 	`如果要用long long，把LL改为long long即可`
 */
-
-#include <cstdio>
-#include <cstdlib>
-#include <algorithm>
-using namespace std;
- 
-typedef int LL;
-struct Point {
-	int x, y;
-};
-
-inline LL sqr(int x) {
-	return abs(x);
-}
-
-inline LL dist(const Point &a, const Point &b) {
-	return sqr(a.x - b.x) + sqr(a.y - b.y);
-}
+struct Point { int x, y; };
+inline LL sqr(int x) { return abs(x); }
+inline LL dist(const Point &a, const Point &b) { return sqr(a.x - b.x) + sqr(a.y - b.y); }
 
 struct Rectangle {
 	int lx , rx , ly , ry;
@@ -131,8 +116,7 @@ void query(int k, bool d) {
 }
 
 int main() {
-	int tests;
-	for (tests = 1; tests --; ) {
+	for (int tests = 1; tests --; ) {
 		scanf("%d %d", &n, &m);
 		for (int i = 0; i < n; ++i) {
 			scanf("%d%d", &a[i].x, &a[i].y);

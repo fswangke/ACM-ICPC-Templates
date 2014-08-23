@@ -1,14 +1,7 @@
 // PKU 1686 Lazy Math Instructor
 
-#include <cstdio>
-#include <cstring>
-#include <cctype>
-#include <ctime>
-#include <cstdlib>
-
 const int maxl = 1000;
 const int maxt = 100;
-const double eps = 1e-8;
 
 int value[26];
 char str1[maxl], str2[maxl];
@@ -33,7 +26,7 @@ inline int getLevel(char ch) {
 	return -1;
 }
 
-int evaluate(const char *&p, int level) {
+int evaluate(char *&p, int level) {
 	int res;
 	if (level == 2) {
 		if (*p == '(') {
@@ -65,8 +58,8 @@ int evaluate(const char *&p, int level) {
 	return res;
 }
 
-int makeEvaluation(const char *str) {
-	const char *p = str;
+int makeEvaluation(char *str) {
+	char *p = str;
 	return evaluate(p, 0);
 }
 

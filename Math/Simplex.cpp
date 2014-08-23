@@ -1,4 +1,3 @@
-
 const int MAXN = 11000, MAXM = 1100;
 //here MAXN is the MAX number of conditions, MAXM is the MAX number of vars
 
@@ -6,7 +5,7 @@ int avali[MAXM], avacnt;
 double A[MAXN][MAXM];
 double b[MAXN], c[MAXM];
 double* simplex(int n, int m) {
-//here n is the number of conditions, m is the number of vars
+//	here n is the number of conditions, m is the number of vars
 	m++;
 	int r = n, s = m - 1;
 	static double D[MAXN + 2][MAXM + 1];

@@ -1,7 +1,3 @@
-
-//BEGIN
-//POINT CLASS
-
 typedef complex<double> Tpoint;
 const double eps = 1e-8;
 const double sqrt3 = sqrt(3.0);
@@ -156,4 +152,3 @@ int main() {
 	}
 	return 0;
 }
-

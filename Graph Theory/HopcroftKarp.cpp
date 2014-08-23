@@ -1,10 +1,6 @@
-
 namespace HopcroftKarp { // 0-based
-	int N, M;
+	int N, M, level[MAXN], matchX[MAXN], matchY[MAXN];
 	bool used[MAXN];
-	int level[MAXN];
-	int matchX[MAXN], matchY[MAXN];
-
 	bool DFS(int x) {
 		used[x] = true;
 		for (edge e(fir[x]); e; e = e->next) {
@@ -18,7 +14,6 @@ namespace HopcroftKarp { // 0-based
 		}
 		return false;
 	}
-
 	int maxMatch() {
 		for (int i = 0; i < N; ++i) used[i] = false;
 		for (int i = 0; i < N; ++i) matchX[i] = -1;
@@ -57,5 +52,3 @@ namespace HopcroftKarp { // 0-based
 		return match;
 	}
 }
-
-

@@ -1,28 +1,17 @@
-
 namespace Blossom {
-
 	int n, match[MAXN];
 	int Q[MAXN], head, tail;
 	int pred[MAXN], label[MAXN];
 	int inq[MAXN], inb[MAXN];
 	int S, T, lca;
 	vector<int> link[MAXN];
-
 	void init(int _n) {
-		n = _n;
-		for (int i = 0; i < n; ++i)
-			link[i].clear();
+		n = _n; for (int i = 0; i < n; ++i) link[i].clear();
 	}
-
-	inline void push(int x) {
-		Q[tail++] = x;
-		inq[x] = true;
-	}
-
+	inline void push(int x) { Q[tail++] = x; inq[x] = true; }
 	int findCommonAncestor(int x, int y) {
 		static bool inPath[MAXN];
-		for (int i = 0; i < n; ++i)
-			inPath[i] = 0;
+		for (int i = 0; i < n; ++i) inPath[i] = 0;
 		for ( ; ; x = pred[ match[x] ]) {
 			x = label[x];
 			inPath[x] = true;
@@ -34,7 +23,6 @@ namespace Blossom {
 		}
 		return y;
 	}
-
 	void resetTrace(int x, int lca) {
 		while (label[x] != lca) {
 			int y = match[x];
@@ -43,11 +31,9 @@ namespace Blossom {
 			if (label[x] != lca) pred[x] = y;
 		}
 	}
-
 	void blossomContract(int x, int y) {
 		lca = findCommonAncestor(x, y);
-		for (int i = 0; i < n; ++i)
-			inb[i] = 0;
+		for (int i = 0; i < n; ++i) inb[i] = 0;
 		resetTrace(x, lca);
 		resetTrace(y, lca);
 		if (label[x] != lca) pred[x] = y;
@@ -58,7 +44,6 @@ namespace Blossom {
 				if (!inq[i]) push(i);
 			}
 	}
-
 	bool findAugmentingPath() {
 		for (int i = 0; i < n; ++i) pred[i] = -1;
 		for (int i = 0; i < n; ++i) label[i] = i;
@@ -91,7 +76,6 @@ namespace Blossom {
 		}
 		return false;
 	}
-
 	int findMaxMatching() {
 		int ans = 0;
 		for (int i = 0; i < n; ++i) match[i] = -1;
@@ -101,5 +85,4 @@ namespace Blossom {
 					++ans;
 		return ans;
 	}
-
 }

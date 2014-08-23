@@ -3,26 +3,9 @@
 	input n points
 	for each query px, py, kth, output the Kth maxdistance point id;
 */
-
-#include <cstdio>
-#include <cstdlib>
-#include <algorithm>
-
-using namespace std;
- 
-typedef long long LL;
-
-struct Point {
-	int x, y, id;
-};
-
-inline LL sqr(int x) {
-	return (LL)x * x;
-}
-
-inline LL dist(const Point &a, const Point &b) {
-	return sqr(a.x - b.x) + sqr(a.y - b.y);
-}
+struct Point { int x, y, id; };
+inline LL sqr(int x) { return (LL)x * x; }
+inline LL dist(const Point &a, const Point &b) { return sqr(a.x - b.x) + sqr(a.y - b.y); }
 
 struct Rectangle {
 	int lx , rx , ly , ry;
@@ -30,7 +13,6 @@ struct Rectangle {
 		lx = rx = p.x;
 		ly = ry = p.y;
 	}
-	
 	void merge(const Rectangle &o) {
 		lx = min(lx , o.lx);
 		rx = max(rx , o.rx);
@@ -63,12 +45,10 @@ bool cmpX(const Point &a, const Point &b) {
 	if (a.x != b.x) return a.x < b.x;
 	return a.y < b.y;
 }
-
 bool cmpY(const Point &a, const Point &b) {
 	if (a.y != b.y) return a.y < b.y;
 	return a.x < b.x;
 }
-
 void build(int k, int s, int t, bool d) {
 	int mid = (s + t) >> 1;
 	nth_element(a + s, a + mid , a + t, d ? cmpX : cmpY);
@@ -83,10 +63,8 @@ void build(int k, int s, int t, bool d) {
 		tree[k].rect.merge(tree[k << 1 | 1]. rect);
 	}
 }
-
 void query(int k, int s, int t, bool d, int kth) {
-	if (tree[k].rect.dist(p) < result[kth].first)
-		return;
+	if (tree[k].rect.dist(p) < result[kth].first) return;
 	pair<LL, int> tmp;
 	tmp = make_pair(dist(tree[k].p, p), -tree[k].p.id);
 	for(int i = 1; i <= kth; i++) {
@@ -113,8 +91,7 @@ void query(int k, int s, int t, bool d, int kth) {
 }
 
 int main() {
-	int tests;
-	for (tests = 1; tests --; ) {
+	for (int ests = 1; tests --; ) {
 		scanf("%d", &n);
 		for (int i = 0; i < n; ++i) {
 			scanf("%d%d", &a[i].x, &a[i].y);

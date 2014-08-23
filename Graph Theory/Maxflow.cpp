@@ -1,25 +1,14 @@
-
 namespace Maxflow {
-
-	int h[MAXNODE], vh[MAXNODE];
-	int S, T, Ncnt;
+	int h[MAXNODE], vh[MAXNODE], S, T, Ncnt;
 	edge cur[MAXNODE], pe[MAXNODE];
-
-	void init(int _S, int _T, int _Ncnt) {
-		S = _S;
-		T = _T;
-		Ncnt = _Ncnt;
-	}
-
+	void init(int _S, int _T, int _Ncnt) { S = _S; T = _T; Ncnt = _Ncnt; }
 	int maxflow() {
 		static int Q[MAXNODE];
 		int x, y, augc, flow = 0, head = 0, tail = 0;
 		edge e;
-		
 		Rep(i, 0, Ncnt) cur[i] = fir[i];
 		Rep(i, 0, Ncnt) h[i] = INF;
 		Rep(i, 0, Ncnt) vh[i] = 0;
-
 		for (Q[++tail] = T, h[T] = 0; head < tail; ) {
 			x = Q[++head]; ++vh[ h[x] ];
 			for (e = fir[x]; e; e = e->next) if (e->op->c)
@@ -28,7 +17,6 @@ namespace Maxflow {
 					Q[++tail] = y;
 				}
 		}
-
 		for (x = S; h[S] < Ncnt; ) {
 			for (e = cur[x]; e; e = e->next) if (e->c)
 				if (h[y = e->to] + 1 == h[x]) {
@@ -58,4 +46,3 @@ namespace Maxflow {
 		return flow;
 	}
 }
-

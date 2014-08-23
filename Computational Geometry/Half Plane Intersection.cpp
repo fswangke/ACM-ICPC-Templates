@@ -1,4 +1,3 @@
-
 struct Border {
 	point p1, p2; double alpha;
 	Border() : p1(), p2(), alpha(0.0) {}
@@ -58,4 +57,3 @@ double HPI(int N) {
 	Foru(i, 0, cnt) area += det(ps[i], ps[(i + 1) % cnt]);
 	return -area * 0.5;
 }
-

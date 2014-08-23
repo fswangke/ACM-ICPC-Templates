@@ -1,4 +1,3 @@
-
 bool test(LL n, int base) {
 	LL m = n - 1, ret = 0;
 	int s = 0;

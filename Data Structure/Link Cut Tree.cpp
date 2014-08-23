@@ -1,30 +1,14 @@
-
 struct node {
-	int rev;
-	node *pre, *ch[2];
+	int rev; node *pre, *ch[2];
 } base[MAXN], nil, *null;
 typedef node *tree;
 
 #define isRoot(x) (x->pre->ch[0] != x && x->pre->ch[1] != x)
 #define isRight(x) (x->pre->ch[1] == x)
 
-inline void MakeRev(tree t) {
-	if (t != null) {
-		t->rev ^= 1;
-		swap(t->ch[0], t->ch[1]);
-	}
-}
-
-inline void Update(tree t) {
-}
-
-inline void PushDown(tree t) {
-	if (t->rev) {
-		MakeRev(t->ch[0]);
-		MakeRev(t->ch[1]);
-		t->rev = 0;
-	}
-}
+inline void MakeRev(tree t) { if (t != null) { t->rev ^= 1; swap(t->ch[0], t->ch[1]); } }
+inline void Update(tree t) {}
+inline void PushDown(tree t) { if (t->rev) { MakeRev(t->ch[0]); MakeRev(t->ch[1]); t->rev = 0; } }
 
 inline void Rotate(tree x) {
 	tree y = x->pre;
@@ -37,13 +21,11 @@ inline void Rotate(tree x) {
 	y->pre = x;
 	Update(y);
 }
-
 inline void Splay(tree x) {
 	PushDown(x);
 	for (tree y; !isRoot(x); Rotate(x)) {
 		y = x->pre;
-		if (!isRoot(y))
-			Rotate(isRight(x) != isRight(y) ? x : y);
+		if (!isRoot(y)) Rotate(isRight(x) != isRight(y) ? x : y);
 	}
 	Update(x);
 }
@@ -54,51 +36,36 @@ inline void Splay(tree x, tree to) {
 			Rotate(isRight(x) != isRight(y) ? x : y);
 	Update(x);
 }
-
 inline tree Access(tree t) {
 	tree last = null;
 	while (t != null) {
-		Splay(t);
-		t->ch[1] = last;
-		Update(t);
-		last = t;
-		t = t->pre;
+		Splay(t); t->ch[1] = last; Update(t);
+		last = t; t = t->pre;
 	}
 	return last;
 }
-
 inline void MakeRoot(tree t) {
-	Access(t);
-	Splay(t);
-	MakeRev(t);
+	Access(t); Splay(t); MakeRev(t);
 }
-
 inline tree FindRoot(tree t) {
-	Access(t);
-	Splay(t);
-	tree last = null;
-	for (; t != null;) {
+	Access(t); Splay(t); tree last = null;
+	for ( ; t != null; ) {
 		PushDown(t); // important
-		last = t;
-		t = t->ch[0];
+		last = t; t = t->ch[0];
 	}
 	Splay(last);
 	return last;
 }
-
+inline void Join(tree x, tree y) { MakeRoot(y); y->pre = x; }
 inline void Cut(tree t) {
-	Access(t);
-	Splay(t);
+	Access(t); Splay(t);
 	t->ch[0]->pre = null;
 	t->ch[0] = null;
 	Update(t);
 }
-inline void Cut_simp(tree a, tree b) //simple version
-{
-	MakeRoot(a);
-	Access(a);
-	Splay(b);
-	b -> pre = null;
+inline void Cut_simp(tree a, tree b) { //simpler version
+	MakeRoot(a); Access(a); Splay(b);
+	b->pre = null;
 }
 inline void Cut(tree x, tree y) {
 	tree upper = (Access(x), Access(y));
@@ -108,22 +75,12 @@ inline void Cut(tree x, tree y) {
 		x->ch[1] = null;
 		Update(x);
 	} else if (upper == y) {
-		Access(x);
-		Splay(y);
-		x->pre = null;
-		y->ch[1] = null;
+		Access(x); Splay(y);
+		x->pre = null; y->ch[1] = null;
 		Update(y);
-	} else
-		assert(0); // impossible to happen
+	} else assert(0); // impossible to happen
 }
-
-inline void Join(tree x, tree y) {
-	MakeRoot(y);
-	y->pre = x;
-}
-
-// query the cost in path a <-> b, lca inclusive
-inline int Query(tree a, tree b) { 
+inline int Query(tree a, tree b) { // query the cost in path a <-> b, lca inclusive
 	Access(a);
 	tree c = Access(b); // c is lca
 	int v1 = c->ch[1]->maxCost;
@@ -136,10 +93,5 @@ void Init() {
 	null = &nil;
 	null->ch[0] = null->ch[1] = null->pre = null;
 	null->rev = 0;
-	Rep(i, 1, N) {
-		node &n = base[i];
-		n.rev = 0;
-		n.pre = n.ch[0] = n.ch[1] = null;
-	}
+	Rep(i, 1, N) { node &n = base[i]; n.rev = 0; n.pre = n.ch[0] = n.ch[1] = null; }
 }
-

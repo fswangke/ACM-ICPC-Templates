@@ -1,9 +1,7 @@
 namespace MaxCliqueCounting {
-
 	int n, ans;
 	int ne[MAXN], ce[MAXN];
 	int g[MAXN][MAXN], list[MAXN][MAXN];
-
 	void dfs(int size) {
 		int i, j, k, t, cnt, best = 0;
 		bool bb;
@@ -48,7 +46,6 @@ namespace MaxCliqueCounting {
 				break;
 		}
 	}
-
 	void work() {
 		int i;
 		ne[0] = 0;
@@ -58,5 +55,4 @@ namespace MaxCliqueCounting {
 		ans = 0;
 		dfs(0);
 	}
-
 }

@@ -1,4 +1,3 @@
-
 const int MAXLEN = 100033;
 const int MAXNODE = MAXLEN * 2 + 1;
 

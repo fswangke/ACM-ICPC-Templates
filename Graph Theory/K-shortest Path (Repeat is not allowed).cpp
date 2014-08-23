@@ -1,11 +1,3 @@
-
-#include <cstdio>
-#include <cstring>
-#include <vector>
-#include <queue>
-
-using namespace std;
-
 int Num[10005][205], Path[10005][205], dev[10005];
 int from[10005], value[10005], dist[205], Next[205], Graph[205][205];
 bool forbid[205];

@@ -1,20 +1,13 @@
-/**
- * Time Complexity: O(N ^ 3)
- */
-
-
 inline bool toUpRight(const point &a, const point &b) {
 	int c = sign(b.y - a.y);
 	if (c > 0) return true;
 	return c == 0 && sign(b.x - a.x) > 0;
 }
-
 inline bool cmpByPolarAngle(const point &a, const point &b) { // counter-clockwise, shorter first if they share the same polar angle
 	int c = sign(det(a, b));
 	if (c != 0) return c > 0;
 	return sign(b.len() - a.len()) > 0;
 }
-
 double maxEmptyConvexHull(point p[], int N) {
 	static double dp[133][133];
 	static point vec[133];

@@ -1,4 +1,3 @@
-
 // Warning: Pay Attention to Integer Overflow !
 
 int gcd(int a, int b) {

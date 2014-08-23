@@ -1,9 +1,5 @@
-
-#define MAXN 1033
 struct Polygon { // stored in [0, n)
-	int n;
-	point list[MAXN];
-
+	int n; point list[MAXN];
 	Polygon cut(const point &a, const point &b) {
 		static Polygon res;
 		static point o;
@@ -19,7 +15,6 @@ struct Polygon { // stored in [0, n)
 		}
 		return res;
 	}
-
 	bool contain(const point &p) const { // 1 if on border or inner, 0 if outter
 		static point A, B;
 		int res = 0;
@@ -34,13 +29,10 @@ struct Polygon { // stored in [0, n)
 		}
 		return res & 1;
 	}
-	
 	bool convex_contain(const point &p) const { // sort by polar angle
-		for (int i = 1; i < n; ++ i) list[i] = list[i] - list[0];
-		static point q = p - list[0];
-		
-		if (sign(det(list[1], q)) < 0 || sign(det(list[n - 1], q)) > 0)
-			return false;
+		for (int i = 1; i < n; ++i) list[i] = list[i] - list[0];
+		point q = p - list[0];
+		if (sign(det(list[1], q)) < 0 || sign(det(list[n - 1], q)) > 0) return false;
 		int l = 2, r = n - 1;
 		while (l <= r) {
 			int mid = (l + r) >> 1;
@@ -50,7 +42,6 @@ struct Polygon { // stored in [0, n)
 				if (d2 <= 0) {
 					if (sign(det(q - list[mid - 1], list[mid] - list[mid - 1]) <= 0) <= 0)
 						return true;
-					break;
 				} else 
 					r = mid - 1;
 			} else l = mid + 1;
@@ -58,4 +49,3 @@ struct Polygon { // stored in [0, n)
 		return false;
 	}
 };
-

@@ -1,7 +1,5 @@
 // for a_{i + n} = (\sum_{i = 0}^{n - 1} k_j a_{i + j}) + d
 // a_m = (\sum_{i = 0}^{n - 1} c_i a_i) + c_n d
-
-const int MAX_K = 1333;
 vector<int> recFormula(int n, int k[], int m) {
 	vector<int> c(n + 1, 0);
 	if (m < n) c[m] = 1;

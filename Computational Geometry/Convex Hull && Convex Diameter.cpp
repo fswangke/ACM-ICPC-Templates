@@ -1,12 +1,9 @@
-
 inline bool turnLeft(const point &a, const point &b, const point &c) {
 	return sign(det(b - a, c - a)) >= 0;
 }
-
 inline bool turnRight(const point &a, const point &b, const point &c) {
 	return sign(det(b - a, c - a)) <= 0;
 }
-
 inline bool cmpByXY(const point &a, const point &b) {
 	int c = sign(a.x - b.x);
 	if (c != 0) return c < 0;
@@ -34,11 +31,9 @@ vector<point> convexHull(vector<point> &a) {
 		}
 		ret.push_back(a[i]);
 		++cnt;
-	}
-	// the lowest point will occur twice, i.e. ret.front() == ret.back()
+	} // the lowest point will occur twice, i.e. ret.front() == ret.back()
 	return ret;
 }
-
 double convexDiameter(const vector<point> &ps) {
 	int n = ps.size();
 	if (n < 2) return 0;

@@ -1,4 +1,3 @@
-
 namespace MinBall {
 
 int outCnt;
@@ -97,5 +96,4 @@ pair<point, double> main(int npoint, point pt[]) { // 0-based
 	}
 	return make_pair(res, sqrt(radius));
 }
-
 }

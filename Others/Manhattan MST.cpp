@@ -1,4 +1,3 @@
-
 const int maxn = 100000 + 5;
 const int Inf = 1000000005;
 
