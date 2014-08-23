@@ -15,19 +15,19 @@ def processFile(f):
 			print("File " + f)
 			toWrite = "\\begin{lstlisting}"
 			toWrite += "\n"
-			with open(f, "r", encoding = "utf-8") as infile:
+			with open(f, "r") as infile:
 				for line in infile.readlines():
 					line = line.replace("	", "  ")
 					toWrite += line
 			toWrite += "\n"
 			toWrite += "\\end{lstlisting}"
-			with open(os.path.splitext(f)[0] + ".tex", "w", encoding = "utf-8") as outfile:
+			with open(os.path.splitext(f)[0] + ".tex", "w") as outfile:
 				outfile.write(toWrite)
 
 		if f.endswith((".tex")) and not checkExist(f):
 			print("File " + f)
 			toWrite = ""
-			with open(f, "r", encoding = "utf-8") as infile:
+			with open(f, "r") as infile:
 				for line in infile.readlines():
 					line = line.replace("	", "  ")
 					line = line.replace("。", ". ")
@@ -37,11 +37,11 @@ def processFile(f):
 					line = line.replace("！", "! ")
 					line = line.replace("？", "? ")
 					toWrite += line
-			with open(f, "w", encoding = "utf-8") as outfile:
+			with open(f, "w") as outfile:
 				outfile.write(toWrite)
 
 def walkFolder(depth):
-	for f in os.listdir():
+	for f in os.listdir(os.getcwd()):
 		if os.path.isdir(f):
 			if not f.startswith("."):
 				print("Enter " + f)
