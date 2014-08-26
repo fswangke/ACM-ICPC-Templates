@@ -79,3 +79,4 @@ Templates
 * Minimal Vertex Coloring (Warning: Too Strange!!!)
 * Expression Evaluation
 * Manhattan MST
+* DLX for Multiple Cover
