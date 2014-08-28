@@ -25,7 +25,7 @@ int minCut(int N, int G[MAXN][MAXN]) { // 0-based
 		}
 		G[S][S] = 0;
 		--N;
-		for (int i = 0; i < N; ++i) swap(G[i][T], G[i][N]);
+		for (int i = 0; i <= N; ++i) swap(G[i][T], G[i][N]);
 		for (int i = 0; i < N; ++i) swap(G[T][i], G[N][i]);
 	}
 	return ans;
