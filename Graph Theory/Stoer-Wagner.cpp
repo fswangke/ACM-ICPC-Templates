@@ -5,6 +5,7 @@ int minCut(int N, int G[MAXN][MAXN]) { // 0-based
 	int ans = INT_MAX;
 	while (N > 1) {
 		for (int i = 0; i < N; ++i) used[i] = false;
+		used[0] = true;
 		for (int i = 0; i < N; ++i) weight[i] = G[i][0];
 		int S = -1, T = 0;
 		for (int _r = 2; _r <= N; ++_r) { // N - 1 selections
@@ -23,8 +24,8 @@ int minCut(int N, int G[MAXN][MAXN]) { // 0-based
 			G[S][i] += G[i][T];
 		}
 		G[S][S] = 0;
-		for (int i = 0; i < N; ++i) swap(G[i][T], G[i][N]);
 		--N;
+		for (int i = 0; i < N; ++i) swap(G[i][T], G[i][N]);
 		for (int i = 0; i < N; ++i) swap(G[T][i], G[N][i]);
 	}
 	return ans;
