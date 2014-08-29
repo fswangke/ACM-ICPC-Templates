@@ -429,10 +429,17 @@
       对质数p,
       设$n = n_k p^k + n_{k - 1} p ^ {k - 1} + \cdots + n_1 p + n_0$,
       $m = m_k p^k + m_{k - 1} p ^ {k - 1} + \cdots + m_1 p + m_0$,
-      则 $ \binom{n}{m} \equiv \prod{i = 0}^{k}\binom{n_i}{m_i}$ (mod $p$)
+      则 $ \binom{n}{m} \equiv \prod{i = 0}^{k}\binom{n_i}{m_i} \pmod{p}$
     \item 组合数判断奇偶性:
       若 $(n \& m) = m$, 则 $\binom{n}{m}$ 为奇数, 否则为偶数
     \end{itemize}
+  \item{指数与原根(Order and Primitive Root)}
+    \begin{itemize}
+	\item 模 $n$ 意义下的原根 $g$: $g$ 是模 $n$ 简化剩余系构成的乘法群的生成元
+	\item 模 $n$ 意义下 $g$ 的指数: 定义 $Ord_n(g)$ 为最小的 $d$ 使得 $g^d \equiv 1 \pmod{n}$, 若 $Ord_n(g) == \phi(n)$, 则 $g$ 是 $n$ 的原根
+	\item 模 $n$ 有原根的充要条件是 $n = 2, 4, p^n, 2p^n$, 其中 $p$ 是奇质数, $n$ 是正整数
+	
+	\end{itemize}
   \end{itemize}
   
 \section{其他}
