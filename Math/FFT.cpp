@@ -1,73 +1,53 @@
 namespace FFT {
+	#define mul(a, b) (Complex(a.x * b.x - a.y * b.y, a.x * b.y + a.y * b.x))
 	struct Complex {
-		double a, b;
-		Complex(): a(0.0), b(0.0) {}
-		Complex(double a, double b): a(a), b(b) {}
+		double x, y;
+		Complex() : x(0.0), y(0.0) {}
+		Complex(double x): x(x), y(0.0) {}
+		Complex(double x, double y) : x(x), y(y) {}
 	};
-	int n, id, *A, *B, *s, len;
-	Complex tmp[MAXLEN], pa[MAXLEN], pb[MAXLEN], *p;
 
-	void Fill(int m, int d) {
-		if (m == n) {
-			if (id < len)
-				p[d] = Complex(s[id++], 0.0);
-			else
-				p[d] = Complex();
+	void FFT(Complex P[], int n, int oper) {
+		for (int i = 1, j = 0; i < n - 1; i++) {
+			for (int s = n; j ^= s >>= 1, ~j & s; );
+			if (i < j) swap(P[i], P[j]);
 		}
-		else {
-			Fill(m << 1, d);
-			Fill(m << 1, d + m);
-		}
-	}
-
-	void Fill2(int m, int d) {
-		if (m == n) {
-			p[d] = tmp[id++];
-		}
-		else {
-			Fill2(m << 1, d);
-			Fill2(m << 1, d + m);
-		}
-	}
-
-	void FFT(int oper) {
-		for (int d = 0; (1 << d) < n; ++d) {
-			int m = 1 << d;
+		for (int d = 0; (1 << d) < n; d++) {
+			int m = 1 << d, m2 = m * 2;
 			double p0 = PI / m * oper;
-			double sinp0 = sin(p0);
-			double cosp0 = cos(p0);
-			for (int i = 0; i < n; i += m << 1) {
-				double sinp = 0, cosp = 1;
-				for (int j = 0; j < m; ++j) {
-					double ta = cosp * p[i + j + m].a - sinp * p[i + j + m].b;
-					double tb = cosp * p[i + j + m].b + sinp * p[i + j + m].a;
-					p[i + j + m].a = p[i + j].a - ta;
-					p[i + j + m].b = p[i + j].b - tb;
-					p[i + j].a += ta;
-					p[i + j].b += tb;
-					double tsinp = sinp;
-					sinp =  tsinp * cosp0 + cosp * sinp0;
-					cosp = -tsinp * sinp0 + cosp * cosp0;
+			Complex unit_p0(cos(p0), sin(p0));
+			for (int i = 0; i < n; i += m2) {
+				Complex unit(1.0, 0.0);
+				for (int j = 0; j < m; j++) {
+					Complex &P1 = P[i + j + m], &P2 = P[i + j];
+					Complex t = mul(unit, P1);
+					P1 = Complex(P2.x - t.x, P2.y - t.y);
+					P2 = Complex(P2.x + t.x, P2.y - t.y);
+					unit = mul(unit, unit_p0);
 				}
 			}
 		}
 	}
 
-	void doFFT(int a[], int la, int b[], int lb, int C[]) {
-		A = a; B = b;
-		for (n = la + lb; n != Lowbit(n); n += Lowbit(n));
-
-		id = 0; s = A; p = pa; len = la; Fill(1, 0); FFT(1);
-		id = 0; s = B; p = pb; len = lb; Fill(1, 0); FFT(1); 
-		for (int i = 0; i < n; ++i) {
-			tmp[i].a = pa[i].a * pb[i].a - pa[i].b * pb[i].b;
-			tmp[i].b = pa[i].b * pb[i].a + pa[i].a * pb[i].b;
+	vector<int> doFFT(const vector<int> &a, const vector<int> &b) {
+		vector<int> ret(max(0, (int) a.size() + (int) b.size() - 1), 0);
+		static Complex A[MAXB], B[MAXB], C[MAXB];
+		int len = 1;
+		while (len < (int)ret.size()) {
+			len *= 2;
 		}
-
-		id = 0; p = pa; Fill2(1, 0); FFT(-1);
-		for (int i = 0; i < n; ++i) {
-			double t = p[i].a / (double)(n);
-			C[i] = int(t + 0.5);
+		for (int i = 0; i < len; i++) {
+			A[i] = i < (int)a.size() ? a[i] : 0;
+			B[i] = i < (int)b.size() ? b[i] : 0;
 		}
+		FFT(A, len, 1);
+		FFT(B, len, 1);
+		for (int i = 0; i < len; i++) {
+			C[i] = mul(A[i], B[i]);
+		}
+		FFT(C, len, -1);
+		for (int i = 0; i < (int)ret.size(); i++)
+			ret[i] = (int) (C[i].x / len + 0.5);
+		return ret;
 	}
 }
