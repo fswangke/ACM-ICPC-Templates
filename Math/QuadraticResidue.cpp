@@ -1,44 +1,49 @@
-// solve equation x ^ 2 == a (mod p), where p is a prime number
-bool QuadraticResidue(int a, int p, int &x, int &y) {
-	a = (a % p + p) % p;
-	if (p == 2) {
-		if (a == 0)
-			x = y = 0;
-		else
-			x = y = 1;
-		return true;
+/* 
+ * a * x ^ 2 + b * x + c == 0 (mod P), where a != 0 (mod P), and P is a prime number
+ */
+
+inline int normalize(LL a, int P) {
+	a %= P;
+	return a < 0 ? a + P : a;
+}
+
+vector<int> QuadraticResidue(LL a, LL b, LL c, int P) {
+	int h, t;
+	LL r1, r2, delta, pb = 0;
+	a = normalize(a, P);
+	b = normalize(b, P);
+	c = normalize(c, P);
+	if (P == 2) {
+		vector<int> res;
+		if (c % P == 0) res.push_back(0);
+		if ((a + b + c) % P == 0) res.push_back(1);
+		return res;
 	}
-	if (powMod(a, p / 2, p) == p - 1)
-		return false;
-	if ((p + 1) % 4 == 0) {
-		x = powMod(a, (p + 1) / 4, p);
-		y = x == 0 ? 0 : p - x;
-		if (x > y) swap(x, y);
-		return true;
+	delta = b * rev(a + a, P) % P;
+	a = normalize(-c * rev(a, P) + delta * delta, P);
+	if (powMod(a, P / 2, P) + 1 == P) return vector<int>(0);
+	for (t = 0, h = P / 2; h % 2 == 0; ++t, h /= 2);
+	r1 = powMod(a, h / 2, P);
+
+	if (t > 0) {
+		do {
+			b = random() % (P - 2) + 2;
+		} while (powMod(b, P / 2, P) + 1 != P);
 	}
-	else {
-		int t, h, pb = 0;
-		h = p - 1;
-		for (t = 0; (h & 1) == 0; h >>= 1, ++t);
-		if (t >= 2) {
-			int b;
-			do {
-				b = random() % (p - 2) + 2; // pay attention to the range of rand()
-			} while (powMod(b, p / 2, p) != p - 1);
-			pb = powMod(b, h, p);
-		}
-		int s = powMod(a, h / 2, p);
-		for (int step = 2; step <= t; step++) {
-			int ss = (LL)s * s % p * a % p;
-			for (int i = 0; i < t - step; i++)
-				ss = (LL)ss * ss % p;
-			if (ss + 1 == p)
-				s = (LL)s * pb % p;
-			pb = (LL)pb * pb % p;
-		}
-		x = (LL)s * a % p;
-		y = x == 0 ? 0 : p - x;
-		if (x > y) swap(x, y);
+	for (int i = 1; i <= t; ++i) {
+		LL d = r1 * r1 % P * a % P;
+		for (int j = 1; j <= t - i; ++j) d = d * d % P;
+		if (d + 1 == P) r1 = r1 * pb % P;
+		pb = pb * pb % P;
 	}
-	return true;
+	r1 = a * r1 % P;
+	r2 = P - r1;
+	r1 = normalize(r1 - delta, P);
+	r2 = normalize(r2 - delta, P);
+	if (r1 > r2) swap(r1, r2);
+
+	vector<int> res;
+	res.push_back(r1);
+	if (r1 != r2) res.push_back(r2);
+	return res;
 }
