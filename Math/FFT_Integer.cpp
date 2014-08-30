@@ -6,18 +6,15 @@ namespace PrimitiveRoot {
 //	3 * 2 ^ 21 + 1 is a suitable alternate, PrimitiveRoot = 3
 	int powMod(int a, int d, int p) {
 		int res = 1;
-		a %= p;
-		for ( ; d; d >>= 1) {
-			if (d & 1)
-				res = (long long)res * a % p;
+		for (a %= p; d; d >>= 1) {
+			if (d & 1) res = (long long)res * a % p;
 			a = (long long)a * a % p;
 		}
 		return res;
 	}
 	bool isPrime(int n) {
 		for (int i = 2; i * i <= n; ++i)
-			if (n % i == 0)
-				return false;
+			if (n % i == 0) return false;
 		return true;
 	}
 	int getMod(int downLimit) {
@@ -95,12 +92,12 @@ namespace FFT {
 		vector<int> ret(max(0, (int) a.size() + (int) b.size() - 1), 0);
 		static int A[MAXB], B[MAXB], C[MAXB];
 		int len = 1;
-		while (len < ret.size()) {
+		while (len < (int)ret.size()) {
 			len *= 2;
 		}
 		for (int i = 0; i < len; i++) {
-			A[i] = i < a.size() ? a[i] : 0;
-			B[i] = i < b.size() ? b[i] : 0;
+			A[i] = i < (int)a.size() ? a[i] : 0;
+			B[i] = i < (int)b.size() ? b[i] : 0;
 		}
 		NTT(A, len, 1);
 		NTT(B, len, 1);
@@ -109,7 +106,7 @@ namespace FFT {
 		}
 		NTT(C, len, -1);
 		int inv = modinv(len);
-		for (int i = 0; i < ret.size(); i++) {
+		for (int i = 0; i < (int)ret.size(); i++) {
 			ret[i] = (long long) C[i] * inv % MOD;
 		}
 		return ret;
