@@ -1,12 +1,12 @@
-namespace EdmondsAlgorithm { // O(ElogE + V^2)
-
-const int N = 1111;
-const int M = 1111111;
-
-int n, m, a, b, c, x[N], y[N], z[N], 
-	edgeCnt, firstEdge[N], from[M], length[M], nextEdge[M],
-	inEdge[N], key[M], delta[M], depth[M], child[M][2],
-	parent[N], choosen[N], degree[N], queue[N];
+const int maxn = 1111, maxm = 1111111;
+const int inf = 1000000000;
+namespace EdmondsAlgorithm { // O(ElogE + V^2) !!!0-based!!!
+    
+    int n, m, a, b, c, x[maxn], y[maxn], z[maxn],
+	edgeCnt, firstEdge[maxn], from[maxm], nextEdge[maxm],
+	inEdge[maxn], depth[maxm], child[maxm][2],
+	parent[maxn], choosen[maxn], degree[maxn], queue[maxn];
+    int length[maxm], key[maxm], delta[maxm];
 
 void pass (int x) {
 	if (delta[x] != 0) {
@@ -58,11 +58,11 @@ int findRoot (int u) {
 	return parent[u];
 }
 
-void clear () {
+void clear (int E) {
 	edgeCnt = 0;
 	depth[0] = -1;
-	memset(inEdge, 0, sizeof(inEdge));
-	memset(firstEdge, 0, sizeof(firstEdge));
+    for(int i = 0; i <= E; ++i)
+        inEdge[i] = firstEdge[i] = 0;
 }
 
 int solve (int root) {
@@ -125,11 +125,11 @@ int solve (int root) {
 
 }
 
-namespace ChuLiu { // O(V ^ 3)
+namespace ChuLiu { // O(V ^ 3) !!!1-based!!!
 
-const int maxn = 1100;
+int n, m, used[maxn], pass[maxn], eg[maxn], more, queue[maxn];
 
-int n, m, g[maxn][maxn], used[maxn], pass[maxn], eg[maxn], more, queue[maxn];
+int g[maxn][maxn];
 
 void combine(int id, int &sum) {
 	int tot = 0, from, i, j, k;
@@ -159,8 +159,13 @@ void combine(int id, int &sum) {
 			}
 		}
 }
-
-int mdst(int root) { // return the total length of MDST 
+void clear(int V)
+{
+    for(int i = 1; i <= V; ++i)
+        for(int j = 1; j <= V; ++j)
+            g[i][j] = inf;
+}
+int solve(int root) { // return the total length of MDST
 	int i, j, k, sum = 0;
 	memset(used, 0, sizeof(used));
 	for (more = 1; more;) {
@@ -183,33 +188,5 @@ int mdst(int root) { // return the total length of MDST
 		if (!used[i] && i != root)
 			sum += g[eg[i]][i];
 	return sum;
-}
-
-int main() {
-	int i, j, k, test, cases;
-	cases = 0;
-	scanf("%d", &test);
-	while (test) {
-		test--;
-		scanf("%d%d", &n, &m);
-		for (int i = 1; i <= n; ++i)
-			for (int j = 1; j <= n; ++j)
-				g[i][j] = 1000001;
-		for (int i = 1; i <= m; ++i) {
-			scanf("%d%d", &j, &k);
-			j++;
-			k++;
-			scanf("%d", &g[j][k]);
-		}
-		cases++;
-		printf("Case #%d: ", cases);
-		k = mdst(1);
-		if (k > 1000000)
-			printf("Possums!\n");  //===no
-		else
-			printf("%d\n", k);
-	}
-
-	return 0;
 }
 }
