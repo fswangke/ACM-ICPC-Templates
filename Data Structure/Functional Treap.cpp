@@ -1,4 +1,4 @@
-inline bool randomBySize(int a, int b) {
+inline bool randomBySize(int a, int b) { // pay attention to long long overflow if treap is copied repeatedly
 	static long long seed = 1;
 	seed = seed * 48271 % 2147483647;
 	return seed * (a + b) < 2147483647LL * a;
