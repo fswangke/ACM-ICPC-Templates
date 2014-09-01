@@ -1,4 +1,5 @@
-\documentclass[10pt, a4paper]{article}
+\documentclass[landscape, twocolumn, 10pt, a4paper, twoside]{article}
+
 \usepackage{listings}
 \usepackage{geometry}
 
@@ -9,9 +10,9 @@
 
 \geometry{left=2.0cm, right=2.0cm, top=2.5cm, bottom=2.5cm}
 
-\lstset{language=C++, breaklines,numbers=left,frame=leftline,
+\lstset{language=C++, breaklines, frame=single,
     escapeinside=``,extendedchars=false,
-    xleftmargin=0em,xrightmargin=0em,
+    xleftmargin=0.5em,xrightmargin=0.5em,
     basicstyle=\ttfamily\small, tabsize=2,
 }
 
@@ -21,6 +22,15 @@
 \date{}
 \tableofcontents
 \newpage
+
+\pagestyle{fancy}
+\lhead{Shanghai Jiao Tong University}
+\chead{\thepage}
+\rhead{Call It Magic}
+\lfoot{}
+\cfoot{}
+\rfoot{}
+
 
 \section{计算几何}
 
@@ -68,6 +78,35 @@
 
   \subsection{最小覆盖球}
     \input{"Computational Geometry/MinBall.tex"}
+  
+  \subsection{三维向量操作矩阵}
+    \begin{itemize}
+    \item 绕单位向量$u = (u_x, u_y, u_z)$右手方向旋转$\theta$度的矩阵: \\
+      $
+      \begin{bmatrix}
+        \cos\theta + u_x^2 (1 - \cos\theta)    &    u_x u_y (1 - \cos\theta) - u_z \sin\theta    &    u_x u_z (1 - \cos\theta) + u_y \sin\theta \\
+        u_y u_x (1 - \cos\theta) + u_z \sin\theta    &    \cos\theta + u_y^2 (1 - \cos\theta)    &    u_y u_z (1 - \cos\theta) - u_x \sin\theta \\
+        u_z u_x (1 - \cos\theta) - u_y \sin\theta    &    u_z u_y (1 - \cos\theta) + u_x \sin\theta    &    \cos\theta + u_z^2 (1 - \cos\theta)
+        \end{bmatrix} \\
+      = \cos\theta I
+      + \sin\theta
+        \begin{bmatrix}
+          0    &    -u_z    &    u_y \\
+          u_z    &    0    &    -u_x \\
+          -u_y    &    u_x    &    0
+        \end{bmatrix}
+      + (1 - \cos\theta)
+        \begin{bmatrix}
+        u_x ^ 2    &    u_x u_y    &    u_x u_z \\
+        u_y u_x    &    u_y ^ 2    &    u_y u_z \\
+        u_z u_x    &    u_z u_y    &    u_z ^ 2
+      \end{bmatrix}
+      $
+    \item 点$a$绕单位向量$u = (u_x, u_y, u_z)$右手方向旋转$\theta$度的对应点为
+        $a^\prime = a \cos\theta + (u \times a) \sin\theta + (u \otimes u) a (1 - \cos\theta)$
+    \item 关于向量 $v$ 作对称变换的矩阵 $H = I - 2 \frac{v v^T}{v^T v}$,
+    \item 点$a$对称点: $a^\prime = a - 2 \frac{v^T a}{v^T v} \cdot v$
+    \end{itemize}
 
 \section{数据结构}
   \subsection{动态凸包(只支持插入)}
@@ -328,8 +367,6 @@
       \item $ac + bd = D_1 D_2$ (内接四边形适用)
       \item Bretschneider公式:
         $S = \sqrt{(p - a)(p - b)(p - c)(p - d) - abcd \cos^2(\frac{\theta}{2})}$, 其中 $\theta$ 为对角和
-%    S=√[(p-a)(p-b)(p-c)(p-d)-abcdcos^2(θ/2)]
-%    $S = \sqrt{(p - a)(p - b)(p - c)(p - d)}, p$为半周长 (内接四边形适用)
       \end{itemize}
     \item 棱锥:
       \begin{itemize}
@@ -435,11 +472,11 @@
     \end{itemize}
   \item{指数与原根(Order and Primitive Root)}
     \begin{itemize}
-	\item 模 $n$ 意义下的原根 $g$: $g$ 是模 $n$ 简化剩余系构成的乘法群的生成元
-	\item 模 $n$ 意义下 $g$ 的指数: 定义 $Ord_n(g)$ 为最小的 $d$ 使得 $g^d \equiv 1 \pmod{n}$, 若 $Ord_n(g) == \phi(n)$, 则 $g$ 是 $n$ 的原根
-	\item 模 $n$ 有原根的充要条件是 $n = 2, 4, p^n, 2p^n$, 其中 $p$ 是奇质数, $n$ 是正整数
-	
-	\end{itemize}
+  \item 模 $n$ 意义下的原根 $g$: $g$ 是模 $n$ 简化剩余系构成的乘法群的生成元
+  \item 模 $n$ 意义下 $g$ 的指数: 定义 $Ord_n(g)$ 为最小的 $d$ 使得 $g^d \equiv 1 \pmod{n}$, 若 $Ord_n(g) == \phi(n)$, 则 $g$ 是 $n$ 的原根
+  \item 模 $n$ 有原根的充要条件是 $n = 2, 4, p^n, 2p^n$, 其中 $p$ 是奇质数, $n$ 是正整数
+  
+  \end{itemize}
   \end{itemize}
   
 \section{其他}
