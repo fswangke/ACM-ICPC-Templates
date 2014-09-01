@@ -69,6 +69,10 @@ struct point {
 		if (dot(p1 - p2, q - p2) < EPS) return (q - p2).len();
 		return distLP(p1, p2);
 	}
+	bool inAngle(const point &p1, const point &p2) const { // det(p1, p2) >= 0
+		const point &q = *this;
+		return det(p1, q) > -EPS && det(p2, q) < EPS;
+	}
 };
 
 bool lineIntersect(const point &a, const point &b, const point &c, const point &d, point &e) {
@@ -202,6 +206,25 @@ vector<pair<point, point> > tanCC(const circle &cir1, const circle &cir2) {
 		list.push_back(make_pair(b1, b2));
 	}
 	return list;
+}
+
+bool distConvexPIn(const point &p1, const point &p2, const point &p3, const point &p4, const point &q) {
+	point o12 = (p1 - p2).rot90();
+	point o23 = (p2 - p3).rot90();
+	point o34 = (p3 - p4).rot90();
+	return (q - p1).inAngle(o12, o23) || (q - p3).inAngle(o23, o34) || ((q - p2).inAngle(o23, p3 - p2) && (q - p3).inAngle(p2 - p3, o23));
+}
+
+double distConvexP(int n, point ps[], const point &q) {
+	int left = 0, right = n;
+	while (right - left > 1) {
+		int mid = (left + right) / 2;
+		if (distConvexPIn(ps[(left + n - 1) % n], ps[left], ps[mid], ps[(mid + 1) % n], q))
+			right = mid;
+		else
+			left = mid;
+	}
+	return q.distSP(ps[left], ps[right % n]);
 }
 
 double areaCT(const circle &cir, point pa, point pb) {
