@@ -1,4 +1,4 @@
-\documentclass[landscape, twocolumn, 10pt, a4paper, twoside]{article}
+\documentclass[landscape, twocolumn, 8pt, a4paper, twoside]{extarticle}
 
 \usepackage{listings}
 \usepackage{geometry}
@@ -6,22 +6,13 @@
 \usepackage{ctex, amsmath, amsthm, graphicx, amsfonts, fancyhdr, ctable, pict2e, CJKulem}
 \usepackage[CJKbookmarks, colorlinks = true, linkcolor = red, anchorcolor = blue, citecolor = blue, pdfstartview={FitH}]{hyperref}
 
-%\geometry{left=2.7cm, right=2.7cm, top=3cm, bottom=3cm}
-
-\geometry{left=2.0cm, right=2.0cm, top=2.5cm, bottom=2.5cm}
+\geometry{left=2.0cm, right=2.0cm, top=2.5cm, bottom=1.5cm}
 
 \lstset{language=C++, breaklines, frame=single,
     escapeinside=``,extendedchars=false,
     xleftmargin=0.5em,xrightmargin=0.5em,
-    basicstyle=\ttfamily\small, tabsize=2,
+    basicstyle=\ttfamily\footnotesize, tabsize=2,
 }
-
-\begin{document}
-
-\title{Call It Magic - Standard Code Library}
-\date{}
-\tableofcontents
-\newpage
 
 \pagestyle{fancy}
 \lhead{Shanghai Jiao Tong University}
@@ -31,6 +22,12 @@
 \cfoot{}
 \rfoot{}
 
+\title{Call It Magic - Standard Code Library}
+
+\begin{document}
+
+\tableofcontents
+\newpage
 
 \section{计算几何}
 
@@ -117,6 +114,9 @@
   
   \subsection{可持久化Treap}
     \input{"Data Structure/Functional Treap.tex"}
+  
+  \subsection{左偏树}
+    \input{"Data Structure/Leftist Heap.tex"}
   
   \subsection{Link-Cut Tree}
     \input{"Data Structure/Link Cut Tree.tex"}
@@ -448,7 +448,7 @@
     显然, 当两个因数很接近时这个方法能很快找到结果, 
     但如果遇到一个素数, 则需要检查$\frac{n + 1}{2} - \sqrt{n}$个整数
   \item 牛顿迭代:
-    $x_1 = x_0 - \frac{f(x_0)}{f\prime(x_0)}$
+    $x_1 = x_0 - \frac{f(x_0)}{f^\prime(x_0)}$
   \item 球与盒子的动人故事: ($n$个球, $m$个盒子, $S$为第二类斯特林数)
     \begin{enumerate}
     \item 球同, 盒同, 无空: 整数分拆

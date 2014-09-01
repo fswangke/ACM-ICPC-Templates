@@ -1,11 +1,7 @@
 tex:
-	xelatex main.tex
-	xelatex main.tex
-#	main.pdf
-
-convert:
 	python convert.py
-
+	xelatex main.tex
+	xelatex main.tex
 
 clean:
 	del main.aux
@@ -13,4 +9,3 @@ clean:
 	del main.out
 	del main.pdf
 	del main.toc
-	

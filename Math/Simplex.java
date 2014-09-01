@@ -1,5 +1,4 @@
-// max { cx | Ax ≤ b, x ≥ 0}
-
+// ` max { cx | Ax ≤ b, x ≥ 0} `
 double[] simplex(double[][] A, double[] b, double[] c) {
 	int n = A.length, m = A[0].length + 1, r = n, s = m - 1;
 	double[][] D = new double[n + 2][m + 1];
@@ -33,10 +32,10 @@ double[] simplex(double[][] A, double[] b, double[] c) {
 					  || d < EPS && ix[r + m] > ix[i + m])
 				r = i;
 		}
-		if (r < 0) return null; // 非有界
+		if (r < 0) return null; // `非有界`
 	}
-	if (D[n + 1][m] < -EPS) return null; // 无法执行
+	if (D[n + 1][m] < -EPS) return null; // `无法执行`
 	double[] x = new double[m - 1];
 	for (int i = m; i < n + m; i++) if (ix[i] < m - 1) x[ix[i]] = D[i - m][m];
-	return x; // 值为 D[n][m]
+	return x; // `值为 D[n][m]`
 }

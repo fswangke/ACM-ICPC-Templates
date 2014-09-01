@@ -51,7 +51,7 @@ def walkFolder(depth):
 				print("Exit")
 		else:
 	#		if not (depth == 0 and (f == "convert.py" or f == "main.tex")):
-			if not (depth == 0 and (f == "convert.py")):
+			if not (depth == 0 and (f == "convert.py" or f == "convert2.7.py")):
 				processFile(f)
 
 def main():
