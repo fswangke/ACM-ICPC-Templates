@@ -1,5 +1,7 @@
 inline bool randomBySize(int a, int b) {
-	return rand() % (a + b) < a;
+	static long long seed = 1;
+	seed = seed * 48271 % 2147483647;
+	return seed * (a + b) < 2147483647LL * a;
 }
 
 tree merge(tree x, tree y) {
@@ -28,6 +30,21 @@ void splitByKey(tree t, int k, tree &l, tree &r) { // [-oo, k) [k, +oo)
 	else {
 		r = newNode(t);
 		splitByKey(t->l, k, l, r->l);
+		update(r);
+	}
+}
+
+void splitBySize(tree t, int k, tree &l, tree &r) { // [1, k) [k, +oo)
+	static int s;
+	if (t == null) l = r = null;
+	else if ((s = t->l->size + 1) < k) {
+		l = newNode(t);
+		splitBySize(t->r, k - s, l->r, r);
+		update(l);
+	}
+	else {
+		r = newNode(t);
+		splitBySize(t->l, k, l, r->l);
 		update(r);
 	}
 }
