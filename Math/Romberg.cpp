@@ -3,7 +3,7 @@ double Romberg(const T&f, double a, double b, double eps = 1e-8) {
 	vector<double> t;
 	double h = b - a, last, now;
 	int k = 1, i = 1;
-	t.push_back(h * (f(a) + f(b)) / 2); // `ÌÝÐÎ`
+	t.push_back(h * (f(a) + f(b)) / 2); // `æ¢¯å½¢`
 	do {
 		last = t.back();
 		now = 0;
@@ -15,7 +15,7 @@ double Romberg(const T&f, double a, double b, double eps = 1e-8) {
 			double tmp = k1 * now - k2 * t[j];
 			t[j] = now;
 			now = tmp;
-			k2 /= 4 * k1 - k2; // `·ÀÖ¹Òç³ö`
+			k2 /= 4 * k1 - k2; // `é˜²æ­¢æº¢å‡º`
 		}
 		t.push_back(now);
 		k *= 2; h /= 2; ++i;
