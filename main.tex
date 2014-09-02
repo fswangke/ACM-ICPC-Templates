@@ -223,7 +223,19 @@
     \input{"Math/FFT_Integer.tex"}
 
   \subsection{线性同余方程}
-    \input{"Math/Linear Congruence.tex"}
+    \begin{itemize}
+    \item 中国剩余定理:
+      设$m_1, m_2, \cdots, m_k$ 两两互素, 则同余方程组 $x \equiv a_i \pmod{m_i} \textrm{for $i = 1, 2, \cdots, k$}$
+      在$[0, M = m_1 m_2 \cdots m_k)$内有唯一解. 
+      记 $M_i = M / m_i$,
+      找出 $p_i$ 使得 $M_i p_i \equiv 1 \pmod{m_i}$,
+      记 $e_i = M_i p_i$,
+      则 $x \equiv e_1 a_1 + e_2 a_2 + \cdots + e_k a_k \pmod{M}$
+    \item 多变元线性同余方程组:
+      方程的形式为 $a_1 x_1 + a_2 x_2 + \cdots + a_n x_n + b \equiv 0 \pmod{m}$,
+      令 $d = (a_1, a_2, \cdots, a_n, m)$,
+      有解的充要条件是 $d | b$, 解的个数为 $m^{n - 1} d$
+    \end{itemize}
 
   \subsection{Miller-Rabin 素性测试}
     \input{"Math/MillerRabin.tex"}
@@ -235,7 +247,11 @@
     \input{"Math/Root Of Polynomial.tex"}
   
   \subsection{平方剩余}
+    若$p$为奇质数, $a$为$p$二次剩余的充要条件是$a^{p - 1} \equiv 1 \pmod{p}$.
     \input{"Math/QuadraticResidue.tex"}
+  
+  \subsection{N次剩余 -- TODO}
+    若$p$为奇质数, $a$为$p$的$n$次剩余的充要条件是$a^{\frac{p - 1}{(a, p - 1)}} \equiv 1 \pmod{p}$.
   
   \subsection{Romberg积分}
     \input{"Math/Romberg.tex"}
