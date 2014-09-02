@@ -1,15 +1,7 @@
-const int MAXN = 11000, MAXM = 1100;
-//here MAXN is the MAX number of conditions, MAXM is the MAX number of vars
-
-int avali[MAXM], avacnt;
-double A[MAXN][MAXM];
-double b[MAXN], c[MAXM];
-double* simplex(int n, int m) {
-//	here n is the number of conditions, m is the number of vars
-	m++;
-	int r = n, s = m - 1;
-	static double D[MAXN + 2][MAXM + 1];
-	static int ix[MAXN + MAXM];
+double[] simplex(double[][] A, double[] b, double[] c) {
+	int n = A.length, m = A[0].length + 1, r = n, s = m - 1;
+	double[][] D = new double[n + 2][m + 1];
+	int[] ix = new int[n + m];
 	for (int i = 0; i < n + m; i++) ix[i] = i;
 	for (int i = 0; i < n; i++) {
 		for (int j = 0; j < m - 1; j++) D[i][j] = -A[i][j];
@@ -24,15 +16,8 @@ double* simplex(int n, int m) {
 			int t = ix[s]; ix[s] = ix[r + m]; ix[r + m] = t;
 			D[r][s] = 1.0 / D[r][s];
 			for (int j = 0; j <= m; j++) if (j != s) D[r][j] *= -D[r][s];
-			avacnt = 0;
-			for (int i = 0; i <= m; ++i)
-				if(fabs(D[r][i]) > EPS)
-					avali[avacnt++] = i;
 			for (int i = 0; i <= n + 1; i++) if (i != r) {
-				if(fabs(D[i][s]) < EPS) continue;
-				double *cur1 = D[i], *cur2 = D[r], tmp = D[i][s];
-				//for (int j = 0; j <= m; j++) if (j != s) cur1[j] += cur2[j] * tmp;
-				for(int j = 0; j < avacnt; ++j) if(avali[j] != s) cur1[avali[j]] += cur2[avali[j]] * tmp;
+				for (int j = 0; j <= m; j++) if (j != s) D[i][j] += D[r][j] * D[i][s];
 				D[i][s] *= D[r][s];
 			}
 		}
@@ -46,10 +31,10 @@ double* simplex(int n, int m) {
 					  || d < EPS && ix[r + m] > ix[i + m])
 				r = i;
 		}
-		if (r < 0) return null; // 非有界
+		if (r < 0) return null; // `非有界`
 	}
-	if (D[n + 1][m] < -EPS) return null; // 无法执行
-	static double x[MAXM - 1];
+	if (D[n + 1][m] < -EPS) return null; // `无法执行`
+	double[] x = new double[m - 1];
 	for (int i = m; i < n + m; i++) if (ix[i] < m - 1) x[ix[i]] = D[i - m][m];
-	return x; // 值为 D[n][m]
+	return x; // `值为 D[n][m]`
 }

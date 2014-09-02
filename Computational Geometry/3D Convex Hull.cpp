@@ -1,4 +1,4 @@
-namespace ConvexHull3D { // make sure there is no points coincide
+namespace ConvexHull3D {
 	const int MAXN = 1033;
 	struct Facet {
 		int a, b, c;

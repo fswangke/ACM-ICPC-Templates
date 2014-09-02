@@ -1,12 +1,4 @@
-/* 
- * a * x ^ 2 + b * x + c == 0 (mod P), where a != 0 (mod P), and P is a prime number
- */
-
-inline int normalize(LL a, int P) {
-	a %= P;
-	return a < 0 ? a + P : a;
-}
-
+inline int normalize(LL a, int P) { a %= P; return a < 0 ? a + P : a; }
 vector<int> QuadraticResidue(LL a, LL b, LL c, int P) {
 	int h, t;
 	LL r1, r2, delta, pb = 0;
@@ -26,9 +18,8 @@ vector<int> QuadraticResidue(LL a, LL b, LL c, int P) {
 	r1 = powMod(a, h / 2, P);
 
 	if (t > 0) {
-		do {
-			b = random() % (P - 2) + 2;
-		} while (powMod(b, P / 2, P) + 1 != P);
+		do b = random() % (P - 2) + 2;
+		while (powMod(b, P / 2, P) + 1 != P);
 	}
 	for (int i = 1; i <= t; ++i) {
 		LL d = r1 * r1 % P * a % P;
@@ -42,8 +33,7 @@ vector<int> QuadraticResidue(LL a, LL b, LL c, int P) {
 	r2 = normalize(r2 - delta, P);
 	if (r1 > r2) swap(r1, r2);
 
-	vector<int> res;
-	res.push_back(r1);
+	vector<int> res(1, r1);
 	if (r1 != r2) res.push_back(r2);
 	return res;
 }

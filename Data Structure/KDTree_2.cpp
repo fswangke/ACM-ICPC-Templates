@@ -1,8 +1,3 @@
-/*
-	test on bzoj 2626 :: find the Kth max distance point
-	input n points
-	for each query px, py, kth, output the Kth maxdistance point id;
-*/
 struct Point { int x, y, id; };
 inline LL sqr(int x) { return (LL)x * x; }
 inline LL dist(const Point &a, const Point &b) { return sqr(a.x - b.x) + sqr(a.y - b.y); }

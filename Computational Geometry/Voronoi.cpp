@@ -1,4 +1,3 @@
-// `不能有重点`
 #define Oi(e) ((e)->oi)
 #define Dt(e) ((e)->dt)
 #define On(e) ((e)->on)

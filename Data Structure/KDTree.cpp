@@ -1,9 +1,3 @@
-/*
-	test on bzoj 2648 and bzoj 2716
-	`曼哈顿最短路，改成欧几里得只需把sqr改为 x*x 正常即可`
-	`支持插入，查询`
-	`如果要用long long，把LL改为long long即可`
-*/
 struct Point { int x, y; };
 inline LL sqr(int x) { return abs(x); }
 inline LL dist(const Point &a, const Point &b) { return sqr(a.x - b.x) + sqr(a.y - b.y); }

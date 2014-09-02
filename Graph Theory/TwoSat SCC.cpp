@@ -1,4 +1,3 @@
-// reverse edge is needed
 namespace SCC {
 	int code[MAXN * 2], seq[MAXN * 2], sCnt;
 	void DFS_1(int x) {
@@ -30,15 +29,11 @@ namespace SCC {
 // true    -   2i - 1
 // false   -   2i
 bool TwoSat() {
-	SCC::SCC(N + N);
 	using SCC::code;
+	SCC::SCC(N + N);
+	for (int i = 1; i <= N; ++i) if (code[i + i - 1] == code[i + i]) return false;
 	for (int i = 1; i <= N; ++i)
-		if (code[i + i - 1] == code[i + i])
-			return false;
-	for (int i = 1; i <= N; ++i)
-		if (code[i + i - 1] > code[i + i])
-			// i : selected
-		else
-			// i : not selected
+		if (code[i + i - 1] > code[i + i]) // i : selected
+		else // i : not selected
 	return true;
 }

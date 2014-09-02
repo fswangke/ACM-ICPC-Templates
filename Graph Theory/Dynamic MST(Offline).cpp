@@ -1,11 +1,3 @@
-/*
- * 动态最小生成树
- * Q(logQ)^2
- * (qx[i], qy[i]) 表示将编号为 qx[i] 的边的权值改为 qy[i]
- * 删除一条边相当于将其权值改为 \infinity
- * 加入一条边相当于将其权值从 \infinity 变成某个值
- */
-
 const int maxn = 100000 + 5;
 const int maxm = 1000000 + 5;
 const int maxq = 1000000 + 5;

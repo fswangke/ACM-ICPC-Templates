@@ -53,6 +53,7 @@
     \input{"Computational Geometry/Farmland.tex"}
 
   \subsection{Voronoi图}
+    不能有重点
     \input{"Computational Geometry/Voronoi.tex"}
 
   \subsection{四边形费马点}
@@ -65,6 +66,7 @@
     \input{"Computational Geometry/3D Convex Cut.tex"}
 
   \subsection{三维凸包}
+    不能有重点
     \input{"Computational Geometry/3D Convex Hull.tex"}
 
   \subsection{球面点表面点距离}
@@ -125,6 +127,7 @@
     \input{"Data Structure/KDTree.tex"}
 
   \subsection{K-D Tree Farthest}
+    输入 $n$ 个点, 对每个询问 $px, py, k$, 输出 $k$ 远点的编号
     \input{"Data Structure/KDTree_2.tex"}
 
   \subsection{树链剖分}
@@ -141,6 +144,11 @@
     \input{"String Related/Suffix Automaton.tex"}
 
   \subsection{后缀数组}
+    待排序的字符串放在 $r[0 \ldots n - 1]$ 中, 最大值小于 $m$.
+    
+    $r[0 \ldots n - 2] > 0$, $r[n - 1] = 0$.
+    
+    结果放在 $sa[0 \ldots n - 1]$.
     \input{"String Related/Suffix Array.tex"}
   
   \subsection{环串最小表示}
@@ -157,6 +165,7 @@
     \input{"Graph Theory/KM.tex"}
 
   \subsection{2-SAT 与 Kosaraju}
+    注意 Kosaraju 需要建反图
     \input{"Graph Theory/TwoSat SCC.tex"}
 
   \subsection{全局最小割 Stoer-Wagner}
@@ -180,7 +189,11 @@
   \subsection{最小树形图}
     \input{"Graph Theory/Minimum Optimum branchings.tex"}
 
-  \subsection{动态最小生成树}
+  \subsection{离线动态最小生成树}
+    $O (Q log^2 Q) $.
+    $(qx[i], qy[i])$ 表示将编号为 $qx[i]$ 的边的权值改为 $qy[i]$,
+    删除一条边相当于将其权值改为 $\infty$,
+    加入一条边相当于将其权值从 $\infty$ 变成某个值.
     \input{"Graph Theory/Dynamic MST(Offline).tex"}
 
   \subsection{K短路(允许重复)}
@@ -213,8 +226,11 @@
   \end{itemize}
 
 \section{数学}
-  \subsection{单纯形}
-    \input{"Math/Simplex.tex"}
+  \subsection{单纯形Cpp}
+    max $\left \{ cx | Ax \le b, x \ge 0 \right \}$
+    \input{"Math/SimplexCpp.tex"}
+  \subsection{单纯形Java}
+    \input{"Math/SimplexJava.tex"}
 
   \subsection{FFT}
     \input{"Math/FFT.tex"}
@@ -248,6 +264,8 @@
   
   \subsection{平方剩余}
     若$p$为奇质数, $a$为$p$二次剩余的充要条件是$a^{p - 1} \equiv 1 \pmod{p}$.
+
+    $ax^2 + bx + c \equiv 0 \pmod{P}$, where $a \ne 0 \pmod{P}$, and $P$ is a prime number
     \input{"Math/QuadraticResidue.tex"}
   
   \subsection{N次剩余 -- TODO}

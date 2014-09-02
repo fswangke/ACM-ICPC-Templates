@@ -1,6 +1,6 @@
 namespace FFT {
-//	`替代方案: $23068673( = 11 * 2 ^ 21 + 1)$`, 原根为 $3$`
-	const int MOD = 786433; // 3 * 2 ^ 18 + 1
+//	`替代方案: $23068673( = 11 * 2 ^ {21} + 1)$, 原根为 $3$`
+	const int MOD = 786433; // `$3 * 2 ^ {18} + 1$`
 	const int PRIMITIVE_ROOT = 10;
 	const int MAXB = 1 << 20;
 	int getMod(int downLimit) { // `或者现场自己找一个MOD`
