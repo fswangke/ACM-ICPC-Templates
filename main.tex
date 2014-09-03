@@ -262,6 +262,11 @@
   \subsection{多项式求根}
     \input{"Math/Root Of Polynomial.tex"}
   
+  \subsection{原根}
+    原根 $g$: $g$ 是模 $n$ 简化剩余系构成的乘法群的生成元.
+    模 $n$ 有原根的充要条件是 $n = 2, 4, p^n, 2p^n$, 其中 $p$ 是奇质数, $n$ 是正整数
+    \input{"Math/PrimitiveRoot.tex"}
+
   \subsection{平方剩余}
     若$p$为奇质数, $a$为$p$二次剩余的充要条件是$a^{p - 1} \equiv 1 \pmod{p}$.
 
@@ -273,7 +278,7 @@
   
   \subsection{Romberg积分}
     \input{"Math/Romberg.tex"}
-  
+
   \subsection{公式}
     \subsubsection{级数与三角}
     \begin{itemize}
@@ -546,7 +551,7 @@
 
     则$c^2=a^2+b^2$. 
 
-  \item Pick定理: 简单多边形, 不自交. 则: $\frac{(\mbox{严格在多边形内部的整点数}\times 2+\mbox{在边上的整点数}-2)}{2}=\mbox{面积}$
+  \item Pick定理: 简单多边形, 不自交, 顶点如果全是整点. 则: $\frac{(\mbox{严格在多边形内部的整点数}\times 2+\mbox{在边上的整点数}-2)}{2}=\mbox{面积}$
   \item Mersenne素数: $p$是素数且$2^p-1$的数是素数. (10000以内的$p$有: 2, 3, 5, 7, 13, 17, 19, 31, 61, 89, 107, 127, 521, 607, 1279, 2203, 2281, 3217, 4253, 4423, 9689, 9941)
   \item 序列差分表: 差分表的第$0$条对角线确定原序列. 
       设原序列为$h_i$, 第$0$条对角线为$c_0,c_1,\ldots,c_p,0,0,\ldots$. 
@@ -591,13 +596,7 @@
     \item 组合数判断奇偶性:
       若 $(n \& m) = m$, 则 $\binom{n}{m}$ 为奇数, 否则为偶数
     \end{itemize}
-  \item{指数与原根(Order and Primitive Root)}
-    \begin{itemize}
-  \item 模 $n$ 意义下的原根 $g$: $g$ 是模 $n$ 简化剩余系构成的乘法群的生成元
-  \item 模 $n$ 意义下 $g$ 的指数: 定义 $Ord_n(g)$ 为最小的 $d$ 使得 $g^d \equiv 1 \pmod{n}$, 若 $Ord_n(g) == \phi(n)$, 则 $g$ 是 $n$ 的原根
-  \item 模 $n$ 有原根的充要条件是 $n = 2, 4, p^n, 2p^n$, 其中 $p$ 是奇质数, $n$ 是正整数
-  
-  \end{itemize}
+  \item 格雷码 $G(x) = x \otimes (x >> 1) $
   \end{itemize}
   
 \section{其他}
