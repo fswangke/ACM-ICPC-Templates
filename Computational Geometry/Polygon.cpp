@@ -114,4 +114,22 @@ struct Polygon { // stored in [0, n)
 		cp2 = isPL_Get(a, b, list[y - 1], list[y]);
 		return true;
 	}
+	double getI(const point &O) const {
+		if (n <= 2) return 0;
+		point G(0.0, 0.0);
+		double S = 0.0, I = 0.0;
+		for (int i = 0; i < n; ++i) {
+			const point &x = list[i], &y = list[(i + 1) % n];
+			double d = det(x, y);
+			G = G + (x + y) * d / 3.0;
+			S += d;
+		}
+		G = G / S;
+		for (int i = 0; i < n; ++i) {
+			point x = list[i] - G, y = list[(i + 1) % n] - G;
+			I += fabs(det(x, y)) * (x.norm() + dot(x, y) + y.norm());
+		}
+		I = I / 12.0 + fabs(S * 0.5) * (O - G).norm();
+		return I;
+	}
 };
