@@ -1,7 +1,6 @@
 make gen
 make B_pai
 make B_re
-
 $i
 while [ true ]
 do

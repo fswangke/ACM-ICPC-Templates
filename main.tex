@@ -275,7 +275,7 @@
     \input{"Math/Romberg.tex"}
   
   \subsection{公式}
-    \subsubsection{级数求和}
+    \subsubsection{级数与三角}
     \begin{itemize}
     \item
       $\sum_{k=1}^{n}k^3 = (\frac{n(n+1)}{2})^2  $
@@ -289,11 +289,8 @@
       $\sum_{k=1}^{n}k(k+1)(k+2) = \frac{n(n+1)(n+2)(n+3)}{4} $
     \item
       $\sum_{k=1}^{n}k(k+1)(k+2)(k+3) = \frac{n(n+1)(n+2)(n+3)(n+4)}{5} $
-    \item
-      $\mbox{错排: }D_n = n!(1-\frac{1}{1!}+\frac{1}{2!}-\frac{1}{3!}+\ldots+\frac{(-1)^n}{n!}) = (n-1)(D_{n-2}-D_{n-1})$
-    \end{itemize}
-    \subsubsection{三角公式}
-    \begin{itemize}
+    \item 错排:
+      $D_n = n!(1-\frac{1}{1!}+\frac{1}{2!}-\frac{1}{3!}+\ldots+\frac{(-1)^n}{n!}) = (n-1)(D_{n-2}-D_{n-1})$
     \item
       $\sin(\alpha \pm \beta) = \sin\alpha\cos\beta \pm \cos\alpha\sin\beta $
     \item
@@ -322,8 +319,65 @@
         - \binom{n}{3} \cos ^ {n - 3} \alpha \sin ^ {3} \alpha
         + \binom{n}{5} \cos ^ {n - 5} \alpha \sin ^ {5} \alpha
         \cdots $
+    \item
+      $\sum_{n = 1}^{N} \cos nx = \frac{\sin(N + \frac{1}{2})x - \sin \frac{x}{2}}{2 \sin \frac{x}{2}}$
+    \item
+      $\sum_{n = 1}^{N} \sin nx = \frac{-\cos(N + \frac{1}{2})x + \cos \frac{x}{2}}{2 \sin \frac{x}{2}}$
+    \item
+      $e^x = 1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} \cdots$ for $x \in (-\infty, +\infty)$ 
+    \item
+      $\cos x = 1 - \frac{x^2}{2!} + \frac{x^4}{4!} \cdots$ for $x \in (-\infty, +\infty)$
+    \item
+      $\sin x = x - \frac{x^3}{3!} + \frac{x^5}{5!} \cdots$ for $x \in (-\infty, +\infty)$
+    \item
+      $\arcsin x = x + \sum_{n = 1}^{\infty} \frac{(2n - 1)!!}{(2n)!!} \frac{x^{2n + 1}}{2n + 1}$
+                    for $ x \in [-1, 1]$
+    \item
+      $\arccos x = \frac{\pi}{2} - \sum_{n = 1}^{\infty} \frac{(2n - 1)!!}{(2n)!!} \frac{x^{2n + 1}}{2n + 1}$
+                    for $ x \in [-1, 1]$
+    \item
+      $\arctan x = x - \frac{x^3}{3} + \frac{x^5}{5} \cdots$ for $x \in [-1, 1]$
+    \item
+      $\ln(1 + x) = x - \frac{x^2}{2} + \frac{x^3}{3} \cdots$ for $x \in (-1, 1]$
+    \item
+      $\int\limits_{0}^{\frac{\pi}{2}} \sin^n x {\rm d}x = 
+        \left\{
+        \begin{aligned}
+          \frac{(n - 1)!!}{n!!} \times \frac{\pi}{2} &   & {n \textrm{是偶数}}\\
+          \frac{(n - 1)!!}{n!!}                      &   & {n \textrm{是奇数}}
+        \end{aligned}
+        \right.
+      $
+    \item
+      $\int\limits_{0}^{+\infty} \frac{\sin x}{x} {\rm d}x = \frac{\pi}{2}$
+    \item
+      $\int\limits_{0}^{+\infty} e^{-x^2} {\rm d}x = \frac{\sqrt{\pi}}{2}$
+    \item 傅里叶级数: 设周期为 $2T$. 函数分段连续. 在不连续点的值为左右极限的平均数.
+      \begin{itemize}
+      \item $a_n = \frac{1}{T} \int\limits_{-T}^{T} f(x) \cos \frac{n\pi}{T} x {\rm d}x$
+      \item $b_n = \frac{1}{T} \int\limits_{-T}^{T} f(x) \sin \frac{n\pi}{T} x {\rm d}x$
+      \item $f(x) = \frac{a_0}{2} +
+              \sum\limits_{n = 1}^{+\infty}(a_n \cos \frac{n\pi}{T} x + b_n \sin \frac{n\pi}{T}x)$
+      \end{itemize}
+      \item Beta 函数: $B(p, q) = \int\limits_{0}^{1} x^{p - 1} (1 - x) ^ {q - 1} {\rm d}x$
+        \begin{itemize}
+        \item 定义域 $(0, +\infty) \times (0, +\infty)$, 在定义域上连续
+        \item $B(p, q) = B(q, p) = \frac{q - 1}{p + q - 1} B(p, q - 1)
+                       = 2\int\limits_{0}^{\frac{\pi}{2}} \cos^{2p - 1}\phi \sin^{2p - 1} \phi {\rm d}\phi
+                       = \int\limits_{0}^{+\infty} \frac{t^{q - 1}}{(1 + t)^{p + q}} {\rm d}t
+                       = \int\limits_{0}^{1} \frac{t^{p - 1} + t ^ {q - 1}}{(1 + t) ^ (p + q)}$
+        \item $B(\frac{1}{2}, \frac{1}{2}) = \pi$
+        \end{itemize}
+      \item Gamma 函数: $\Gamma = \int\limits_{0}^{+\infty} x^{s - 1} e ^ {-x} {\rm d}x$
+        \begin{itemize}
+        \item 定义域 $(0, +\infty)$, 在定义域上连续
+        \item $\Gamma(1) = 1$, $\Gamma(\frac{1}{2}) = \sqrt{\pi}$
+        \item $\Gamma(s) = (s - 1) \Gamma(s - 1)$
+        \item $B(p, q) = \frac{\Gamma(p)\Gamma(q)}{\Gamma(p + q)}$
+        \item $\Gamma(s)\Gamma(1 - s) = \frac{\pi}{\sin \pi s}$ for $s > 0$
+        \item $\Gamma(s)\Gamma(s + \frac{1}{2}) = 2\sqrt{\pi} \frac{\Gamma(s)}{2^{2s - 1}}$ for $0 < s < 1$
+        \end{itemize}
     \end{itemize}
-    
     \subsubsection{三次方程求根公式}
       对一元三次方程
       $x ^ 3 + px + q = 0$,
@@ -550,6 +604,9 @@
 
   \subsection{重复覆盖}
     \input{"Others/Multiple Cover.tex"}
+  
+  \subsection{星期几判定}
+    \input{"Others/Zeller.tex"}
 
 \section{Templates}
   \subsection{vim配置}
