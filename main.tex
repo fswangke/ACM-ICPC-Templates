@@ -1,18 +1,15 @@
 \documentclass[landscape, twocolumn, 8pt, a4paper, twoside]{extarticle}
 
-\usepackage{listings}
-\usepackage{geometry}
-
-\usepackage{ctex, amsmath, amsthm, graphicx, amsfonts, fancyhdr, ctable, pict2e, CJKulem, multirow}
+\usepackage{ctex, amsmath, amsthm, graphicx, amsfonts, fancyhdr, ctable, pict2e, CJKulem, multirow, rotating, geometry, listings}
 \usepackage[CJKbookmarks, colorlinks = true, linkcolor = red, anchorcolor = blue, citecolor = blue, pdfstartview={FitH}]{hyperref}
 
 \geometry{left=2.0cm, right=2.0cm, top=2.5cm, bottom=1.5cm}
-
 \lstset{language=C++, breaklines, frame=single,
     escapeinside=``,extendedchars=false,
     xleftmargin=0.5em,xrightmargin=0.5em,
     basicstyle=\ttfamily\footnotesize, tabsize=2,
 }
+\newcommand{\stb}[2]{\genfrac{ \{ }{ \} }{0pt}{}{#1}{#2}}
 
 \pagestyle{fancy}
 \lhead{Shanghai Jiao Tong University}
@@ -268,14 +265,32 @@
     \input{"Math/PrimitiveRoot.tex"}
 
   \subsection{平方剩余}
-    若$p$为奇质数, $a$为$p$二次剩余的充要条件是$a^{p - 1} \equiv 1 \pmod{p}$.
+    \begin{itemize}
+    \item Legrendre Symbol: 对奇质数 $p$, $(\frac{a}{p}) =
+      \left\{
+      \begin{aligned}
+      &  1 & \textrm{是平方剩余} \\
+      & -1 & \textrm{是非平方剩余} \\
+      &  0 & \textrm{$a \equiv 0 \pmod{p}$}
+      \end{aligned}
+      \right.
+      = a^{\frac{p - 1}{2}} \bmod{p} $
+    \item 若 $p$ 是奇质数, $(\frac{-1}{p}) = 1$ 当且仅当 $p \equiv 1 \pmod{4}$
+    \item 若 $p$ 是奇质数, $(\frac{ 2}{p}) = 1$ 当且仅当 $p \equiv \pm 1 \pmod{8}$
+    \item 若 $p, q$ 是奇素数且互质, $(\frac{p}{q})(\frac{q}{p}) = (-1)^{\frac{p - 1}{2} \times \frac{q - 1}{2}}$
+    \item Jacobi Symbol: 对奇数 $n = p_1^{\alpha_1} p_2^{\alpha_2} \cdots p_k ^ {\alpha_k} $, 
+                         $(\frac{a}{n}) = (\frac{a}{p_1})^{\alpha_1} (\frac{a}{p_2})^{\alpha_2} \cdots (\frac{a}{p_k})^{\alpha_k}$
+    \item Jacobi Symbol 为 $-1$ 则一定不是平方剩余, 所有平方剩余的 Jacobi Symbol 都是 1, 但1不一定是平方剩余
+    \end{itemize}
 
-    $ax^2 + bx + c \equiv 0 \pmod{P}$, where $a \ne 0 \pmod{P}$, and $P$ is a prime number
+    $ax^2 + bx + c \equiv 0 \pmod{p}$, 其中 $a \ne 0 \pmod{p}$, 且 $p$ 是质数
     \input{"Math/QuadraticResidue.tex"}
   
   \subsection{N次剩余 -- TODO}
-    若$p$为奇质数, $a$为$p$的$n$次剩余的充要条件是$a^{\frac{p - 1}{(a, p - 1)}} \equiv 1 \pmod{p}$.
-  
+    \begin{itemize}
+    \item 若$p$为奇质数, $a$为$p$的$n$次剩余的充要条件是$a^{\frac{p - 1}{(a, p - 1)}} \equiv 1 \pmod{p}$.
+    \end{itemize}
+
   \subsection{Romberg积分}
     \input{"Math/Romberg.tex"}
 
@@ -407,8 +422,7 @@
       &$2\pi\int\limits_{T_1}^{T_2}|y(t)|\sqrt{x^{\prime 2}(t) + y^{\prime 2}(t)}{\rm d}t$
       &$2\pi\int\limits_{\alpha}^{\beta}r(\theta)\sin\theta\sqrt{r^2(\theta)+r^{\prime2}(\theta)}{\rm d}\theta$\\
       \hline
-      \end{tabular} \\
-
+      \end{tabular}
     \end{itemize}
     \subsubsection{三次方程求根公式}
       对一元三次方程
@@ -515,7 +529,7 @@
         当$n$是偶数时, 则有$a_n - \sum\limits_{1 \le i \le \frac{n}{2}} a_i a_{n - i} + \dfrac{1}{2} a_\frac{n}{2} (a_\frac{n}{2} + 1)$种不同的无根树
     \item Matrix-Tree定理: 对任意图$G$, 设mat[$i$][$i$] = $i$的度数, mat[$i$][$j$] = $i$与$j$之间边数的相反数, 则mat[$i$][$j$]的任意余子式的行列式就是该图的生成树个数
     \end{itemize}
-
+  
   \subsection{小知识}
   \begin{itemize}
   \item 勾股数: 设正整数$n$的质因数分解为$n = \prod p_i ^ {a_i}$, 
@@ -551,7 +565,9 @@
 
     则$c^2=a^2+b^2$. 
 
-  \item Pick定理: 简单多边形, 不自交, 顶点如果全是整点. 则: $\frac{(\mbox{严格在多边形内部的整点数}\times 2+\mbox{在边上的整点数}-2)}{2}=\mbox{面积}$
+  \item Stirling公式: $n! \approx \sqrt{2 \pi n} (\frac{n}{e})^n$
+  \item Pick定理: 简单多边形, 不自交, 顶点如果全是整点. 则: 
+        $ \textrm{严格在多边形内部的整点数} + \frac{1}{2} \textrm{在边上的整点数} - 1 = \textrm{面积}$
   \item Mersenne素数: $p$是素数且$2^p-1$的数是素数. (10000以内的$p$有: 2, 3, 5, 7, 13, 17, 19, 31, 61, 89, 107, 127, 521, 607, 1279, 2203, 2281, 3217, 4253, 4423, 9689, 9941)
   \item 序列差分表: 差分表的第$0$条对角线确定原序列. 
       设原序列为$h_i$, 第$0$条对角线为$c_0,c_1,\ldots,c_p,0,0,\ldots$. 
@@ -577,8 +593,8 @@
     $x_1 = x_0 - \frac{f(x_0)}{f^\prime(x_0)}$
   \item 球与盒子的动人故事: ($n$个球, $m$个盒子, $S$为第二类斯特林数)
     \begin{enumerate}
-    \item 球同, 盒同, 无空: 整数分拆
-    \item 球同, 盒同, 可空: 整数分拆前缀和
+    \item 球同, 盒同, 无空: dp
+    \item 球同, 盒同, 可空: dp
     \item 球同, 盒不同, 无空: $\binom{n - 1}{m - 1}$
     \item 球同, 盒不同, 可空: $\binom{n + m - 1}{n - 1}$
     \item 球不同, 盒同, 无空: $S(n, m)$
@@ -597,8 +613,18 @@
       若 $(n \& m) = m$, 则 $\binom{n}{m}$ 为奇数, 否则为偶数
     \end{itemize}
   \item 格雷码 $G(x) = x \otimes (x >> 1) $
+  \item Bell 数: $B_n$ 代表将 $n$ 个元素划分成若干个非空集合的方案数
+    \begin{itemize}
+    \item $B_0 = B_1 = 1$, $B_n = \sum\limits_{k = 0}^{n - 1} \binom{n - 1}{k} B_k$
+    \item $B_n = \sum\limits_{k = 0}^{n} \stb{n}{k} $
+    \item Bell 三角形: $a_{1, 1} = 1$, $a_{n, 1} = a_{n - 1, n - 1}$, $a_{n, m} = a_{n, m - 1} + a_{n - 1, m - 1}$, $B_n = a_{n, 1}$
+    \item 对质数$p$, $B_{n + p} \equiv B_n + B_{n + 1} \pmod{p}$
+    \item 对质数$p$, $B_{n + p^m} \equiv mB_n + B_{n + 1} \pmod{p}$
+    \item 对质数$p$, 模的周期一定是 $\frac{p^p - 1}{p - 1}$ 的约数, $p \le 101$时就是这个值
+    \item 从$B_0$开始, 前几项是 $1, 1, 2, 5, 15, 52, 203, 877, 4140, 21147, 115975 \cdots$
+    \end{itemize}
   \end{itemize}
-  
+
 \section{其他}
   \subsection{Extended LIS}
     \input{"Others/K Disjoint LIS.tex"}
