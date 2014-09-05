@@ -134,7 +134,13 @@
   \subsection{Manacher}
     \input{"String Related/Manacher.tex"}
 
-    \subsection{Aho-Corasick 自动机}
+  \subsection{KMP}
+    $next[i] = \max\{len | A[0 \ldots len - 1] = A \textrm{的第i位向前或后的长度为 $len$ 的串} \}$
+
+    $ext[i] = \max\{len | A[0 \ldots len - 1] = B \textrm{的第i位向前或后的长度为 $len$ 的串} \}$
+    \input{"String Related/KMP.tex"}
+
+  \subsection{Aho-Corasick 自动机}
     \input{"String Related/Aho Corasick Automaton.tex"}
 
   \subsection{后缀自动机}

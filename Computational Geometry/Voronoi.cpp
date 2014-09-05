@@ -12,36 +12,24 @@
 #define C3(p1, p2, p3) ((p2->x - p1->x) * (p3->y - p1->y) - (p2->y - p1->y) * (p3->x - p1->x))
 #define Dot(u1, v1, u2, v2) (u1 * u2 + v1 * v2)
 #define dis(a,b) (sqrt( (a->x - b->x) * (a->x - b->x) + (a->y - b->y) * (a->y - b->y) ))
-
 const int maxn = 110024;
 const int aix = 4;
 const double eps = 1e-7;
-
 int n, M, k;
-
 struct gEdge {
 	int u, v; double w;
 	bool operator <(const gEdge &e1) const { return w < e1.w - eps; }
 } E[aix * maxn], MST[maxn];
-
 struct point {
-	double x, y; int index;
-	struct edge *in;
-	bool operator <(const point &p1) const {
-		return x < p1.x - eps || (abs(x - p1.x) <= eps && y < p1.y - eps);
-	}
+	double x, y; int index; edge *in;
+	bool operator <(const point &p1) const { return x < p1.x - eps || (abs(x - p1.x) <= eps && y < p1.y - eps); }
 };
 struct edge { point *oi, *dt; edge *on, *op, *dn, *dp; };
 
 point p[maxn], *Q[maxn];
 edge mem[aix * maxn], *elist[aix * maxn];
 int nfree;
-
-void Alloc_memory() {
-	nfree = aix * n; edge *e = mem;
-	for (int i = 0; i < nfree; i++) elist[i] = e++;
-}
-//Add an edge to a ring of edges
+void Alloc_memory() { nfree = aix * n; edge *e = mem; for (int i = 0; i < nfree; i++) elist[i] = e++; }
 void Splice(edge *a, edge *b, point *v) {
 	edge *next;
 	if (Oi(a) == v) next = On(a), On(a) = b; else next = Dn(a), Dn(a) = b;
@@ -55,7 +43,6 @@ edge *Make_edge(point *u, point *v) {
 	if (!v->in) v->in = e;
 	return e;
 }
-//	Creates a new edge and adds it to two rings of edges.
 edge *Join(edge *a, point *u, edge *b, point *v, int side) {
 	edge *e = Make_edge(u, v);
 	if (side == 1) {
@@ -66,10 +53,9 @@ edge *Join(edge *a, point *u, edge *b, point *v, int side) {
 		Splice(a, e, u);
 		if (Oi(b) == v) Splice(Op(b), e, v);
 		else Splice(Dp(b), e, v);
-	}
-	return e;
+	} return e;
 }
-void Remove(edge *e) { //Remove an edge
+void Remove(edge *e) {
 	point *u = Oi(e), *v = Dt(e);
 	if (u->in == e) u->in = e->on;
 	if (v->in == e) v->in = e->dn;
@@ -79,23 +65,16 @@ void Remove(edge *e) { //Remove an edge
 	if (Oi(e->dp) == v) e->dp->on = e->dn; else e->dp->dn = e->dn;
 	elist[nfree++] = e;
 }
-//	Determines the lower tangent of two triangulations
 void Low_tangent(edge *e_l, point *o_l, edge *e_r, point *o_r, edge **l_low, point **OL, edge **r_low, point **OR) {
-	point *d_l = Other(e_l, o_l), *d_r = Other(e_r, o_r);
-	while (1)
-		if (C3(o_l, o_r, d_l) < -eps)
-			e_l = Prev(e_l, d_l), o_l = d_l, d_l = Other(e_l, o_l);
-		else if (C3(o_l, o_r, d_r) < -eps)
-			e_r = Next(e_r, d_r), o_r = d_r, d_r = Other(e_r, o_r);
-		else
-			break;
-	*OL = o_l, *OR = o_r;
-	*l_low = e_l, *r_low = e_r;
+	for (point *d_l = Other(e_l, o_l), *d_r = Other(e_r, o_r); ; )
+		if (C3(o_l, o_r, d_l) < -eps)      e_l = Prev(e_l, d_l), o_l = d_l, d_l = Other(e_l, o_l);
+		else if (C3(o_l, o_r, d_r) < -eps) e_r = Next(e_r, d_r), o_r = d_r, d_r = Other(e_r, o_r);
+		else break;
+	*OL = o_l, *OR = o_r; *l_low = e_l, *r_low = e_r;
 }
 void Merge(edge *lr, point *s, edge *rl, point *u, edge **tangent) {
 	double l1, l2, l3, l4, r1, r2, r3, r4, cot_L, cot_R, u1, v1, u2, v2, n1, cot_n, P1, cot_P;
-	point *O, *D, *OR, *OL;
-	edge *B, *L, *R;
+	point *O, *D, *OR, *OL; edge *B, *L, *R;
 	Low_tangent(lr, s, rl, u, &L, &OL, &R, &OR);
 	for (*tangent = B = Join(L, OL, R, OR, 0), O = OL, D = OR; ; ) {
 		edge *El = Next(B, O), *Er = Prev(B, D), *next, *prev;
@@ -107,32 +86,22 @@ void Merge(edge *lr, point *s, edge *rl, point *u, edge **tangent) {
 		if (BL) {
 			double dl = Dot(l1, l2, l3, l4);
 			for (cot_L = dl / cl; ; Remove(El), El = next, cot_L = cot_n) {
-				next = Next(El, O);
-				V(Other(next, O), O, u1, v1);
-				V(Other(next, O), D, u2, v2);
-				n1 = C2(u1, v1, u2, v2);
-				if (!(n1 > eps)) break;
+				next = Next(El, O); V(Other(next, O), O, u1, v1); V(Other(next, O), D, u2, v2);
+				n1 = C2(u1, v1, u2, v2); if (!(n1 > eps)) break;
 				cot_n = Dot(u1, v1, u2, v2) / n1;
 				if (cot_n > cot_L) break;
 			}
-		}
-		if (BR) {
+		} if (BR) {
 			double dr = Dot(r1, r2, r3, r4);
 			for (cot_R = dr / cr; ; Remove(Er), Er = prev, cot_R = cot_P) {
-				prev = Prev(Er, D);
-				V(Other(prev, D), O, u1, v1);
-				V(Other(prev, D), D, u2, v2);
-				P1 = C2(u1, v1, u2, v2);
-				if (!(P1 > eps)) break;
+				prev = Prev(Er, D); V(Other(prev, D), O, u1, v1); V(Other(prev, D), D, u2, v2);
+				P1 = C2(u1, v1, u2, v2); if (!(P1 > eps)) break;
 				cot_P = Dot(u1, v1, u2, v2) / P1;
 				if (cot_P > cot_R) break;
 			}
-		}
-		l = Other(El, O); r = Other(Er, D);
-		if (!BL || (BL && BR && cot_R < cot_L))
-			B = Join(B, O, Er, r, 0), D = r;
-		else
-			B = Join(El, l, B, D, 0), O = l;
+		} l = Other(El, O); r = Other(Er, D);
+		if (!BL || (BL && BR && cot_R < cot_L)) B = Join(B, O, Er, r, 0), D = r;
+		else B = Join(El, l, B, D, 0), O = l;
 	}
 }
 void Divide(int s, int t, edge **L, edge **R) {
@@ -148,8 +117,7 @@ void Divide(int s, int t, edge **L, edge **R) {
 		else *L = a, *R = b;
 	} else if (n > 3) {
 		int split = (s + t) / 2;
-		Divide(s, split, &ll, &lr);
-		Divide(split + 1, t, &rl, &rr);
+		Divide(s, split, &ll, &lr); Divide(split + 1, t, &rl, &rr);
 		Merge(lr, Q[split], rl, Q[split + 1], &tangent);
 		if (Oi(tangent) == Q[s]) ll = tangent;
 		if (Dt(tangent) == Q[t]) rr = tangent;
@@ -157,30 +125,19 @@ void Divide(int s, int t, edge **L, edge **R) {
 	}
 }
 void Make_Graph() {
-	edge *start, *e;
-	point *u, *v;
+	edge *start, *e; point *u, *v;
 	for (int i = 0; i < n; i++) {
 		start = e = (u = &p[i])->in;
-		do {
-			v = Other(e, u);
-			if (u < v) {
-				E[M].u = u - p;
-				E[M].v = v - p;
-				E[M++].w = dis(u, v);
-				if (M >= aix * maxn) OLE();
-			}
+		do{ v = Other(e, u);
+			if (u < v) E[M++].u = (u - p, v - p, dis(u, v)); // M < aix * maxn
 		} while ((e = Next(e, u)) != start);
 	}
 }
 int b[maxn];
-int Find(int x) {
-	while (x != b[x]) { b[x] = b[b[x]]; x = b[x]; }
-	return x;
-}
+int Find(int x) { while (x != b[x]) { b[x] = b[b[x]]; x = b[x]; } return x; }
 void Kruskal() {
-	memset(b, 0, sizeof(b));
+	memset(b, 0, sizeof(b)); sort(E, E + M);
 	for (int i = 0; i < n; i++) b[i] = i;
-	sort(E, E + M);
 	for (int i = 0, kk = 0; i < M && kk < n - 1; i++) {
 		int m1 = Find(E[i].u), m2 = Find(E[i].v);
 		if (m1 != m2) b[m1] = m2, MST[kk++] = E[i];
@@ -192,11 +149,9 @@ void solve() {
 		scanf("%lf%lf", &p[i].x, &p[i].y);
 		p[i].index = i;
 		p[i].in = NULL;
-	} Alloc_memory();
-	sort(p, p + n);
+	} Alloc_memory(); sort(p, p + n);
 	for (int i = 0; i < n; i++) Q[i] = p + i;
 	edge *L, *R; Divide(0, n - 1, &L, &R);
-	M = 0; Make_Graph();
-	Kruskal();
+	M = 0; Make_Graph(); Kruskal();
 }
 int main() { solve(); return 0; }
