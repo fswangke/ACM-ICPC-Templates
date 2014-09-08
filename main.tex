@@ -229,6 +229,24 @@
   \item 欧拉回路与树形图的联系: 
     对于出度等于入度的连通图
     $s(G) = t_i(G) \prod_{j = 1}^{n} (d^+(v_j) - 1)! $
+  \item 密度子图: 给定无向图, 选取点集及其导出子图, 最大化 $W_e + P_v$ (点权可负).
+    \begin{itemize}
+    \item $(S, u) = U$
+    \item $(u, T) = U - 2 P_u - D_u$
+    \item $(u, v) = (v, u) = W_e$
+    \item ans = $\frac{Un - C[S, T]}{2}$, 解集为 $S - \{s\}$
+    \end{itemize}
+  \item 最大权闭合图: 选$a$则$a$的后继必须被选
+    \begin{itemize}
+    \item $P_u > 0$, $(S, u) = P_u$
+    \item $P_u < 0$, $(u, T) = -P_u$
+    \item ans = $\sum\limits_{P_u > 0}^{} P_u - C[S, T]$, 解集为 $S - \{s\}$
+    \end{itemize}
+  \item 判定边是否属于最小割:
+    \begin{itemize}
+    \item 可能属于最小割: $(u, v)$ 不属于同一SCC
+    \item 一定在所有最小割中: $(u, v)$ 不属于同一SCC, 且 $S, u$ 在同一 SCC, $u, T$ 在同一SCC
+    \end{itemize}
   \end{itemize}
 
 \section{数学}
@@ -261,7 +279,7 @@
 
   \subsection{Miller-Rabin 素性测试}
     \input{"Math/MillerRabin.tex"}
-  
+
   \subsection{PollardRho}
     \input{"Math/PollardRho.tex"}
 
