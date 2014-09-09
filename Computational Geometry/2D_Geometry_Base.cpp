@@ -161,11 +161,16 @@ double areaCT(const circle &cir, point pa, point pb) {
 circle minCircle(const point &a, const point &b) {
 	return circle((a + b) * 0.5, (b - a).len() * 0.5);
 }
+
 circle minCircle(const point &a, const point &b, const point &c) { // `钝角三角形没有被考虑`
-	double A = 2 * a.x - 2 * b.x, B = 2 * a.y - 2 * b.y;
-	double D = 2 * a.x - 2 * c.x, E = 2 * a.y - 2 * c.y;
-	double C = a.x * a.x + a.y * a.y - b.x * b.x - b.y * b.y;
-	double F = a.x * a.x + a.y * a.y - c.x * c.x - c.y * c.y;
+	double a2( (b - c).norm() ), b2( (a - c).norm() ), c2( (a - b).norm() );
+	if (b2 + c2 <= a2 + EPS) return minCircle(b, c);
+	if (a2 + c2 <= b2 + EPS) return minCircle(a, c);
+	if (a2 + b2 <= c2 + EPS) return minCircle(a, b);
+	double A = 2.0 * (a.x - b.x), B = 2.0 * (a.y - b.y);
+	double D = 2.0 * (a.x - c.x), E = 2.0 * (a.y - c.y);
+	double C = a.norm() - b.norm();
+	double F = a.norm() - c.norm();
 	point p((C * E - B * F) / (A * E - B * D), (A * F - C * D) / (A * E - B * D));
 	return circle(p, (p - a).len());
 }
