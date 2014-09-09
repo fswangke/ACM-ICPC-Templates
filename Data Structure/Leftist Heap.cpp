@@ -1,6 +1,5 @@
 tree merge(tree a, tree b) {
-	if (a == null) return b;
-	if (b == null) return a;
+	if (a == null) return b; if (b == null) return a;
 	if (a->key > b->key) swap(a, b);
 	a->rc = merge(a->rc, b);
 	a->rc->fa = a;

@@ -1,7 +1,5 @@
 struct Event {
-	point p;
-	double alpha;
-	int add;
+	point p; double alpha; int add;
 	Event(): p(), alpha(0.0), add(0) {}
 	Event(const point &p, const double &alpha, const int &add): p(p), alpha(alpha), add(add) {}
 	bool operator < (const Event &other) const { return alpha < other.alpha; }
@@ -20,22 +18,17 @@ void circleKCover(circle *c, int N, double *area) { // area[k] : covered not les
 			double l = (a.o - b.o).norm();
 			double s = ((a.r - b.r) * (a.r + b.r) / l + 1) * 0.5;
 			double t = sqrt(-(l - sqr(a.r - b.r)) * (l - sqr(a.r + b.r)) / (l * l * 4.0));
-			point dir = b.o - a.o;
-			point Ndir = point(-dir.y, dir.x);
-			point aa = a.o + dir * s + Ndir * t;
-			point bb = a.o + dir * s - Ndir * t;
+			point dir = b.o - a.o, nDir = point(-dir.y, dir.x);
+			point aa = a.o + dir * s + nDir * t;
+			point bb = a.o + dir * s - nDir * t;
 			double A = atan2(aa.y - a.o.y, aa.x - a.o.x);
 			double B = atan2(bb.y - a.o.y, bb.x - a.o.x);
 			events[totE++] = Event(bb, B, 1);
 			events[totE++] = Event(aa, A, -1);
 			if (B > A) ++cnt;
 		}
-		if (totE == 0) {
-			area[cnt] += PI * c[i].r2;
-			continue;
-		}
-		sort(events, events + totE);
-		events[totE] = events[0];
+		if (totE == 0) { area[cnt] += PI * c[i].r2; continue; }
+		sort(events, events + totE); events[totE] = events[0];
 		Foru(j, 0, totE) {
 			cnt += events[j].add;
 			area[cnt] += 0.5 * det(events[j].p, events[j + 1].p);

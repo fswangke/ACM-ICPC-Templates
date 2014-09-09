@@ -1,6 +1,5 @@
 namespace KM {
-	int n, m; // left && right
-	int ans;
+	int n, m, ans; // `left` && `right`
 	int L[MAX_LEFT], R[MAX_RIGHT], v[MAX_RIGHT];
 	bool bx[MAX_LEFT], by[MAX_RIGHT];
 	bool find(int x) {
@@ -10,8 +9,7 @@ namespace KM {
 			if (!by[y] && L[x] + R[y] == c) {
 				by[y] = true;
 				if (!v[y] || find(v[y])) {
-					v[y] = x;
-					return true;
+					v[y] = x; return true;
 				}
 			}
 		}

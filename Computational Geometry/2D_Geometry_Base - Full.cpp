@@ -1,11 +1,29 @@
 const double PI = 3.14159265358979323846264338327950288;
+int sign(const double &a, const double &eps = EPS) { return a < -eps ? -1 : int(a > eps); }
+double sqr(const double &x) { return x * x; }
+double Sqrt(const double &x) { return x < 0 ? 0 : sqrt(x); }
 double arcSin(const double &a) {
-	return (a <= -1.0) ? (-PI / 2) : ((a >= 1.0) ? (PI / 2) : (asin(a)));
+	if (a <= -1.0) return -PI / 2;
+	if (a >=  1.0) return  PI / 2;
+	return asin(a);
 }
 double arcCos(const double &a) {
-	return (a <= -1.0) ? (PI) : ((a >= 1.0) ? (0) : (acos(a)));
+	if (a <= -1.0) return PI;
+	if (a >=  1.0) return 0;
+	return acos(a);
 }
-struct point { double x, y; // `something omitted`
+
+struct point {
+	double x, y;
+	point() : x(0.0), y(0.0) {}
+	point(const double &x, const double &y) : x(x), y(y) {}
+	point operator +(const point &rhs) const { return point(x + rhs.x, y + rhs.y); }
+	point operator -(const point &rhs) const { return point(x - rhs.x, y - rhs.y); }
+	point operator *(const double &k) const { return point(x * k, y * k); }
+	point operator /(const double &k) const { return point(x / k, y / k); }
+	double len() const { return hypot(x, y); }
+	double norm() const { return x * x + y * y; }
+	point unit() const { double k = len(); return point(x / k, y / k); }
 	point rot(const double &a) const { // `counter-clockwise`
 		return point(x * cos(a) - y * sin(a), x * sin(a) + y * cos(a));
 	}
@@ -13,6 +31,8 @@ struct point { double x, y; // `something omitted`
 	point project(const point &p1, const point &p2) const {
 		const point &q = *this; return p1 + (p2 - p1) * (dot(p2 - p1, q - p1) / (p2 - p1).norm());
 	}
+	friend double dot(const point &a, const point &b) { return a.x * b.x + a.y * b.y; }
+	friend double det(const point &a, const point &b) { return a.x * b.y - a.y * b.x; }
 	bool onSeg(const point &a, const point &b) const { // `a, b inclusive`
 		const point &c = *this; return sign(dot(a - c, b - c)) <= 0 && sign(det(b - a, c - a)) == 0;
 	}
@@ -41,9 +61,9 @@ bool segIntersect(const point &a, const point &b, const point &c, const point &d
 	e = (b - a) * (s1 / (s1 + s2)) + a;
 	return e.onSeg(a, b) && e.onSeg(c, d);
 }
+int iCnt;
 int segIntersectCheck(const point &a, const point &b, const point &c, const point &d, point &o) {
 	static double s1, s2, s3, s4;
-	static int iCnt;
 	int d1 = sign(s1 = det(b - a, c - a)), d2 = sign(s2 = det(b - a, d - a));
 	int d3 = sign(s3 = det(d - c, a - c)), d4 = sign(s4 = det(d - c, b - c));
 	if ((d1 ^ d2) == -2 && (d3 ^ d4) == -2) {
@@ -63,39 +83,53 @@ struct circle {
 	bool contain(const circle &b) const { return sign(b.r + (o - b.o).len() - r) <= 0; } // `非严格`
 	bool disjunct(const circle &b) const { return sign(b.r + r - (o - b.o).len()) <= 0; } // `非严格`
 	int isCL(const point &p1, const point &p2, point &a, point &b) const {
-		double x = dot(p1 - o, p2 - p1), y = (p2 - p1).norm();
+		double x = dot(p1 - o, p2 - p1);
+		double y = (p2 - p1).norm();
 		double d = x * x - y * ((p1 - o).norm() - rSqure);
-		if (d < -EPS) return 0; if (d < 0) d = 0;
+		if (d < -EPS) return 0;
+		if (d < 0) d = 0;
 		point q1 = p1 - (p2 - p1) * (x / y);
 		point q2 = (p2 - p1) * (sqrt(d) / y);
 		a = q1 - q2; b = q1 + q2;
 		return q2.len() < EPS ? 1 : 2;
 	}
 	int tanCP(const point &p, point &a, point &b) const { // `返回切点, 注意可能与 $p$ 重合`
-		double x = (p - o).norm(), d = x - rSqure;
-		if (d < -EPS) return 0; if (d < 0) d = 0;
-		point q1 = (p - o) * (rSqure / x), q2 = ((p - o) * (-r * sqrt(d) / x)).rot90();
+		double x = (p - o).norm();
+		double d = x - rSqure;
+		if (d < -EPS) return 0;
+		if (d < 0) d = 0;
+		point q1 = (p - o) * (rSqure / x);
+		point q2 = ((p - o) * (-r * sqrt(d) / x)).rot90();
 		a = o + (q1 - q2); b = o + (q1 + q2);
 		return q2.len() < EPS ? 1 : 2;
 	}
 };
+
 bool checkCrossCS(const circle &cir, const point &p1, const point &p2) { // `非严格`
-	const point &c = cir.o; const double &r = cir.r;
+	const point &c = cir.o;
+	const double &r = cir.r;
 	return c.distSP(p1, p2) < r + EPS && (r < (c - p1).len() + EPS || r < (c - p2).len() + EPS);
 }
+
 bool checkCrossCC(const circle &cir1, const circle &cir2) { // `非严格`
-	double &r1 = cir1.r, &r2 = cir2.r, d = (cir1.o - cir2.o).len();
+	const double &r1 = cir1.r, &r2 = cir2.r;
+	double d = (cir1.o - cir2.o).len();
 	return d < r1 + r2 + EPS && fabs(r1 - r2) < d + EPS;
 }
+
 int isCC(const circle &cir1, const circle &cir2, point &a, point &b) {
 	const point &c1 = cir1.o, &c2 = cir2.o;
-	double x = (c1 - c2).norm(), y = ((cir1.rSqure - cir2.rSqure) / x + 1) / 2;
+	double x = (c1 - c2).norm();
+	double y = ((cir1.rSqure - cir2.rSqure) / x + 1) / 2;
 	double d = cir1.rSqure / x - y * y;
-	if (d < -EPS) return 0; if (d < 0) d = 0;
-	point q1 = c1 + (c2 - c1) * y, q2 = ((c2 - c1) * sqrt(d)).rot90();
+	if (d < -EPS) return 0;
+	if (d < 0) d = 0;
+	point q1 = c1 + (c2 - c1) * y;
+	point q2 = ((c2 - c1) * sqrt(d)).rot90();
 	a = q1 - q2; b = q1 + q2;
 	return q2.len() < EPS ? 1 : 2;
 }
+
 vector<pair<point, point> > tanCC(const circle &cir1, const circle &cir2) { 
 //	`注意: 如果只有三条切线, 即 $s1 = 1, s2 = 1$, 返回的切线可能重复, 切点没有问题`
 	vector<pair<point, point> > list;
@@ -124,11 +158,13 @@ vector<pair<point, point> > tanCC(const circle &cir1, const circle &cir2) {
 		list.push_back(make_pair(b1, b2));
 	} return list;
 }
+
 bool distConvexPIn(const point &p1, const point &p2, const point &p3, const point &p4, const point &q) {
 	point o12 = (p1 - p2).rot90(), o23 = (p2 - p3).rot90(), o34 = (p3 - p4).rot90();
 	return (q - p1).inAngle(o12, o23) || (q - p3).inAngle(o23, o34)
 		|| ((q - p2).inAngle(o23, p3 - p2) && (q - p3).inAngle(p2 - p3, o23));
 }
+
 double distConvexP(int n, point ps[], const point &q) {
 	int left = 0, right = n;
 	while (right - left > 1) {
@@ -138,6 +174,7 @@ double distConvexP(int n, point ps[], const point &q) {
 		else left = mid;
 	} return q.distSP(ps[left], ps[right % n]);
 }
+
 double areaCT(const circle &cir, point pa, point pb) {
 	pa = pa - cir.o; pb = pb - cir.o;
 	double R = cir.r;

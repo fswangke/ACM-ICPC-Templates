@@ -1,17 +1,13 @@
 namespace MinBall {
-
 int outCnt;
 point out[4], res;
 double radius;
-
 void ball() {
 	static point q[3];
 	static double m[3][3], sol[3], L[3], det;
 	int i, j;
-
 	res = point(0.0, 0.0, 0.0);
 	radius = 0.0;
-
 	switch (outCnt) {
 	case 1:
 		res = out[0];

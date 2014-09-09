@@ -145,11 +145,8 @@ void Kruskal() {
 }
 void solve() {
 	scanf("%d", &n);
-	for (int i = 0; i < n; i++) {
-		scanf("%lf%lf", &p[i].x, &p[i].y);
-		p[i].index = i;
-		p[i].in = NULL;
-	} Alloc_memory(); sort(p, p + n);
+	for (int i = 0; i < n; i++) scanf("%lf%lf", &p[i].x, &p[i].y), p[i].index = i, p[i].in = NULL;
+	Alloc_memory(); sort(p, p + n);
 	for (int i = 0; i < n; i++) Q[i] = p + i;
 	edge *L, *R; Divide(0, n - 1, &L, &R);
 	M = 0; Make_Graph(); Kruskal();

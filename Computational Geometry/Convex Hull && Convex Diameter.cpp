@@ -1,56 +1,22 @@
-inline bool turnLeft(const point &a, const point &b, const point &c) {
-	return sign(det(b - a, c - a)) >= 0;
+vector<point> convexHull(int n, point ps[]) { // `counter-clockwise, strict`
+	static point qs[MAXN * 2];
+	sort(ps, ps + n, cmpByXY);
+	if (n <= 2) return vector(ps, ps + n);
+	int k = 0;
+	for (int i = 0; i < n; qs[k++] = ps[i++])
+		while (k > 1 && det(qs[k - 1] - qs[k - 2], ps[i] - qs[k - 1]) < EPS) --k;
+	for (int i = n - 2, t = k; i >= 0; qs[k++] = ps[i--])
+		while (k > t && det(qs[k - 1] - qs[k - 2], ps[i] - qs[k - 1]) < EPS) --k;
+	return vector<point>(qs, qs + k);
 }
-inline bool turnRight(const point &a, const point &b, const point &c) {
-	return sign(det(b - a, c - a)) <= 0;
-}
-inline bool cmpByXY(const point &a, const point &b) {
-	int c = sign(a.x - b.x);
-	if (c != 0) return c < 0;
-	return sign(a.y - b.y) < 0;
-}
-
-vector<point> convexHull(vector<point> &a) {
-	int n = (int)a.size(), cnt = 0;
-	sort(a.begin(), a.end(), cmpByXY);
-	vector<point> ret;
-	ret.reserve(n * 2);
-	for (int i = 0; i < n; ++i) {
-		while (cnt > 1 && turnLeft(ret[cnt - 2], a[i], ret[cnt - 1])) {
-			--cnt;
-			ret.pop_back();
-		}
-		ret.push_back(a[i]);
-		++cnt;
-	}
-	int fixed = cnt;
-	for (int i = n - 2; i >= 0; --i) { // n - 1 must be in stack
-		while (cnt > fixed && turnLeft(ret[cnt - 2], a[i], ret[cnt - 1])) {
-			--cnt;
-			ret.pop_back();
-		}
-		ret.push_back(a[i]);
-		++cnt;
-	} // the lowest point will occur twice, i.e. ret.front() == ret.back()
-	return ret;
-}
-double convexDiameter(const vector<point> &ps) {
-	int n = ps.size();
-	if (n < 2) return 0;
-	if (n == 2) return (ps[1] - ps[0]).len();
-	int nx, ny, y = 1;
-	double k;
-	double ans = 0;
-	for (int x = 0; x < n; ++x) {
-		nx = x + 1;
-		for ( ; ; y = ny) {
-			ny = y == n - 1 ? 0 : y + 1;
-			k = det(ps[nx] - ps[x], ps[ny] - ps[y]);
-			if (k <= 0) break;
-		}
-		ans = max(ans, (ps[x] - ps[y]).len());
-		if (sign(k) == 0)
-			ans = max(ans, (ps[x] - ps[ny]).len());
-	}
-	return ans;
+double convexDiameter(int n, point ps[]) {
+	if (n < 2) return 0; if (n == 2) return (ps[1] - ps[0]).len();
+	double k, ans = 0;
+	for (int x = 0, y = 1, nx, ny; x < n; ++x) {
+		for(nx = (x == n - 1) ? (0) : (x + 1); ; y = ny) {
+			ny = (y == n - 1) ? (0) : (y + 1);
+			if ( sign(k = det(ps[nx] - ps[x], ps[ny] - ps[y])) <= 0) break;
+		} ans = max(ans, (ps[x] - ps[y]).len());
+		if (sign(k) == 0) ans = max(ans, (ps[x] - ps[ny]).len());
+	} return ans;
 }

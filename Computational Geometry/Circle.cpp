@@ -1,7 +1,6 @@
 struct circle {
 	point o;
 	double r, r2; // r ^ 2
-
 	circle(): o(), r(0.0), r2(0.0) {}
 	circle(const point &o, const double &r): o(o), r(r), r2(r * r) {}
 	bool inside(const point &a) { return sign((a - o).norm() - r2) <= 0; }
