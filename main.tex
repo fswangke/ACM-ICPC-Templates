@@ -277,6 +277,10 @@
   \subsection{整数FFT}
     \input{"Math/FFT_Integer.tex"}
 
+  \subsection{扩展欧几里得}
+    $ax + by = g = gcd(x, y)$
+    \input{"Math/ExGcd.tex"}
+
   \subsection{线性同余方程}
     \begin{itemize}
     \item 中国剩余定理:
@@ -301,10 +305,19 @@
   \subsection{多项式求根}
     \input{"Math/Root Of Polynomial.tex"}
   
+  \subsection{线性递推}
+    for $a_{i + n} = (\sum_{i = 0}^{n - 1} k_j a_{i + j}) + d$,
+    $a_m = (\sum_{i = 0}^{n - 1} c_i a_i) + c_n d$
+    \input{"Math/Linear Recursive Equation.tex"}
+
   \subsection{原根}
     原根 $g$: $g$ 是模 $n$ 简化剩余系构成的乘法群的生成元.
     模 $n$ 有原根的充要条件是 $n = 2, 4, p^n, 2p^n$, 其中 $p$ 是奇质数, $n$ 是正整数
     \input{"Math/PrimitiveRoot.tex"}
+
+  \subsection{离散对数}
+    $A ^ x \equiv B \pmod(C)$, 对非质数 $C$ 也适用.
+  \input{"Math/ModLog.tex"}
 
   \subsection{平方剩余}
     \begin{itemize}

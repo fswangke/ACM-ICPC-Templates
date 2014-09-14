@@ -1,8 +1,8 @@
-vector<int> findPrimitiveRoot(int N) { // `只有 2, 4, $p^n$, $2p^n$ 有原根` 
+vector<int> findPrimitiveRoot(int N) {
 	if (N <= 4) return vector<int>(1, max(1, N - 1));
 	static int factor[100];
 	int phi = N, totF = 0;
-	{ // check no solution && calculate phi
+	{ // `check no solution and calculate phi`
 		int M = N, k = 0;
 		if (~M & 1) M >>= 1, phi >>= 1;
 		if (~M & 1) return vector<int>(0);
@@ -13,7 +13,7 @@ vector<int> findPrimitiveRoot(int N) { // `只有 2, 4, $p^n$, $2p^n$ 有原根`
 			if (++k > 1) return vector<int>(0);
 			phi -= phi / M;
 		}
-	} { // factorize phi
+	} { // `factorize phi`
 		int M = phi;
 		for (int d = 2; d * d <= M; ++d) if (M % d == 0) {
 			for ( ; M % d == 0; M /= d);
@@ -31,4 +31,3 @@ vector<int> findPrimitiveRoot(int N) { // `只有 2, 4, $p^n$, $2p^n$ 有原根`
 	} sort(ans.begin(), ans.end());
 	return ans;
 }
-

@@ -6,7 +6,6 @@ namespace FFT {
 		Complex(double x): x(x), y(0.0) {}
 		Complex(double x, double y) : x(x), y(y) {}
 	};
-
 	void FFT(Complex P[], int n, int oper) {
 		for (int i = 1, j = 0; i < n - 1; i++) {
 			for (int s = n; j ^= s >>= 1, ~j & s; );
@@ -28,23 +27,18 @@ namespace FFT {
 			}
 		}
 	}
-
 	vector<int> doFFT(const vector<int> &a, const vector<int> &b) {
 		vector<int> ret(max(0, (int) a.size() + (int) b.size() - 1), 0);
 		static Complex A[MAXB], B[MAXB], C[MAXB];
 		int len = 1;
-		while (len < (int)ret.size()) {
-			len *= 2;
-		}
+		while (len < (int)ret.size()) len *= 2;
 		for (int i = 0; i < len; i++) {
 			A[i] = i < (int)a.size() ? a[i] : 0;
 			B[i] = i < (int)b.size() ? b[i] : 0;
 		}
 		FFT(A, len, 1);
 		FFT(B, len, 1);
-		for (int i = 0; i < len; i++) {
-			C[i] = mul(A[i], B[i]);
-		}
+		for (int i = 0; i < len; i++) C[i] = mul(A[i], B[i]);
 		FFT(C, len, -1);
 		for (int i = 0; i < (int)ret.size(); i++)
 			ret[i] = (int) (C[i].x / len + 0.5);
