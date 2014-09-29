@@ -118,6 +118,15 @@
     \item 关于向量 $v$ 作对称变换的矩阵 $H = I - 2 \frac{v v^T}{v^T v}$,
     \item 点$a$对称点: $a^\prime = a - 2 \frac{v^T a}{v^T v} \cdot v$
     \end{itemize}
+  \subsection{立体角}
+    对于任意一个四面体$OABC$,
+    从$O$点观察$\Delta ABC$的立体角$\tan{\frac{\Omega}{2}} = 
+    \frac{\textrm{mix}(\vec{a}, \vec{b}, \vec{c}) }{
+        |a||b||c|
+      + (\vec{a} \cdot \vec{b}) |c|
+      + (\vec{a} \cdot \vec{c}) |b|
+      + (\vec{b} \cdot \vec{c}) |a|
+    }$.
 
 \section{数据结构}
   \subsection{动态凸包(只支持插入)}
@@ -544,17 +553,17 @@
     \begin{itemize}
     \item 三角形的五心
       \begin{itemize}
-      \item 重心 $\overrightarrow{G} = \frac{\overrightarrow{A} + \overrightarrow{B} + \overrightarrow{C}}{3}$
+      \item 重心 $\vec{G} = \frac{\vec{A} + \vec{B} + \vec{C}}{3}$
       \item
-        内心 $\overrightarrow{I} = \frac{a\overrightarrow{A} + b\overrightarrow{B} + c\overrightarrow{C}}{a + b + c}$,
+        内心 $\vec{I} = \frac{a\vec{A} + b\vec{B} + c\vec{C}}{a + b + c}$,
         $R = \frac{2S}{a + b + c}$
       \item
-        外心 $\overrightarrow{O} = \frac{\overrightarrow{A} + \overrightarrow{B} + \frac{\overrightarrow{AC} \cdot \overrightarrow{BC}}{\overrightarrow{AB} \times \overrightarrow{BC}} \overrightarrow{AB}^{T}}{2}$,
+        外心 $\vec{O} = \frac{\vec{A} + \vec{B} + \frac{\vec{AC} \cdot \vec{BC}}{\vec{AB} \times \vec{BC}} \vec{AB}^{T}}{2}$,
         $R = \frac{abc}{4S}$
       \item
-        垂心 $\overrightarrow{H} = 3\overrightarrow{G} - 2\overrightarrow{O} = \overrightarrow{C} + \frac{\overrightarrow{BC} \cdot \overrightarrow{AC}}{\overrightarrow{BC} \times \overrightarrow{AC}} \overrightarrow{AB} ^ {T}$
+        垂心 $\vec{H} = 3\vec{G} - 2\vec{O} = \vec{C} + \frac{\vec{BC} \cdot \vec{AC}}{\vec{BC} \times \vec{AC}} \vec{AB} ^ {T}$
       \item
-        旁心(三个) $\frac{-a\overrightarrow{A} + b\overrightarrow{B} + c\overrightarrow{C}}{-a + b + c}$
+        旁心(三个) $\frac{-a\vec{A} + b\vec{B} + c\vec{C}}{-a + b + c}$
       \end{itemize}
 
     \item 四边形: 设$D_1, D_2$为对角线, $M$为对角线中点连线, $A$为对角线夹角
