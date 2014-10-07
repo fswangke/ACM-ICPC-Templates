@@ -1,150 +1,94 @@
 namespace EdmondsAlgorithm { // O(ElogE + V^2) !!! 0-based !!!
-	const int inf = 1000000000;
-	int n, m, a, b, c, x[maxn], y[maxn], z[maxn];
-	int edgeCnt, firstEdge[maxn], from[maxm], nextEdge[maxm], inEdge[maxn];
-	int child[maxm][2], key[maxm], delta[maxm], depth[maxm];
-	int parent[maxn], choosen[maxn], degree[maxn], queue[maxn], length[maxm];
-
-	void pass (int x) {
-		if (delta[x] != 0) {
-			key[child[x][0]] += delta[x]; delta[child[x][0]] += delta[x];
-			key[child[x][1]] += delta[x]; delta[child[x][1]] += delta[x];
-			delta[x] = 0;
-		}
+	struct enode { int from, c, key, delta, dep; enode *ch[2], *next;
+	} ebase[maxm], *etop, *fir[maxn], nil, *null, *inEdge[maxn], *chs[maxn];
+	typedef enode *edge; typedef enode *tree;	
+	int n, m, setFa[maxn], deg[maxn], que[maxn];
+	inline void pushDown(tree x) { if (x->delta) {
+		x->ch[0]->key += x->delta; x->ch[0]->delta += x->delta;
+		x->ch[1]->key += x->delta; x->ch[1]->delta += x->delta; x->delta = 0;
+	}}
+	tree merge(tree x, tree y) {
+		if (x == null) return y; if (y == null) return x;
+		if (x->key > y->key) swap(x, y); pushDown(x); x->ch[1] = merge(x->ch[1], y);
+		if (x->ch[0]->dep < x->ch[1]->dep) swap(x->ch[0], x->ch[1]);
+		x->dep = x->ch[1]->dep + 1; return x;
 	}
-
-	int merge(int x, int y) {
-		if (x == 0 or y == 0) return x ^ y;
-		if (key[x] > key[y]) swap(x, y);
-		pass(x); child[x][1] = merge(child[x][1], y);
-		if (depth[child[x][0]] < depth[child[x][1]]) swap(child[x][0], child[x][1]);
-		depth[x] = depth[child[x][1]] + 1;
-		return x;
-	}
-
 	void addEdge(int u, int v, int w) {
-		from[++ edgeCnt] = u;
-		length[edgeCnt] = w;
-		nextEdge[edgeCnt] = firstEdge[v];
-		firstEdge[v] = edgeCnt;
-		key[edgeCnt] = w;
-		delta[edgeCnt] = 0;
-		depth[edgeCnt] = 0;
-		child[edgeCnt][0] = child[edgeCnt][1] = 0;
-		inEdge[v] = merge(inEdge[v], edgeCnt);
+		etop->from = u; etop->c = etop->key = w; etop->delta = etop->dep = 0;
+		etop->next = fir[v]; etop->ch[0] = etop->ch[1] = null;
+		fir[v] = etop; inEdge[v] = merge(inEdge[v], etop++);
 	}
-
-	void deleteMin(int &r) {
-		pass(r); r = merge(child[r][0], child[r][1]);
+	void deleteMin(tree &r) { pushDown(r); r = merge(r->ch[0], r->ch[1]); }
+	int findSet(int x) { return setFa[x] == x ? x : setFa[x] = findSet(setFa[x]); }
+	void clear(int V, int E) {
+		null = &nil; null->ch[0] = null->ch[1] = null; null->dep = -1;
+		n = V; m = E; etop = ebase; Foru(i, 0, V) fir[i] = NULL; Foru(i, 0, V) inEdge[i] = null;
 	}
-
-	int findRoot(int u) {
-		if (parent[u] != u) parent[u] = findRoot(parent[u]);
-		return parent[u];
-	}
-
-	void clear(int E) {
-		edgeCnt = 0; depth[0] = -1;
-		for(int i = 0; i <= E; ++i) inEdge[i] = firstEdge[i] = 0;
-	}
-
 	int solve(int root) {
-		int result = 0;
-		for (int i = 0; i < n; ++i) parent[i] = i;
-		while (true) {
-			memset(degree, 0, sizeof(degree));
-			for (int i = 0; i < n; ++i) {
-				if (i == root or parent[i] != i) continue;
-				while (findRoot(from[inEdge[i]]) == findRoot(i)) deleteMin(inEdge[i]);
-				choosen[i] = inEdge[i];
-				degree[findRoot(from[choosen[i]])] += 1;
+		int res = 0, head, tail;
+		for (int i = 0; i < n; ++i) setFa[i] = i;
+		for ( ; ; ) {
+			memset(deg, 0, sizeof(int) * n);
+			chs[root] = inEdge[root];
+			for (int i = 0; i < n; ++i) if (i != root && setFa[i] == i) {
+				while (findSet(inEdge[i]->from) == findSet(i)) deleteMin(inEdge[i]);
+				++deg[ findSet((chs[i] = inEdge[i])->from) ];
 			}
-			int head = 0, tail = 0;
-			for (int i = 0; i < n; ++i)
-				if (i != root and parent[i] == i and degree[i] == 0)
-					queue[tail++] = i;
+			for (int i = head = tail = 0; i < n; ++i)
+				if (i != root && setFa[i] == i && deg[i] == 0) que[tail++] = i;
 			while (head < tail) {
-				if (--degree[findRoot(from[choosen[queue[head]]])] == 0)
-					queue[tail++] = findRoot(from[choosen[queue[head]]]);
-				head += 1;
+				int x = findSet(chs[que[head++]]->from);
+				if (--deg[x] == 0) que[tail++] = x;
 			}
 			bool found = false;
 			for (int i = 0; i < n; ++i)
-				if (i != root and parent[i] == i and degree[i] > 0) {
-					found = true;
-					int j = i, temp = 0;
-					do{
-						j = findRoot(from[choosen[j]]);
-						parent[j] = i;
-						deleteMin(inEdge[j]);
-						result += key[choosen[j]];
-						key[inEdge[j]] -= key[choosen[j]];
-						delta[inEdge[j]] -= key[choosen[j]];
+				if (i != root && setFa[i] == i && deg[i] > 0) {
+					int j = i; tree temp = null; found = true;
+					do {setFa[j = findSet(chs[j]->from)] = i;
+						deleteMin(inEdge[j]); res += chs[j]->key;
+						inEdge[j]->key -= chs[j]->key; inEdge[j]->delta -= chs[j]->key;
 						temp = merge(temp, inEdge[j]);
-					} while (j != i);
-					inEdge[i] = temp;
+					} while (j != i); inEdge[i] = temp;
 				}
-			if (not found) break;
-		}
-		for (int i = 0; i < n; ++ i) if (i != root and parent[i] == i)
-			result += key[choosen[i]];
-		return result;
+			if (!found) break;
+		} for (int i = 0; i < n; ++ i) if (i != root && setFa[i] == i) res += chs[i]->key;
+		return res;
 	}
 }
 
 namespace ChuLiu { // O(V ^ 3) !!! 1-based !!!
-	int n, m, used[maxn], pass[maxn], eg[maxn], more, queue[maxn], g[maxn][maxn];
-
+	int n, used[maxn], pass[maxn], eg[maxn], more, que[maxn], g[maxn][maxn];
 	void combine(int id, int &sum) {
 		int tot = 0, from, i, j, k;
-		for ( ; id != 0 && !pass[id]; id = eg[id]) {
-			queue[tot++] = id;
-			pass[id] = 1;
-		}
-		for (from = 0; from < tot && queue[from] != id; from++);
-		if (from == tot) return;
-		more = 1;
+		for ( ; id != 0 && !pass[id]; id = eg[id]) que[tot++] = id, pass[id] = 1;
+		for (from = 0; from < tot && que[from] != id; from++);
+		if (from == tot) return; more = 1;
 		for (i = from; i < tot; i++) {
-			sum += g[eg[queue[i]]][queue[i]];
-			if (i != from) {
-				used[queue[i]] = 1;
-				for (j = 1; j <= n; j++)
-					if (!used[j])
-						if (g[queue[i]][j] < g[id][j])
-							g[id][j] = g[queue[i]][j];
-			}
+			sum += g[eg[que[i]]][que[i]];
+			if (i == from) continue;
+			for (j = used[que[i]] = 1; j <= n; j++) if (!used[j])
+				if (g[que[i]][j] < g[id][j]) g[id][j] = g[que[i]][j];
 		}
 		for (i = 1; i <= n; i++) if (!used[i] && i != id)
 			for (j = from; j < tot; j++) {
-				k = queue[j];
-				if (g[i][id] > g[i][k] - g[eg[k]][k])
+				k = que[j]; if (g[i][id] > g[i][k] - g[eg[k]][k])
 				g[i][id] = g[i][k] - g[eg[k]][k];
 			}
 	}
-
-	void clear(int V) {
-		for (int i = 1; i <= V; ++i)
-			for (int j = 1; j <= V; ++j)
-				g[i][j] = inf;
-	}
-
+	void clear(int V) { n = V; Rep(i, 1, V) Rep(j, 1, V) g[i][j] = inf; }
 	int solve(int root) { // return the total length of MDST
 		int i, j, k, sum = 0;
-		memset(used, 0, sizeof(used));
+		memset(used, 0, sizeof(int) * (n + 1));
 		for (more = 1; more;) {
-			more = 0;
-			memset(eg, 0, sizeof(eg));
+			more = 0; memset(eg, 0, sizeof(int) * (n + 1));
 			for (i = 1; i <= n; i++) if (!used[i] && i != root) {
 				for (j = 1, k = 0; j <= n; j++) if (!used[j] && i != j)
-					if (k == 0 || g[j][i] < g[k][i])
-						k = j;
+					if (k == 0 || g[j][i] < g[k][i]) k = j;
 				eg[i] = k;
-			}
-			memset(pass, 0, sizeof(pass));
+			} memset(pass, 0, sizeof(int) * (n + 1));
 			for (i = 1; i <= n; i++) if (!used[i] && !pass[i] && i != root)
 				combine(i, sum);
-		}
-		for (i = 1; i <= n; i++) if (!used[i] && i != root) sum += g[eg[i]][i];
+		} for (i = 1; i <= n; i++) if (!used[i] && i != root) sum += g[eg[i]][i];
 		return sum;
 	}
 }
