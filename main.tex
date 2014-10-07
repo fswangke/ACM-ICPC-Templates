@@ -5,8 +5,9 @@
 
 \geometry{left=2.0cm, right=2.0cm, top=2.5cm, bottom=1.5cm}
 \lstset{language=C++, breaklines, frame=single,
+    numbers=left,
     escapeinside=``,extendedchars=false,
-    xleftmargin=0.5em,xrightmargin=0.5em,
+    xleftmargin=2.0em,xrightmargin=2.0em,
     basicstyle=\ttfamily\footnotesize, tabsize=2,
 }
 \newcommand{\stb}[2]{\genfrac{ \{ }{ \} }{0pt}{}{#1}{#2}}
@@ -56,20 +57,20 @@
     不能有重点
     \input{"Computational Geometry/Voronoi.tex"}
 
-  \subsection{三角形和四边形的费马点}
-    \begin{itemize}
-    \item 费马点: 距几个顶点距离之和最小的点
-    \item 三角形:
-      \begin{itemize}
-      \item 若每个角都小于 $120^{\circ}$: 以每条边向外作正三角形, 得到 $\Delta ABF$, $\Delta BCD$, $\Delta CAE$, 连接$AD$, $BE$, $CF$, 三线必共点于费马点. 该点对三边的张角必然是$120^{\circ}$, 也必然是三个三角形外接圆的交点
-      \item 否则费马点一定是那个大于等于$120^{\circ}$的顶角
-      \end{itemize}
-    \item 四边形:
-      \begin{itemize}
-      \item 在凸四边形中, 费马点为对角线的交点
-      \item 在凹四边形中, 费马点位凹顶点
-      \end{itemize}
-    \end{itemize}
+%  \subsection{三角形和四边形的费马点}
+%    \begin{itemize}
+%    \item 费马点: 距几个顶点距离之和最小的点
+%    \item 三角形:
+%      \begin{itemize}
+%      \item 若每个角都小于 $120^{\circ}$: 以每条边向外作正三角形, 得到 $\Delta ABF$, $\Delta BCD$, $\Delta CAE$, 连接$AD$, $BE$, $CF$, 三线必共点于费马点. 该点对三边的张角必然是$120^{\circ}$, 也必然是三个三角形外接圆的交点
+%      \item 否则费马点一定是那个大于等于$120^{\circ}$的顶角
+%      \end{itemize}
+%    \item 四边形:
+%      \begin{itemize}
+%      \item 在凸四边形中, 费马点为对角线的交点
+%      \item 在凹四边形中, 费马点位凹顶点
+%      \end{itemize}
+%    \end{itemize}
 
   \subsection{三维计算几何基本操作}
     \input{"Computational Geometry/3D_Geometry_Base.tex"}
