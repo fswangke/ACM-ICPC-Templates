@@ -1,4 +1,3 @@
-int value[26];
 inline int getLevel(char ch) {
 	switch (ch) { case '+': case '-': return 0; case '*': return 1; } return -1;
 }
@@ -8,8 +7,7 @@ int evaluate(char *&p, int level) {
 		if (*p == '(') ++p, res = evaluate(p, 0);
 		else res = isdigit(*p) ? *p - '0' : value[*p - 'a'];
 		++p; return res;
-	}
-	res = evaluate(p, level + 1);
+	} res = evaluate(p, level + 1);
 	for (int next; *p && getLevel(*p) == level; ) {
 		char op = *p++; next = evaluate(p, level + 1);
 		switch (op) {
@@ -19,6 +17,4 @@ int evaluate(char *&p, int level) {
 		}
 	} return res;
 }
-int makeEvaluation(char *str) {
-	char *p = str; return evaluate(p, 0);
-}
+int makeEvaluation(char *str) { char *p = str; return evaluate(p, 0); }

@@ -10,14 +10,12 @@ vector<int> findPrimitiveRoot(int N) {
 			if (++k > 1) return vector<int>(0);
 			for (phi -= phi / d; M % d == 0; M /= d);
 		} if (M > 1) {
-			if (++k > 1) return vector<int>(0);
-			phi -= phi / M;
+			if (++k > 1) return vector<int>(0); phi -= phi / M;
 		}
 	} { // `factorize phi`
 		int M = phi;
 		for (int d = 2; d * d <= M; ++d) if (M % d == 0) {
-			for ( ; M % d == 0; M /= d);
-			factor[++totF] = d;
+			for ( ; M % d == 0; M /= d); factor[++totF] = d;
 		} if (M > 1) factor[++totF] = M;
 	} vector<int> ans;
 	for (int g = 2; g <= N; ++g) if (Gcd(g, N) == 1) {

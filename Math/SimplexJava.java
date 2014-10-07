@@ -32,8 +32,7 @@ double[] simplex(double[][] A, double[] b, double[] c) {
 				r = i;
 		}
 		if (r < 0) return null; // `非有界`
-	}
-	if (D[n + 1][m] < -EPS) return null; // `无法执行`
+	} if (D[n + 1][m] < -EPS) return null; // `无法执行`
 	double[] x = new double[m - 1];
 	for (int i = m; i < n + m; i++) if (ix[i] < m - 1) x[ix[i]] = D[i - m][m];
 	return x; // `值为 D[n][m]`

@@ -4,7 +4,6 @@ void exgcd(LL x, LL y, LL &a0, LL &b0, LL &g) {
 		t = a0 - x / y * a1, a0 = a1, a1 = t;
 		t = b0 - x / y * b1, b0 = b1, b1 = t;
 		t = x % y, x = y, y = t;
-	}
-	if (x < 0) a0 = -a0, b0 = -b0, x = -x;
+	} if (x < 0) a0 = -a0, b0 = -b0, x = -x;
 	g = x;
 }

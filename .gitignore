@@ -9,5 +9,6 @@
 *.tex
 
 *.swp
+.DS_Store
 
 makefile

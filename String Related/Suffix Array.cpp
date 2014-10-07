@@ -22,7 +22,6 @@ namespace SuffixArrayDoubling {
 		}
 	}
 }
-
 namespace SuffixArrayDC3 { // `r 与 sa 大小需 3 倍`
 	#define F(x) ((x) / 3 + ((x) % 3 == 1 ? 0 : tb))
 	#define G(x) ((x) < tb ? (x) * 3 + 1 : ((x) - tb) * 3 + 2)
@@ -31,18 +30,15 @@ namespace SuffixArrayDC3 { // `r 与 sa 大小需 3 倍`
 		return r[a] == r[b] && r[a + 1] == r[b + 1] && r[a + 2] == r[b + 2];
 	}
 	int c12(int k, int *r, int a, int b) {
-		if (k == 2)
-			return r[a] < r[b] || (r[a] == r[b] && c12(1, r, a + 1, b + 1));
-		else
-			return r[a] < r[b] || (r[a] == r[b] && wv[a + 1] < wv[b + 1]);
+		if (k == 2) return r[a] < r[b] || (r[a] == r[b] && c12(1, r, a + 1, b + 1));
+		else        return r[a] < r[b] || (r[a] == r[b] && wv[a + 1] < wv[b + 1]);
 	}
 	void sort(int *r, int *a, int *b, int n, int m) {
-		int i;
-		for (i = 0; i < n; i++) wv[i] = r[a[i]];
-		for (i = 0; i < m; i++) ws[i] = 0;
-		for (i = 0; i < n; i++) ws[wv[i]]++;
-		for (i = 1; i < m; i++) ws[i] += ws[i - 1];
-		for (i = n - 1; i >= 0; i--) b[--ws[wv[i]]] = a[i];
+		for (int i = 0; i < n; i++) wv[i] = r[a[i]];
+		for (int i = 0; i < m; i++) ws[i] = 0;
+		for (int i = 0; i < n; i++) ws[wv[i]]++;
+		for (int i = 1; i < m; i++) ws[i] += ws[i - 1];
+		for (int i = n - 1; i >= 0; i--) b[--ws[wv[i]]] = a[i];
 	}
 	void dc3(int *r, int *sa, int n, int m) {
 		int i, j, *rn = r + n, *san = sa + n, ta = 0, tb = (n + 1) / 3, tbc = 0, p;
@@ -67,7 +63,6 @@ namespace SuffixArrayDC3 { // `r 与 sa 大小需 3 倍`
 	#undef F
 	#undef G
 }
-
 namespace CalcHeight {
 	int rank[MAXN], height[MAXN];
 	void calheight(int *r, int *sa, int n) {
