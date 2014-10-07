@@ -24,12 +24,9 @@ namespace EdmondsAlgorithm { // O(ElogE + V^2) !!! 0-based !!!
 		null = &nil; null->ch[0] = null->ch[1] = null; null->dep = -1;
 		n = V; m = E; etop = ebase; Foru(i, 0, V) fir[i] = NULL; Foru(i, 0, V) inEdge[i] = null;
 	}
-	int solve(int root) {
-		int res = 0, head, tail;
+	int solve(int root) { int res = 0, head, tail;
 		for (int i = 0; i < n; ++i) setFa[i] = i;
-		for ( ; ; ) {
-			memset(deg, 0, sizeof(int) * n);
-			chs[root] = inEdge[root];
+		for ( ; ; ) { memset(deg, 0, sizeof(int) * n); chs[root] = inEdge[root];
 			for (int i = 0; i < n; ++i) if (i != root && setFa[i] == i) {
 				while (findSet(inEdge[i]->from) == findSet(i)) deleteMin(inEdge[i]);
 				++deg[ findSet((chs[i] = inEdge[i])->from) ];
@@ -39,33 +36,27 @@ namespace EdmondsAlgorithm { // O(ElogE + V^2) !!! 0-based !!!
 			while (head < tail) {
 				int x = findSet(chs[que[head++]]->from);
 				if (--deg[x] == 0) que[tail++] = x;
-			}
-			bool found = false;
-			for (int i = 0; i < n; ++i)
-				if (i != root && setFa[i] == i && deg[i] > 0) {
-					int j = i; tree temp = null; found = true;
-					do {setFa[j = findSet(chs[j]->from)] = i;
-						deleteMin(inEdge[j]); res += chs[j]->key;
-						inEdge[j]->key -= chs[j]->key; inEdge[j]->delta -= chs[j]->key;
-						temp = merge(temp, inEdge[j]);
-					} while (j != i); inEdge[i] = temp;
-				}
-			if (!found) break;
+			} bool found = false;
+			for (int i = 0; i < n; ++i) if (i != root && setFa[i] == i && deg[i] > 0) {
+				int j = i; tree temp = null; found = true;
+				do {setFa[j = findSet(chs[j]->from)] = i;
+					deleteMin(inEdge[j]); res += chs[j]->key;
+					inEdge[j]->key -= chs[j]->key; inEdge[j]->delta -= chs[j]->key;
+					temp = merge(temp, inEdge[j]);
+				} while (j != i); inEdge[i] = temp;
+			} if (!found) break;
 		} for (int i = 0; i < n; ++ i) if (i != root && setFa[i] == i) res += chs[i]->key;
 		return res;
 	}
 }
-
 namespace ChuLiu { // O(V ^ 3) !!! 1-based !!!
 	int n, used[maxn], pass[maxn], eg[maxn], more, que[maxn], g[maxn][maxn];
-	void combine(int id, int &sum) {
-		int tot = 0, from, i, j, k;
+	void combine(int id, int &sum) { int tot = 0, from, i, j, k;
 		for ( ; id != 0 && !pass[id]; id = eg[id]) que[tot++] = id, pass[id] = 1;
 		for (from = 0; from < tot && que[from] != id; from++);
 		if (from == tot) return; more = 1;
 		for (i = from; i < tot; i++) {
-			sum += g[eg[que[i]]][que[i]];
-			if (i == from) continue;
+			sum += g[eg[que[i]]][que[i]]; if (i == from) continue;
 			for (j = used[que[i]] = 1; j <= n; j++) if (!used[j])
 				if (g[que[i]][j] < g[id][j]) g[id][j] = g[que[i]][j];
 		}
@@ -76,10 +67,9 @@ namespace ChuLiu { // O(V ^ 3) !!! 1-based !!!
 			}
 	}
 	void clear(int V) { n = V; Rep(i, 1, V) Rep(j, 1, V) g[i][j] = inf; }
-	int solve(int root) { // return the total length of MDST
-		int i, j, k, sum = 0;
-		memset(used, 0, sizeof(int) * (n + 1));
-		for (more = 1; more;) {
+	int solve(int root) {
+		int i, j, k, sum = 0; memset(used, 0, sizeof(int) * (n + 1));
+		for (more = 1; more; ) {
 			more = 0; memset(eg, 0, sizeof(int) * (n + 1));
 			for (i = 1; i <= n; i++) if (!used[i] && i != root) {
 				for (j = 1, k = 0; j <= n; j++) if (!used[j] && i != j)
