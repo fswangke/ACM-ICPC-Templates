@@ -1,7 +1,4 @@
-namespace MaxClique {
-	// 1-based
-	// mc[i]: max clique in [i ... n]
-	// mc[i] = mc[i + 1] or mc[i + 1] + 1
+namespace MaxClique { // 1-based
 	int g[MAXN][MAXN], len[MAXN], list[MAXN][MAXN], mc[MAXN], ans;
 	bool found;
 	void DFS(int size) {

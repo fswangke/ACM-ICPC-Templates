@@ -1,12 +1,10 @@
 int N, M, level[MAXN], matchX[MAXN], matchY[MAXN];
 bool used[MAXN];
 bool DFS(int x) {
-	used[x] = true;
-	for (edge e(fir[x]); e; e = e->next) {
+	used[x] = true; for (edge e(fir[x]); e; e = e->next) {
 		int y = e->to, z = matchY[y];
 		if (z == -1 || (!used[z] && level[x] < level[z] && DFS(z))) {
-			matchX[x] = y; matchY[y] = x;
-			return true;
+			matchX[x] = y; matchY[y] = x; return true;
 		}
 	} return false;
 }
@@ -25,12 +23,10 @@ int maxMatch() {
 		while (head < tail)
 			for (edge e(fir[x = Q[++head]]); e; e = e->next) {
 				int y = e->to, z = matchY[y];
-				if (z != -1 && level[z] < 0)
-					level[z] = level[x] + 1, Q[++tail] = z;
+				if (z != -1 && level[z] < 0) level[z] = level[x] + 1, Q[++tail] = z;
 			}
 		for (int x = 0; x < N; ++x) used[x] = false;
-		for (int x = 0; x < N; ++x) if (matchX[x] == -1)
-			if (DFS(x)) ++d;
+		for (int x = 0; x < N; ++x) if (matchX[x] == -1) if (DFS(x)) ++d;
 		if (d == 0) break;
 	} return match;
 }
