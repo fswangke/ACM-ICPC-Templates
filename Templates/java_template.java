@@ -5,8 +5,7 @@ import java.math.*;
 class Node implements Comparable<Node> {
 	int key;
 	public int compareTo(Node o) {
-		if (key != o.key)
-			return key < o.key ? -1 : 1;
+		if (key != o.key) return key < o.key ? -1 : 1;
 		return 0;
 	}
 	public boolean equals(Object o) { return false; }
