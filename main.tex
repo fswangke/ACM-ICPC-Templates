@@ -165,8 +165,8 @@
     $ext[i] = \max\{len | A[0 \ldots len - 1] = B \textrm{的第i位向前或后的长度为 $len$ 的串} \}$
     \input{"String Related/KMP.tex"}
 
-  \subsection{Aho-Corasick 自动机}
-    \input{"String Related/Aho Corasick Automaton.tex"}
+%  \subsection{Aho-Corasick 自动机}
+%    \input{"String Related/Aho Corasick Automaton.tex"}
 
   \subsection{后缀自动机}
     \input{"String Related/Suffix Automaton.tex"}
@@ -208,8 +208,8 @@
   \subsection{欧拉路}
     \input{"Graph Theory/EulerianWalk.tex"}
 
-  \subsection{稳定婚姻}
-    \input{"Graph Theory/StableMatching.tex"}
+%  \subsection{稳定婚姻}
+%    \input{"Graph Theory/StableMatching.tex"}
 
   \subsection{最大团搜索}
     \input{"Graph Theory/MaxClique.tex"}
@@ -235,12 +235,7 @@
   
   \subsection{小知识}
   \begin{itemize}
-  \item 平面图: 
-    \begin{enumerate}
-    \item 平面图一定存在一个度小于等于$5$的点
-    \item $E \le 3V - 6$
-    \item 欧拉公式: $V + F - E = 1 + \mbox{连通块数}$
-    \end{enumerate}
+  \item 平面图: 一定存在一个度小于等于$5$的点. $E \le 3V - 6$. 欧拉公式: $V + F - E = 1 + \mbox{连通块数}$
   \item 图连通度: 
     \begin{enumerate}
     \item $k-$连通(\emph{k-connected}): 对于任意一对结点都至少存在结点各不相同的$k$条路
@@ -256,15 +251,12 @@
     $s(G) = t_i(G) \prod_{j = 1}^{n} (d^+(v_j) - 1)! $
   \item 密度子图: 给定无向图, 选取点集及其导出子图, 最大化 $W_e + P_v$ (点权可负).
     \begin{itemize}
-    \item $(S, u) = U$
-    \item $(u, T) = U - 2 P_u - D_u$
-    \item $(u, v) = (v, u) = W_e$
+    \item $(S, u) = U$, $(u, T) = U - 2 P_u - D_u$, $(u, v) = (v, u) = W_e$
     \item ans = $\frac{Un - C[S, T]}{2}$, 解集为 $S - \{s\}$
     \end{itemize}
   \item 最大权闭合图: 选$a$则$a$的后继必须被选
     \begin{itemize}
-    \item $P_u > 0$, $(S, u) = P_u$
-    \item $P_u < 0$, $(u, T) = -P_u$
+    \item $P_u > 0$, $(S, u) = P_u$, $P_u < 0$, $(u, T) = -P_u$
     \item ans = $\sum\limits_{P_u > 0}^{} P_u - C[S, T]$, 解集为 $S - \{s\}$
     \end{itemize}
   \item 判定边是否属于最小割:
@@ -275,12 +267,12 @@
   \end{itemize}
 
 \section{数学}
-%  \subsection{单纯形Cpp}
-%    max $\left \{ cx | Ax \le b, x \ge 0 \right \}$
-%    \input{"Math/SimplexCpp.tex"}
-  \subsection{单纯形Java}
+  \subsection{单纯形Cpp}
     max $\left \{ cx | Ax \le b, x \ge 0 \right \}$
-    \input{"Math/SimplexJava.tex"}
+    \input{"Math/SimplexCpp.tex"}
+%  \subsection{单纯形Java}
+%    max $\left \{ cx | Ax \le b, x \ge 0 \right \}$
+%    \input{"Math/SimplexJava.tex"}
 
   \subsection{FFT}
     \input{"Math/FFT.tex"}
@@ -365,36 +357,36 @@
   \subsection{公式}
     \subsubsection{级数与三角}
     \begin{itemize}
-    \item
-      $\sum_{k=1}^{n}k^3 = (\frac{n(n+1)}{2})^2  $
+%    \item
+%      $\sum_{k=1}^{n}k^3 = (\frac{n(n+1)}{2})^2  $
     \item
       $\sum_{k=1}^{n}k^4 = \frac{n(n+1)(2n+1)(3n^2+3n-1)}{30}  $
     \item
       $\sum_{k=1}^{n}k^5 = \frac{n^2(n+1)^2(2n^2+2n-1)}{12}  $
-    \item
-      $\sum_{k=1}^{n}k(k+1) = \frac{n(n+1)(n+2)}{3}  $
-    \item
-      $\sum_{k=1}^{n}k(k+1)(k+2) = \frac{n(n+1)(n+2)(n+3)}{4} $
-    \item
-      $\sum_{k=1}^{n}k(k+1)(k+2)(k+3) = \frac{n(n+1)(n+2)(n+3)(n+4)}{5} $
+%    \item
+%      $\sum_{k=1}^{n}k(k+1) = \frac{n(n+1)(n+2)}{3}  $
+%    \item
+%      $\sum_{k=1}^{n}k(k+1)(k+2) = \frac{n(n+1)(n+2)(n+3)}{4} $
+%    \item
+%      $\sum_{k=1}^{n}k(k+1)(k+2)(k+3) = \frac{n(n+1)(n+2)(n+3)(n+4)}{5} $
     \item 错排:
       $D_n = n!(1-\frac{1}{1!}+\frac{1}{2!}-\frac{1}{3!}+\ldots+\frac{(-1)^n}{n!}) = (n-1)(D_{n-2}-D_{n-1})$
-    \item
-      $\sin(\alpha \pm \beta) = \sin\alpha\cos\beta \pm \cos\alpha\sin\beta $
-    \item
-      $\cos(\alpha \pm \beta) = \cos\alpha\cos\beta \mp \sin\alpha\sin\beta $
-    \item
-      $\tan(\alpha \pm \beta) = \frac{\tan\alpha \pm \tan\beta}{1 \mp \tan\alpha\tan\beta} $
+%    \item
+%      $\sin(\alpha \pm \beta) = \sin\alpha\cos\beta \pm \cos\alpha\sin\beta $
+%    \item
+%      $\cos(\alpha \pm \beta) = \cos\alpha\cos\beta \mp \sin\alpha\sin\beta $
+%    \item
+%      $\tan(\alpha \pm \beta) = \frac{\tan\alpha \pm \tan\beta}{1 \mp \tan\alpha\tan\beta} $
     \item
       $\tan\alpha \pm \tan\beta = \frac{\sin(\alpha \pm \beta)}{\cos\alpha\cos\beta} $
-    \item
-      $\sin\alpha+\sin\beta = 2\sin\frac{\alpha+\beta}{2}\cos\frac{\alpha-\beta}{2} $
-    \item
-      $\sin\alpha-\sin\beta = 2\cos\frac{\alpha+\beta}{2}\sin\frac{\alpha-\beta}{2} $
-    \item
-      $\cos\alpha+\cos\alpha = 2\cos\frac{\alpha+\beta}{2}\cos\frac{\alpha-\beta}{2} $
-    \item
-      $\cos\alpha-\cos\beta = -2\sin\frac{\alpha+\beta}{2}\sin\frac{\alpha-\beta}{2} $
+%    \item
+%      $\sin\alpha+\sin\beta = 2\sin\frac{\alpha+\beta}{2}\cos\frac{\alpha-\beta}{2} $
+%    \item
+%      $\sin\alpha-\sin\beta = 2\cos\frac{\alpha+\beta}{2}\sin\frac{\alpha-\beta}{2} $
+%    \item
+%      $\cos\alpha+\cos\alpha = 2\cos\frac{\alpha+\beta}{2}\cos\frac{\alpha-\beta}{2} $
+%    \item
+%      $\cos\alpha-\cos\beta = -2\sin\frac{\alpha+\beta}{2}\sin\frac{\alpha-\beta}{2} $
     \item
       $\cos{n\alpha} =
           \binom{n}{0} \cos ^ {n} \alpha
@@ -520,12 +512,12 @@
     \subsubsection{椭圆}
     \begin{itemize}
     \item 椭圆$\frac{x^2}{a^2} + \frac{y^2}{b^2} = 1$, 其中离心率$e = \frac{c}{a}, c = \sqrt{a^2 - b^2}$; 焦点参数$p = \frac{b^2}{a}$
-    \item 椭圆上$(x, y)$点处的曲率半径为$R = a^2 b^2 (\dfrac{x^2}{a^4} + \dfrac{y^2}{b^4})^\frac{3}{2} = \dfrac{(r_1 r_2)^\frac{3}{2}}{ab}$, 其中$r_1$和$r_2$分别为$(x, y)$与两焦点$F_1$和$F_2$的距离. 设点$A$和点$M$的坐标分别为$(a, 0)$和$(x, y)$, 则$AM$的弧长为
-    \[ L_{AM} = a \int_0^{\arccos{\frac{x}{a} }} \sqrt{1 - e^2 \cos^2 t} \textrm{d} t = a \int_{\arccos{\frac{x}{a} }}^\frac{\pi}{2} \sqrt{1 - e^2 \sin^2 t} \textrm{d} t\]
+    \item 椭圆上$(x, y)$点处的曲率半径为$R = a^2 b^2 (\dfrac{x^2}{a^4} + \dfrac{y^2}{b^4})^\frac{3}{2} = \dfrac{(r_1 r_2)^\frac{3}{2}}{ab}$, 其中$r_1$和$r_2$分别为$(x, y)$与两焦点$F_1$和$F_2$的距离. %设点$A$和点$M$的坐标分别为$(a, 0)$和$(x, y)$, 则$AM$的弧长为
+%    \[ L_{AM} = a \int_0^{\arccos{\frac{x}{a} }} \sqrt{1 - e^2 \cos^2 t} \textrm{d} t = a \int_{\arccos{\frac{x}{a} }}^\frac{\pi}{2} \sqrt{1 - e^2 \sin^2 t} \textrm{d} t\]
     \item 椭圆的周长$L = 4a \int_0^{\frac{\pi}{2}} \sqrt{1 - e^2 \sin^2 t } \textrm{d} t = 4a E(e, \frac{\pi}{2})$, 其中
     \[ E(e, \frac{\pi}{2}) = \frac{\pi}{2} [ 1 - (\frac{1}{2})^2 e^2 - (\frac{1 \times 3}{2 \times 4})^2 \frac{e^4}{3} - (\frac{1 \times 3 \times 5}{2 \times 4 \times 6})^2 \frac{e^6}{5} - \cdots\]
     \item 设椭圆上点$M(x, y), N(x, -y), x, y > 0, A(a, 0)$, 原点$O(0, 0)$, 扇形$OAM$的面积$S_{OAM} = \frac{1}{2} ab \arccos{\frac{x}{a}}$, 弓形$MAN$的面积$S_{MAN} = ab \arccos{\frac{x}{a}} - xy$.
-    \item 需要$5$个点才能确定一个圆锥曲线.
+%    \item 需要$5$个点才能确定一个圆锥曲线.
     \item 设$\theta$为$(x, y)$点关于椭圆中心的极角, $r$为$(x, y)$到椭圆中心的距离, 椭圆极坐标方程:
     \[ x = r \cos \theta, y = r \sin \theta, r^2 = \frac{b^2 a^2}{b^2 \cos^2 \theta + a^2 \sin^2 \theta}\]
   \end{itemize}
@@ -576,16 +568,16 @@
       \item Bretschneider公式:
         $S = \sqrt{(p - a)(p - b)(p - c)(p - d) - abcd \cos^2(\frac{\theta}{2})}$, 其中 $\theta$ 为对角和
       \end{itemize}
-    \item 棱锥:
-      \begin{itemize}
-      \item 体积 $V = \frac{1}{3}Ah$, $A$为底面积, $h$ 为高
-      \item (对正棱锥) 侧面积 $S = \frac{1}{2} lp $, $l$为斜高, $p$ 为底面周长
-      \end{itemize}
-    \item 棱台:
-      \begin{itemize}
-      \item 体积$V = \dfrac{(A_1 + A_2 + \sqrt{A_1 A_2}) \cdot h}{3}$, $A_1$, $A_2$分别为上下底面面积, $h$为高
-      \item (对正棱台)侧面积$S = \frac{1}{2} (p_1 + p_2) \cdot l$, $p_1$, $p_2$为上下底面周长, $l$为斜高. 
-      \end{itemize}
+%    \item 棱锥:
+%      \begin{itemize}
+%      \item 体积 $V = \frac{1}{3}Ah$, $A$为底面积, $h$ 为高
+%      \item (对正棱锥) 侧面积 $S = \frac{1}{2} lp $, $l$为斜高, $p$ 为底面周长
+%      \end{itemize}
+%    \item 棱台:
+%      \begin{itemize}
+%      \item 体积$V = \dfrac{(A_1 + A_2 + \sqrt{A_1 A_2}) \cdot h}{3}$, $A_1$, $A_2$分别为上下底面面积, $h$为高
+%      \item (对正棱台)侧面积$S = \frac{1}{2} (p_1 + p_2) \cdot l$, $p_1$, $p_2$为上下底面周长, $l$为斜高. 
+%      \end{itemize}
     \end{itemize}
 
     \subsubsection{树的计数}
@@ -637,18 +629,18 @@
   \item Pick定理: 简单多边形, 不自交, 顶点如果全是整点. 则: 
         $ \textrm{严格在多边形内部的整点数} + \frac{1}{2} \textrm{在边上的整点数} - 1 = \textrm{面积}$
   \item Mersenne素数: $p$是素数且$2^p-1$的数是素数. (10000以内的$p$有: 2, 3, 5, 7, 13, 17, 19, 31, 61, 89, 107, 127, 521, 607, 1279, 2203, 2281, 3217, 4253, 4423, 9689, 9941)
-  \item 序列差分表: 差分表的第$0$条对角线确定原序列. 
-      设原序列为$h_i$, 第$0$条对角线为$c_0,c_1,\ldots,c_p,0,0,\ldots$. 
-      有这样两个公式: 
-      $h_n = \binom{n}{0}c_0 + \binom{n}{1}c_1 + \ldots + \binom{n}{p} c_p$, 
-      $\sum_{k = 0}^{n}h_k = \binom{n+1}{1}c_0 + \binom{n+1}{2}c_2 + \ldots + \binom{n+1}{p+1}c_p$
-  \item Fibonacci数相关: 
-    \begin{itemize}
-    \item $\gcd(F_n,F_m)=F_{\gcd(n,m)}$
-    \item 如果$a$是$b$的倍数, 那么$F_a$是$F_b$的倍数
-    \end{itemize}
-  \item GCD:
-    $\gcd(2^a-1,2^b-1)=2^{\gcd(a,b)}-1$
+%  \item 序列差分表: 差分表的第$0$条对角线确定原序列. 
+%      设原序列为$h_i$, 第$0$条对角线为$c_0,c_1,\ldots,c_p,0,0,\ldots$. 
+%      有这样两个公式: 
+%      $h_n = \binom{n}{0}c_0 + \binom{n}{1}c_1 + \ldots + \binom{n}{p} c_p$, 
+%      $\sum_{k = 0}^{n}h_k = \binom{n+1}{1}c_0 + \binom{n+1}{2}c_2 + \ldots + \binom{n+1}{p+1}c_p$
+%  \item Fibonacci数相关: 
+%    \begin{itemize}
+%    \item $\gcd(F_n,F_m)=F_{\gcd(n,m)}$
+%    \item 如果$a$是$b$的倍数, 那么$F_a$是$F_b$的倍数
+%    \end{itemize}
+%  \item GCD:
+%    $\gcd(2^a-1,2^b-1)=2^{\gcd(a,b)}-1$
   \item Fermat分解算法: 
     从$t=\sqrt{n}$开始, 
     依次检查$t^2-n,(t+1)^2-n,(t+2)^2-n,\ldots$, 
@@ -716,7 +708,7 @@
     求 $\sum_{i=0}^{n-1} \lfloor\frac{a+bi}{m}\rfloor$
     \input{"Others/DotsBelowLine.tex"}
 
-  \subsection{Java分数类}
+  \subsection{Java多项式}
     \input{"Others/Java Polynomial.tex"}
 
   \subsection{long long 乘法取模}
