@@ -1,33 +1,18 @@
-namespace KM {
-	int n, m, ans; // `left` && `right`
-	int L[MAX_LEFT], R[MAX_RIGHT], v[MAX_RIGHT];
-	bool bx[MAX_LEFT], by[MAX_RIGHT];
-	bool find(int x) {
-		bx[x] = true; for (edge e(fir[x]); e; e = e->next) {
-			int y = e->to, c = e->c;
-			if (!by[y] && L[x] + R[y] == c) {
-				by[y] = true;
-				if (!v[y] || find(v[y])) { v[y] = x; return true; }
-			}
-		} return false;
-	}
-	int km() {
-		memset(L, 0, sizeof(L)); memset(R, 0, sizeof(R)); memset(v, 0, sizeof(v));
-		for (int x = 1; x <= n; ++x) for (edge e(fir[x]); e; e = e->next)
-			L[x] = max(L[x], e->c);
-		ans = 0;
-		for (int i = 1; i <= min(n, m); ++i) for ( ; ; ) {
-			memset(bx, 0, sizeof(bx)); memset(by, 0, sizeof(by));
-			if (find(i)) break; int Min = INF;
-			for (int x = 1; x <= n; ++x) if (bx[x])
-				for (edge e(fir[x]); e; e = e->next) {
-					if (!by[e->to]) Min = min(Min, L[x] + R[e->to] - e->c);
-				}
-				for (int x = 1; x <= n; ++x) if (bx[x]) L[x] -= Min;
-				for (int y = 1; y <= m; ++y) if (by[y]) R[y] += Min;
-			}
-		for (int x = 1; x <= n; ++x) for (edge e(fir[x]); e; e = e->next)
-			if (v[e->to] == x) ans += e->c;
-		return ans;
+int N, Tcnt, w[MAXN][MAXN], slack[MAXN];
+int lx[MAXN], linkx[MAXN], visy[MAXN], ly[MAXN], linky[MAXN], visx[MAXN]; // `初值全为0`
+bool DFS(int x) { visx[x] = Tcnt;
+	Rep(y, 1, N) if(visy[y] != Tcnt) { int t = lx[x] + ly[y] - w[x][y];
+		if (t == 0) { visy[y] = Tcnt;
+			if (!linky[y] || DFS(linky[y])) { linkx[x] = y; linky[y] = x; return true; }
+		} else cMin(slack[y], t);
+	} return false;
+} void KM() {
+	Tcnt = 0; Rep(x, 1, N) Rep(y, 1, N) cMax(lx[x], w[x][y]);
+	Rep(S, 1, N) { Rep(i, 1, N) slack[i] = INF;
+		for (++Tcnt; !DFS(S); ++Tcnt) { int d = INF;
+			Rep(y, 1, N) if(visy[y] != Tcnt) cMin(d, slack[y]);
+			Rep(x, 1, N) if(visx[x] == Tcnt) lx[x] -= d;
+			Rep(y, 1, N) if(visy[y] == Tcnt) ly[y] += d; else slack[y] -= d;
+		}
 	}
 }
