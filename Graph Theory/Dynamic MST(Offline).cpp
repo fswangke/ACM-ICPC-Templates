@@ -10,10 +10,8 @@ void init() {
 	scanf("%d", &Q); for (int i = 0; i < Q; i++) { scanf("%d%d", qx + i, qy + i); qx[i]--; }
 }
 int find(int x) {
-	int root = x, next;
-	while (a[root]) root = a[root];
-	while ((next = a[x]) != 0) a[x] = root, x = next;
-	return root;
+	int root = x, next; while (a[root]) root = a[root];
+	while ((next = a[x]) != 0) a[x] = root, x = next; return root;
 }
 inline bool cmp(const int &a, const int &b) { return tz[a] < tz[b]; }
 void solve(int *qx, int *qy, int Q, int n, int *x, int *y, int *z, int m, long long ans) {
@@ -30,8 +28,7 @@ void solve(int *qx, int *qy, int Q, int n, int *x, int *y, int *z, int m, long l
 	} int tm = kt = 0, n2 = 0, m2 = 0;
 	for (int i = 1; i <= n; i++) a[i] = 0;
 	for (int i = 0; i < Q; i++) {
-		ri = find(x[qx[i]]); rj = find(y[qx[i]]);
-		if (ri != rj) a[ri] = rj;
+		ri = find(x[qx[i]]); rj = find(y[qx[i]]); if (ri != rj) a[ri] = rj;
 	}
 	for (int i = 0; i < m; i++) extra[i] = true;
 	for (int i = 0; i < Q; i++) extra[qx[i]] = false;
