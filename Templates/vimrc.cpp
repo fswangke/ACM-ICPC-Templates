@@ -1,4 +1,4 @@
-﻿set nu ru nobk ci si
+﻿set nu ru nobk cindent si
 set mouse=a sw=4 sts=4 ts=4
 set hlsearch incsearch
 set whichwrap=b,s,<,>,[,]
