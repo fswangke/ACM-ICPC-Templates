@@ -19,15 +19,15 @@ namespace BufferedReader {
 		} return true;
 	}
 	bool nextUnsignedInt(unsigned int &x) {
-		for ( ; ; ) { if ( !nextChar(c) ) return false; if ('0' <= c && c <= '9') break; }
-		for (x = c - '0'; nextChar(c); x = x * 10 + c - '0') if (c < '0' || c > '9') break;
+		for (;;){if (!nextChar(c)) return false; if ('0'<=c && c<='9') break;}
+		for (x=c-'0'; nextChar(c); x = x * 10 + c - '0') if (c < '0' || c > '9') break;
 		return true;
 	}
 	bool nextInt(int &x) {
-		for ( ; ; ) { if ( !nextChar(c) ) return false; if (c == '-' || ('0' <= c && c <= '9')) break; }
-		for ((c == '-') ? (x = 0, flag = true) : (x = c - '0' : flag = false); nextChar(c); x = x * 10 + c - '0')
-			if (c < '0' || c > '9') break;
-		if (flag) x = -x; return true;
+		for (;;) { if (!nextChar(c)) return false; if (c=='-' || ('0'<=c && c<='9')) break; }
+		for ((c=='-') ? (x=0,flag=true) : (x=c-'0',flag=false); nextChar(c); x=x*10+c-'0')
+			if (c<'0' || c>'9') break;
+		if (flag) x=-x; return true;
 	}
 };
 #endif

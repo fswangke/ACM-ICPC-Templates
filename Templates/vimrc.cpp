@@ -8,7 +8,7 @@ nmap <C-A> ggVG
 vmap <C-C> "+y
 
 autocmd BufNewFile *.cpp 0r ~/Templates/cpp.cpp
-map<F9> :!g++ % -o %< -Wall -g3 <CR>
+map<F9> :!g++ % -o %< -Wall -Wconversion -Wextra -g3 <CR>
 map<F5> :!./%< <CR>
 map<F8> :!./%< < %<.in <CR>
 
