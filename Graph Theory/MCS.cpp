@@ -1,18 +1,17 @@
 class Chordal //1-Based
-{
-public:
-    int v[Maxn], id[Maxn];
+{ //G is the Graph, must be sorted before call Check_Chordal
+public: //Construct will sort it automatically
+    int v[Maxn], id[Maxn]; 
     bool inseq[Maxn];
     priority_queue<pair<int, int> > pq;
     vector<int> Construct_Perfect_Elimination_Sequence(vector<int> *G, int n)
-    {
+    { //O(m + nlogn)
         vector<int> seq(n + 1, 0);
         for(int i = 0; i <= n; ++i)
             inseq[i] = false, sort(G[i].begin(), G[i].end()), v[i] = 0;
         int cur = n;
         pair<int, int> Mx;
         while(!pq.empty()) pq.pop();
-        //Construct Perfect elimition sequence
         pq.push(make_pair(0, 1));
         for(int i = n; i >= 1; --i)
         {
@@ -30,8 +29,7 @@ public:
         return seq;
     }
     bool Check_Chordal(vector<int> *G, vector<int> &seq, int n) //plz gen seq first
-    {
-        //check whether it is a Chordal
+    { //O(n + mlogn)
         bool isChordal = true;
         for(int i = n - 1; i >= 1 && isChordal; --i)
         {
