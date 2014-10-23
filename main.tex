@@ -3,6 +3,7 @@
 \usepackage{ctex, amsmath, amsthm, graphicx, amsfonts, fancyhdr, ctable, pict2e, CJKulem, multirow, rotating, geometry, listings}
 \usepackage[CJKbookmarks, colorlinks = true, linkcolor = red, anchorcolor = blue, citecolor = blue, pdfstartview={FitH}]{hyperref}
 
+\renewcommand{\baselinestretch}{0.8}
 \geometry{left=2.0cm, right=2.0cm, top=2.5cm, bottom=1.5cm}
 \lstset{language=C++, breaklines, frame=single,
     numbers=left,
@@ -725,6 +726,7 @@
 
 \section{Templates}
   \subsection{vim配置}
+    在 .bashrc 中加入 export CXXFLAGS="-Wall -Wconversion -Wextra -g3"
     \input{"Templates/vimrc.tex"}
   \subsection{C++}
     \input{"Templates/cpp_template.tex"}
