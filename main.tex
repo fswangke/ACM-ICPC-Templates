@@ -476,34 +476,28 @@
       \item $\Gamma(s)\Gamma(1 - s) = \frac{\pi}{\sin \pi s}$ for $s > 0$
       \item $\Gamma(s)\Gamma(s + \frac{1}{2}) = 2\sqrt{\pi} \frac{\Gamma(s)}{2^{2s - 1}}$ for $0 < s < 1$
       \end{itemize}
-    \item
-      \begin{tabular}{|c|c|c|c|}
-      \hline
-         & $y = f(x)$ & $x = x(t), y = y(t), t \in [T_1, T_2]$ & $r = r(\theta), \theta \in [\alpha, \beta]$\\
-      \hline
-      平面图形面积
-      & $\int\limits_{a}^{b}f(x){\rm d}x$
-      & $\int\limits_{T_1}^{T_2} | y(t) x^\prime(t) | {\rm d}t$
-      & $\frac{1}{2}\int\limits_{\alpha}^{\beta}r^2(\theta) {\rm d}\theta $ \\
-      \hline
-      曲线弧长
-      & $\int\limits_{a}^{b} \sqrt{1 + f^{\prime 2}(x)} {\rm d}x$
-      & $\int\limits_{T_1}^{T_2} \sqrt{x^{\prime 2}(t) + y^{\prime 2}(t)} {\rm d}t$
-      & $\int\limits_{\alpha}^{\beta} \sqrt{r^{2}(\theta) + r^{\prime 2}(\theta)} {\rm d}\theta$ \\
-      \hline
-      旋转体体积
-      & $\pi\int\limits_{a}^{b} f^2(x) {\rm d}x$
-      & $\pi\int\limits_{T_1}^{T_2} |x^\prime(t)| y^2(t) {\rm d}t$
-      & $\frac{2}{3}\pi\int\limits_{\alpha}^{\beta}r^3(\theta)\sin\theta{\rm d}\theta$ \\
-      \hline
-      旋转曲面面积
-      &$2\pi\int\limits_{a}^{b}|f(x)|\sqrt{1 + f^{\prime 2}(x)} {\rm d}x$
-      &$2\pi\int\limits_{T_1}^{T_2}|y(t)|\sqrt{x^{\prime 2}(t) + y^{\prime 2}(t)}{\rm d}t$
-      &$2\pi\int\limits_{\alpha}^{\beta}r(\theta)\sin\theta\sqrt{r^2(\theta)+r^{\prime2}(\theta)}{\rm d}\theta$\\
-      \hline
-      \end{tabular}
+    \item 积分：平面图形面积、曲线弧长、旋转体体积、旋转曲面面积
+        $y = f(x)$,
+        $\int\limits_{a}^{b}f(x){\rm d}x$,
+        $\int\limits_{a}^{b} \sqrt{1 + f^{\prime 2}(x)} {\rm d}x$,
+        $\pi\int\limits_{a}^{b} f^2(x) {\rm d}x$,
+        $2\pi\int\limits_{a}^{b}|f(x)|\sqrt{1 + f^{\prime 2}(x)} {\rm d}x$
+
+        $x = x(t), y = y(t), t \in [T_1, T_2]$,
+        $\int\limits_{T_1}^{T_2} | y(t) x^\prime(t) | {\rm d}t$,
+        $\int\limits_{T_1}^{T_2} \sqrt{x^{\prime 2}(t) + y^{\prime 2}(t)} {\rm d}t$,
+        $\pi\int\limits_{T_1}^{T_2} |x^\prime(t)| y^2(t) {\rm d}t$,
+        $2\pi\int\limits_{T_1}^{T_2}|y(t)|\sqrt{x^{\prime 2}(t) + y^{\prime 2}(t)}{\rm d}t$,
+
+        $r = r(\theta), \theta \in [\alpha, \beta]$,
+        $\frac{1}{2}\int\limits_{\alpha}^{\beta}r^2(\theta) {\rm d}\theta $,
+        $\int\limits_{\alpha}^{\beta} \sqrt{r^{2}(\theta) + r^{\prime 2}(\theta)} {\rm d}\theta$,
+        $\frac{2}{3}\pi\int\limits_{\alpha}^{\beta}r^3(\theta)\sin\theta{\rm d}\theta$,
+        $2\pi\int\limits_{\alpha}^{\beta}r(\theta)\sin\theta\sqrt{r^2(\theta)+r^{\prime2}(\theta)}{\rm d}\theta$
+
     \end{itemize}
-    \subsubsection{三次方程求根公式}
+    
+  \subsubsection{三次方程求根公式}
       对一元三次方程
       $x ^ 3 + px + q = 0$,
       令
