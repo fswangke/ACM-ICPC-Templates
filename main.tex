@@ -229,6 +229,21 @@
     \input{"Graph Theory/Dynamic MST(Offline).tex"}
 
   \subsection{弦图}
+    \begin{itemize}
+    \item 团数 $\le$ 色数
+    \item 最大独立集数 $\le$ 最小团覆盖数
+    \item 任何一个弦图都至少有一个单纯点, 不是完全图的弦图至少有两个不相邻的单纯点. 
+    \item 设第i个点在弦图的完美消除序列第 $p(i)$个. 令 $N(v) = \{w | w \text{与} v \text{相邻且} p(w) > p(v) \}$弦图的极大团一定是 $v \cup N(v)$ 的形式. 
+    \item 弦图最多有$n$个极大团. 
+    \item 设 $next(v)$ 表示 $N(v)$中最前的点. 令 $w*$ 表示所有满足 $A\in B$ 的 $w$ 中最后的一个点. 
+          判断 $v \cup N(v)$是否为极大团,
+          只需判断是否存在一个 $w$, 
+          满足 $Next(w) = v$ 且 $|N(v)| + 1 \le |N(w)|$ 即可. 
+    \item 最小染色：完美消除序列从后往前依次给每个点染色, 给每个点染上可以染的最小的颜色. (团数 = 色数)
+    \item 最大独立集：完美消除序列从前往后能选就选. 
+    \item 最小团覆盖：设最大独立集为 $\{p_1, p_2, \ldots, p_t\}$, 则 $\{p_1 \cup N(p_1), \ldots, p_t \cup N(p_t) \}$为最小团覆盖.  (最大独立集数 = 最小团覆盖数)
+    \end{itemize}
+
     \input{"Graph Theory/MCS.tex"}
 
 %  \subsection{K短路(允许重复)}
@@ -666,16 +681,7 @@
     \item 球不同, 盒不同, 无空: $m! S(n, m)$
     \item 球不同, 盒不同, 可空: $m^n$
     \end{enumerate}
-  \item 组合数:
-    \begin{itemize}
-    \item Lucas 定理:
-      对质数p,
-      设$n = n_k p^k + n_{k - 1} p ^ {k - 1} + \cdots + n_1 p + n_0$,
-      $m = m_k p^k + m_{k - 1} p ^ {k - 1} + \cdots + m_1 p + m_0$,
-      则 $ \binom{n}{m} \equiv \prod{i = 0}^{k}\binom{n_i}{m_i} \pmod{p}$
-    \item 组合数判断奇偶性:
-      若 $(n \& m) = m$, 则 $\binom{n}{m}$ 为奇数, 否则为偶数
-    \end{itemize}
+  \item 组合数奇偶性: 若 $(n \& m) = m$, 则 $\binom{n}{m}$ 为奇数, 否则为偶数
   \item 格雷码 $G(x) = x \otimes (x >> 1) $
   \item Bell 数: $B_n$ 代表将 $n$ 个元素划分成若干个非空集合的方案数
     \begin{itemize}
