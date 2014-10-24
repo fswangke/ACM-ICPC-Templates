@@ -66,7 +66,7 @@ bool checkCrossCS(const circle &cir, const point &p1, const point &p2) { // `非
 	return c.distSP(p1, p2) < r + EPS && (r < (c - p1).len() + EPS || r < (c - p2).len() + EPS);
 }
 bool checkCrossCC(const circle &cir1, const circle &cir2) { // `非严格`
-	double &r1 = cir1.r, &r2 = cir2.r, d = (cir1.o - cir2.o).len();
+	const double &r1 = cir1.r, &r2 = cir2.r, d = (cir1.o - cir2.o).len();
 	return d < r1 + r2 + EPS && fabs(r1 - r2) < d + EPS;
 }
 int isCC(const circle &cir1, const circle &cir2, point &a, point &b) {
