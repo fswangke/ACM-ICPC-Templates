@@ -1,6 +1,8 @@
 *.exe
 *.out
 *.in
+*.lyx
+*~
 
 *.aux
 *.log

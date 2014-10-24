@@ -5,23 +5,19 @@ double[] simplex(double[][] A, double[] b, double[] c) {
 	for (int i = 0; i < n + m; i++) ix[i] = i;
 	for (int i = 0; i < n; i++) {
 		for (int j = 0; j < m - 1; j++) D[i][j] = -A[i][j];
-		D[i][m - 1] = 1;
-		D[i][m] = b[i];
-		if (D[r][m] > D[i][m]) r = i;
+		D[i][m - 1] = 1; D[i][m] = b[i]; if (D[r][m] > D[i][m]) r = i;
 	}
 	for (int j = 0; j < m - 1; j++) D[n][j] = c[j];
 	D[n + 1][m - 1] = -1;
 	for (double d; ; ) {
 		if (r < n) {
-			int t = ix[s]; ix[s] = ix[r + m]; ix[r + m] = t;
-			D[r][s] = 1.0 / D[r][s];
+			int t = ix[s]; ix[s] = ix[r + m]; ix[r + m] = t; D[r][s] = 1.0 / D[r][s];
 			for (int j = 0; j <= m; j++) if (j != s) D[r][j] *= -D[r][s];
 			for (int i = 0; i <= n + 1; i++) if (i != r) {
 				for (int j = 0; j <= m; j++) if (j != s) D[i][j] += D[r][j] * D[i][s];
 				D[i][s] *= D[r][s];
 			}
-		}
-		r = -1; s = -1;
+		} r = -1; s = -1;
 		for (int j = 0; j < m; j++) if (s < 0 || ix[s] > ix[j]) {
 			if (D[n + 1][j] > EPS || D[n + 1][j] > -EPS && D[n][j] > EPS) s = j;
 		}
