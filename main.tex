@@ -11,7 +11,10 @@
     xleftmargin=2.0em,xrightmargin=2.0em,
     basicstyle=\ttfamily\footnotesize, tabsize=2,
 }
-\newcommand{\stb}[2]{\genfrac{ \{ }{ \} }{0pt}{}{#1}{#2}}
+
+%\newcommand{\stlf}[2]{\genfrac{ \[ }{ \] }{0pt}{}{#1}{#2}}
+\newcommand{\stlf}[2]{\genfrac{ [ }{ ] }{0pt}{}{#1}{#2}}
+\newcommand{\stls}[2]{\genfrac{ \{ }{ \} }{0pt}{}{#1}{#2}}
 
 \pagestyle{fancy}
 \lhead{Shanghai Jiao Tong University}
@@ -230,8 +233,8 @@
 
   \subsection{弦图}
     \begin{itemize}
-    \item 团数 $\le$ 色数
-    \item 最大独立集数 $\le$ 最小团覆盖数
+%    \item 团数 $\le$ 色数
+%    \item 最大独立集数 $\le$ 最小团覆盖数
     \item 任何一个弦图都至少有一个单纯点, 不是完全图的弦图至少有两个不相邻的单纯点. 
     \item 设第i个点在弦图的完美消除序列第 $p(i)$个. 令 $N(v) = \{w | w \text{与} v \text{相邻且} p(w) > p(v) \}$弦图的极大团一定是 $v \cup N(v)$ 的形式. 
     \item 弦图最多有$n$个极大团. 
@@ -606,38 +609,9 @@
   \subsection{小知识}
   \begin{itemize}
   \item 勾股数: 设正整数$n$的质因数分解为$n = \prod p_i ^ {a_i}$, 
-    则$x^2+y^2=n$有整数解的充要条件是$n$中不存在形如$p_i \equiv 3\pmod{4}$且指数$a_i$为奇数的质因数$p_i$
-  \item 勾股数2: 
-    \begin{verbatim}
-      a[0] := 0;
-      s := 0;
-      for i := 1 to n - 2 do
-        begin
-          a[i] := a[i - 1] + 1;
-          s := s + sqr(a[i]);
-        end;
-      {======s + sqr(a[n-1]) + sqr(a[n]) = k^2=======}
-      a[n - 1] := a[n - 2];
-      repeat
-        a[n - 1] := a[n - 1] + 1;
-      until odd(s + sqr(a[n - 1])) and (a[n - 1] > 2);
-      a[n] := (s + sqr(a[n - 1]) - 1) shr 1;
-    \end{verbatim}
-
-    知道\texttt{s}和\texttt{a[n-1]}后, 直接求了\texttt{a[n]}. 神奇了点. 
-
-    其实, 有当$n$为奇数: $n^2+{\lfloor\frac{n^2-1}{2}\rfloor}^2={\lfloor\frac{n^2+1}{2}\rfloor}^2$
-
-    若: 
-
-    $a=k\cdot(s^2 - t^2)$
-
-    $b=2\cdot k\cdot s\cdot t$
-
-    $c=k\cdot(s^2 + t^2)$
-
-    则$c^2=a^2+b^2$. 
-
+    则$x^2+y^2=n$有整数解的充要条件是$n$中不存在形如$p_i \equiv 3\pmod{4}$且指数$a_i$为奇数的质因数$p_i$.
+    $(\frac{a - b}{2})^2 + ab = (\frac{a + b}{2})^2$.
+  \item 素勾股数: 若 $m$ 和 $n$ 互质, 而且 $m$ 和 $n$ 中有一个是偶数, 则$a = m^2 - n^2$, $b = 2mn$, $c = m^2 + n^2$, 则$a$、$b$、$c$是素勾股数. 
   \item Stirling公式: $n! \approx \sqrt{2 \pi n} (\frac{n}{e})^n$
   \item Pick定理: 简单多边形, 不自交, 顶点如果全是整点. 则: 
         $ \textrm{严格在多边形内部的整点数} + \frac{1}{2} \textrm{在边上的整点数} - 1 = \textrm{面积}$
@@ -677,10 +651,20 @@
     \end{enumerate}
   \item 组合数奇偶性: 若 $(n \& m) = m$, 则 $\binom{n}{m}$ 为奇数, 否则为偶数
   \item 格雷码 $G(x) = x \otimes (x >> 1) $
+  \item 第一类 Stirling 数: $\stlf{n}{k}$ %代表第一类无符号 Stirling 数, 代表将 $n$ 阶置换群中有 $k$ 个环的置换个数; $s(n,k)$代表有符号型.
+    \begin{itemize}
+    \item $s(n, k) = (-1)^{n - k}\stlf{n}{k}$
+    \item $(x)^{(n)} = \sum\limits_{k = 0}^{n}\stlf{n}{k}x ^k$, $(x)_{n} = \sum\limits_{k = 0}^{n} s(n, k) x ^k$
+    \item $\stlf{n}{k} = n\stlf{n - 1}{k} + \stlf{n - 1}{k - 1}$, $\stlf{0}{0} = 1$, $\stlf{n}{0} = \stlf{0}{n} = 0$
+    \item $\stlf{n}{n - 2} = \frac{1}{4} (3n - 1) \binom{n}{3} $, $\stlf{n}{n - 3} = \binom{n}{2} \binom{n}{4} $
+    \item $\sum\limits_{k = 0}^{a}\stlf{n}{k} = n! - \sum\limits_{k = 0}^{n} \stlf{n}{k + a + 1}$
+    \item $\sum\limits_{p = k}^{n}\stlf{n}{p}\binom{p}{k} = \stlf{n + 1}{k + 1}$
+%    \item $s(n, n - p) = \frac{1}{(n - p - 1)!} \sum\limits_{0 \le k1, k2, \ldots, k_p: \sum}^{n}$
+    \end{itemize}
   \item Bell 数: $B_n$ 代表将 $n$ 个元素划分成若干个非空集合的方案数
     \begin{itemize}
     \item $B_0 = B_1 = 1$, $B_n = \sum\limits_{k = 0}^{n - 1} \binom{n - 1}{k} B_k$
-    \item $B_n = \sum\limits_{k = 0}^{n} \stb{n}{k} $
+    \item $B_n = \sum\limits_{k = 0}^{n} \stls{n}{k} $
     \item Bell 三角形: $a_{1, 1} = 1$, $a_{n, 1} = a_{n - 1, n - 1}$, $a_{n, m} = a_{n, m - 1} + a_{n - 1, m - 1}$, $B_n = a_{n, 1}$
     \item 对质数$p$, $B_{n + p} \equiv B_n + B_{n + 1} \pmod{p}$
     \item 对质数$p$, $B_{n + p^m} \equiv mB_n + B_{n + 1} \pmod{p}$
@@ -736,7 +720,6 @@
   \subsection{Java}
     \input{"Templates/java_template.tex"}
   \subsection{Eclipse配置}
-%    Exec=env UBUNTU\_MENUPROXY= 
     Exec=env UBUNTU\_MENUPROXY= /opt/eclipse/eclipse
 
     preference general keys 把 word completion 设置成 alt+c, 把 content assistant 设置成 alt + /
