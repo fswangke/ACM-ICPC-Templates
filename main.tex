@@ -126,11 +126,11 @@
   \subsection{立体角}
     对于任意一个四面体$OABC$,
     从$O$点观察$\Delta ABC$的立体角$\tan{\frac{\Omega}{2}} = 
-    \frac{\textrm{mix}(\vec{a}, \vec{b}, \vec{c}) }{
+    \frac{\textrm{mix}(\overrightarrow{a}, \overrightarrow{b}, \overrightarrow{c}) }{
         |a||b||c|
-      + (\vec{a} \cdot \vec{b}) |c|
-      + (\vec{a} \cdot \vec{c}) |b|
-      + (\vec{b} \cdot \vec{c}) |a|
+      + (\overrightarrow{a} \cdot \overrightarrow{b}) |c|
+      + (\overrightarrow{a} \cdot \overrightarrow{c}) |b|
+      + (\overrightarrow{b} \cdot \overrightarrow{c}) |a|
     }$.
 
 \section{数据结构}
@@ -555,25 +555,27 @@
 
     \subsubsection{向量恒等式}
     \begin{itemize}
-    \item $\vec{a} \cdot (\vec{b} \times \vec{c}) = \vec{b} \cdot (\vec{c} \times \vec{a}) = \vec{c} \cdot (\vec{a} \times \vec{b})$
-    \item $\vec{a} \times (\vec{b} \times \vec{c}) = (\vec{c} \times \vec{b}) \times \vec{a} = \vec{b}(\vec{a} \cdot \vec{c}) - \vec{c}(\vec{a} \cdot \vec{b})$
+    \item $\overrightarrow{a} \cdot (\overrightarrow{b} \times \overrightarrow{c}) = \overrightarrow{b} \cdot (\overrightarrow{c} \times \overrightarrow{a}) = \overrightarrow{c} \cdot (\overrightarrow{a} \times \overrightarrow{b})$
+    \item $\overrightarrow{a} \times (\overrightarrow{b} \times \overrightarrow{c}) = (\overrightarrow{c} \times \overrightarrow{b}) \times \overrightarrow{a} = \overrightarrow{b}(\overrightarrow{a} \cdot \overrightarrow{c}) - \overrightarrow{c}(\overrightarrow{a} \cdot \overrightarrow{b})$
     \end{itemize}
 
     \subsubsection{常用几何公式}
     \begin{itemize}
     \item 三角形的五心
       \begin{itemize}
-      \item 重心 $\vec{G} = \frac{\vec{A} + \vec{B} + \vec{C}}{3}$
+      \item 重心 $\overrightarrow{G} = \frac{\overrightarrow{A} + \overrightarrow{B} + \overrightarrow{C}}{3}$
       \item
-        内心 $\vec{I} = \frac{a\vec{A} + b\vec{B} + c\vec{C}}{a + b + c}$,
+        内心 $\overrightarrow{I} = \frac{a\overrightarrow{A} + b\overrightarrow{B} + c\overrightarrow{C}}{a + b + c}$,
         $R = \frac{2S}{a + b + c}$
       \item
-        外心 $\vec{O} = \frac{\vec{A} + \vec{B} + \frac{\vec{AC} \cdot \vec{BC}}{\vec{AB} \times \vec{BC}} \vec{AB}^{T}}{2}$,
+        外心
+        $x = \frac{\overrightarrow{A} + \overrightarrow{B} - \frac{\overrightarrow{BC} \cdot \overrightarrow{AC}}{\overrightarrow{AB} \times \overrightarrow{BC}} \overrightarrow{AB}^{T}}{2}$,
+        $y = \frac{\overrightarrow{A} + \overrightarrow{B} + \frac{\overrightarrow{BC} \cdot \overrightarrow{AC}}{\overrightarrow{AB} \times \overrightarrow{BC}} \overrightarrow{AB}^{T}}{2}$,
         $R = \frac{abc}{4S}$
       \item
-        垂心 $\vec{H} = 3\vec{G} - 2\vec{O} = \vec{C} + \frac{\vec{BC} \cdot \vec{AC}}{\vec{BC} \times \vec{AC}} \vec{AB} ^ {T}$
+        垂心 $\overrightarrow{H} = 3\overrightarrow{G} - 2\overrightarrow{O}$
       \item
-        旁心(三个) $\frac{-a\vec{A} + b\vec{B} + c\vec{C}}{-a + b + c}$
+        旁心(三个) $\frac{-a\overrightarrow{A} + b\overrightarrow{B} + c\overrightarrow{C}}{-a + b + c}$
       \end{itemize}
 
     \item 四边形: 设$D_1, D_2$为对角线, $M$为对角线中点连线, $A$为对角线夹角
@@ -685,6 +687,7 @@
     \item $\sum\limits_{k = 1}^{n} k^m = \cfrac{1}{m + 1} \sum\limits_{k = 0}^{m} \binom{m + 1}{k} B_k n ^ {m + 1 - k} $
     \item $B_m = 1 - \sum\limits_{k = 0}^{m - 1} \binom{m}{k} \frac{B_k}{m - k + 1}$
     \end{itemize}
+  \item 完全数: $x$ 是偶完全数等价于 $x = 2^{n - 1} (2^n - 1)$, 且 $2^n - 1$ 是质数.
   \end{itemize}
 
 \section{其他}
@@ -737,5 +740,7 @@
     Exec=env UBUNTU\_MENUPROXY= /opt/eclipse/eclipse
 
     preference general keys 把 word completion 设置成 alt+c, 把 content assistant 设置成 alt + /
+  \subsection{积分表}
+    \input{"Templates/calculus.tex"}
 
 \end{document}
