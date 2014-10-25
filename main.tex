@@ -621,11 +621,6 @@
 %      有这样两个公式: 
 %      $h_n = \binom{n}{0}c_0 + \binom{n}{1}c_1 + \ldots + \binom{n}{p} c_p$, 
 %      $\sum_{k = 0}^{n}h_k = \binom{n+1}{1}c_0 + \binom{n+1}{2}c_2 + \ldots + \binom{n+1}{p+1}c_p$
-%  \item Fibonacci数相关: 
-%    \begin{itemize}
-%    \item $\gcd(F_n,F_m)=F_{\gcd(n,m)}$
-%    \item 如果$a$是$b$的倍数, 那么$F_a$是$F_b$的倍数
-%    \end{itemize}
 %  \item GCD:
 %    $\gcd(2^a-1,2^b-1)=2^{\gcd(a,b)}-1$
   \item Fermat分解算法: 
@@ -651,15 +646,28 @@
     \end{enumerate}
   \item 组合数奇偶性: 若 $(n \& m) = m$, 则 $\binom{n}{m}$ 为奇数, 否则为偶数
   \item 格雷码 $G(x) = x \otimes (x >> 1) $
-  \item 第一类 Stirling 数: $\stlf{n}{k}$ %代表第一类无符号 Stirling 数, 代表将 $n$ 阶置换群中有 $k$ 个环的置换个数; $s(n,k)$代表有符号型.
+  \item Fibonacci数: 
     \begin{itemize}
-    \item $s(n, k) = (-1)^{n - k}\stlf{n}{k}$
+    \item $F_0 = F_1 = 1$, $F_i = F_{i - 1} + F_{i - 2}$, $F_{-i} = (-1) ^ {i - 1} F_i$
+    \item $F_i = \cfrac{1}{\sqrt{5}} ((\cfrac{1 + \sqrt{5}}{2}) ^ n - (\cfrac{1 - \sqrt{5}}{2}) ^ {n}) $
+    \item $\gcd(F_n,F_m)=F_{\gcd(n,m)}$
+    \item $F_{i + 1} F_i - F_i^2 = (-1) ^ i$
+    \item $F_{n + k} = F_k F_{n + 1} + F_{k - 1} F_n$
+    \end{itemize}
+  \item 第一类 Stirling 数: $\stlf{n}{k}$ 代表第一类无符号 Stirling 数, 代表将 $n$ 阶置换群中有 $k$ 个环的置换个数; $s(n,k)$代表有符号型, $s(n, k) = (-1)^{n - k}\stlf{n}{k}$.
+    \begin{itemize}
     \item $(x)^{(n)} = \sum\limits_{k = 0}^{n}\stlf{n}{k}x ^k$, $(x)_{n} = \sum\limits_{k = 0}^{n} s(n, k) x ^k$
     \item $\stlf{n}{k} = n\stlf{n - 1}{k} + \stlf{n - 1}{k - 1}$, $\stlf{0}{0} = 1$, $\stlf{n}{0} = \stlf{0}{n} = 0$
     \item $\stlf{n}{n - 2} = \frac{1}{4} (3n - 1) \binom{n}{3} $, $\stlf{n}{n - 3} = \binom{n}{2} \binom{n}{4} $
     \item $\sum\limits_{k = 0}^{a}\stlf{n}{k} = n! - \sum\limits_{k = 0}^{n} \stlf{n}{k + a + 1}$
     \item $\sum\limits_{p = k}^{n}\stlf{n}{p}\binom{p}{k} = \stlf{n + 1}{k + 1}$
 %    \item $s(n, n - p) = \frac{1}{(n - p - 1)!} \sum\limits_{0 \le k1, k2, \ldots, k_p: \sum}^{n}$
+    \end{itemize}
+  \item 第二类 Stirling 数: $\stls{n}{k} = S(n, k)$ 代表 $n$个不同的球, 放到 $k$ 个相同的盒子里, 盒子非空.
+    \begin{itemize}
+    \item $\stls{n}{k} = \frac{1}{k!} \sum\limits_{j = 0}^{k} (-1)^j \binom{k}{j} (k - j)^n$
+    \item $\stls{n + 1}{k} = k\stls{n}{k} + \stls{n}{k - 1}$, $\stls{0}{0} = 1$, $\stls{n}{0} = \stls{0}{n} = 0$
+    \item 奇偶性: $(n - k) \& \frac{k - 1}{2} == 0$
     \end{itemize}
   \item Bell 数: $B_n$ 代表将 $n$ 个元素划分成若干个非空集合的方案数
     \begin{itemize}
@@ -670,6 +678,11 @@
     \item 对质数$p$, $B_{n + p^m} \equiv mB_n + B_{n + 1} \pmod{p}$
     \item 对质数$p$, 模的周期一定是 $\frac{p^p - 1}{p - 1}$ 的约数, $p \le 101$时就是这个值
     \item 从$B_0$开始, 前几项是 $1, 1, 2, 5, 15, 52, 203, 877, 4140, 21147, 115975 \cdots$
+    \end{itemize}
+  \item Bernoulli 数
+    \begin{itemize}
+    \item $B_0 = 1$, $B_1 = \frac{1}{2}$, $B_2 = \frac{1}{6}$, $B_4 = -\frac{1}{30}$, $B_6 = \frac{1}{42}$, $B_8 = B_4$, $B_{10} = \frac{5}{66}$
+    \item $\sum\limits_{k = 1}^{n} = \cfrac{1}{m + 1} \sum\limits_{k = 0}^{m} \binom{m + 1}{k} B_k n ^ {m + 1 - k} $
     \end{itemize}
   \end{itemize}
 
