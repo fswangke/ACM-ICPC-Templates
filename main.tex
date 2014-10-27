@@ -61,6 +61,9 @@
     不能有重点, 点数应当不小于2
     \input{"Computational Geometry/Voronoi.tex"}
 
+  \subsection{四边形双费马点}
+    \input{"Computational Geometry/Fermat Point Of A Quadrilateral.tex"}
+
 %  \subsection{三角形和四边形的费马点}
 %    \begin{itemize}
 %    \item 费马点: 距几个顶点距离之和最小的点
@@ -86,8 +89,8 @@
     不能有重点
     \input{"Computational Geometry/3D Convex Hull.tex"}
 
-%  \subsection{球面点表面点距离}
-%    \input{"Computational Geometry/DistOnBall.tex"}
+  \subsection{球面点表面点距离}
+    \input{"Computational Geometry/DistOnBall.tex"}
     
   \subsection{长方体表面点距离}
     \input{"Computational Geometry/DistOnCuboid.tex"}
@@ -196,8 +199,8 @@
   \subsection{最大流}
     \input{"Graph Theory/Maxflow.tex"}
   
-%  \subsection{最高标号预流推进}
-%    \input{"Graph Theory/Highest Level Preflow-Push.tex"}
+  \subsection{最高标号预流推进}
+    \input{"Graph Theory/Highest Level Preflow-Push.tex"}
   
   \subsection{KM}
     \input{"Graph Theory/KM.tex"}
@@ -209,14 +212,14 @@
   \subsection{全局最小割 Stoer-Wagner}
     \input{"Graph Theory/Stoer-Wagner.tex"}
 
-%  \subsection{Hopcroft-Karp}
-%    \input{"Graph Theory/HopcroftKarp.tex"}
+  \subsection{Hopcroft-Karp}
+    \input{"Graph Theory/HopcroftKarp.tex"}
 
   \subsection{欧拉路}
     \input{"Graph Theory/EulerianWalk.tex"}
 
-%  \subsection{稳定婚姻}
-%    \input{"Graph Theory/StableMatching.tex"}
+  \subsection{稳定婚姻}
+    \input{"Graph Theory/StableMatching.tex"}
 
   \subsection{最大团搜索}
     \input{"Graph Theory/MaxClique.tex"}
@@ -252,11 +255,11 @@
 
     \input{"Graph Theory/MCS.tex"}
 
-%  \subsection{K短路(允许重复)}
-%    \input{"Graph Theory/K-shortest Path (Repeat is allowed).tex"}
+  \subsection{K短路(允许重复)}
+    \input{"Graph Theory/K-shortest Path (Repeat is allowed).tex"}
 
-%  \subsection{K短路(不允许重复)}
-%    \input{"Graph Theory/K-shortest Path (Repeat is not allowed).tex"}
+  \subsection{K短路(不允许重复)}
+    \input{"Graph Theory/K-shortest Path (Repeat is not allowed).tex"}
   
   \subsection{小知识}
   \begin{itemize}
@@ -344,7 +347,7 @@
     \input{"Math/PrimitiveRoot.tex"}
 
   \subsection{离散对数}
-    $A ^ x \equiv B \pmod(C)$, 对非质数 $C$ 也适用.
+    $A ^ x \equiv B \pmod{C}$, 对非质数 $C$ 也适用.
   \input{"Math/ModLog.tex"}
 
   \subsection{平方剩余}
@@ -443,22 +446,22 @@
       $\sum_{n = 1}^{N} \cos nx = \frac{\sin(N + \frac{1}{2})x - \sin \frac{x}{2}}{2 \sin \frac{x}{2}}$
     \item
       $\sum_{n = 1}^{N} \sin nx = \frac{-\cos(N + \frac{1}{2})x + \cos \frac{x}{2}}{2 \sin \frac{x}{2}}$
-    \item
-      $e^x = 1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} \cdots$ for $x \in (-\infty, +\infty)$ 
-    \item
-      $\cos x = 1 - \frac{x^2}{2!} + \frac{x^4}{4!} \cdots$ for $x \in (-\infty, +\infty)$
-    \item
-      $\sin x = x - \frac{x^3}{3!} + \frac{x^5}{5!} \cdots$ for $x \in (-\infty, +\infty)$
-    \item
-      $\arcsin x = x + \sum_{n = 1}^{\infty} \frac{(2n - 1)!!}{(2n)!!} \frac{x^{2n + 1}}{2n + 1}$
-                    for $ x \in [-1, 1]$
-    \item
-      $\arccos x = \frac{\pi}{2} - \sum_{n = 1}^{\infty} \frac{(2n - 1)!!}{(2n)!!} \frac{x^{2n + 1}}{2n + 1}$
-                    for $ x \in [-1, 1]$
-    \item
-      $\arctan x = x - \frac{x^3}{3} + \frac{x^5}{5} \cdots$ for $x \in [-1, 1]$
-    \item
-      $\ln(1 + x) = x - \frac{x^2}{2} + \frac{x^3}{3} \cdots$ for $x \in (-1, 1]$
+%    \item
+%      $e^x = 1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} \cdots$ for $x \in (-\infty, +\infty)$ 
+%    \item
+%      $\cos x = 1 - \frac{x^2}{2!} + \frac{x^4}{4!} \cdots$ for $x \in (-\infty, +\infty)$
+%    \item
+%      $\sin x = x - \frac{x^3}{3!} + \frac{x^5}{5!} \cdots$ for $x \in (-\infty, +\infty)$
+%    \item
+%      $\arcsin x = x + \sum_{n = 1}^{\infty} \frac{(2n - 1)!!}{(2n)!!} \frac{x^{2n + 1}}{2n + 1}$
+%                    for $ x \in [-1, 1]$
+%    \item
+%      $\arccos x = \frac{\pi}{2} - \sum_{n = 1}^{\infty} \frac{(2n - 1)!!}{(2n)!!} \frac{x^{2n + 1}}{2n + 1}$
+%                    for $ x \in [-1, 1]$
+%    \item
+%      $\arctan x = x - \frac{x^3}{3} + \frac{x^5}{5} \cdots$ for $x \in [-1, 1]$
+%    \item
+%      $\ln(1 + x) = x - \frac{x^2}{2} + \frac{x^3}{3} \cdots$ for $x \in (-1, 1]$
     \item
       $\int\limits_{0}^{\frac{\pi}{2}} \sin^n x {\rm d}x = 
         \left\{
