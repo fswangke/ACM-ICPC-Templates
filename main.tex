@@ -292,6 +292,12 @@
     \item 可能属于最小割: $(u, v)$ 不属于同一SCC
     \item 一定在所有最小割中: $(u, v)$ 不属于同一SCC, 且 $S, u$ 在同一 SCC, $u, T$ 在同一SCC
     \end{itemize}
+  \item 图同构 Hash: $F_t(i) = (F_{t - 1}(i) \times A
+                             + \sum_{i \rightarrow j} F_{t - 1}(j) \times B
+                             + \sum_{j \leftarrow i} F_{t - 1}(j) \times C
+                             + D \times (i = a)
+                             ) \pmod{P}$, 枚举点$a$, 迭代$K$次后求得的$F_k(a)$就是$a$点所对应的 Hash 值. 
+%      $\arcsin x = x + \sum_{n = 1}^{\infty} \frac{(2n - 1)!!}{(2n)!!} \frac{x^{2n + 1}}{2n + 1}$
   \end{itemize}
 
 \section{数学}
