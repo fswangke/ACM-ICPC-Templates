@@ -1,4 +1,4 @@
-int isPL(point a, point b, vector<point> &res) { // `µãÄæÊ±Õë¸ø³ö£¬ÎŞÈıµã¹²Ïß`
+int isPL(point a, point b, vector<point> &res) { // `ç‚¹é€†æ—¶é’ˆç»™å‡ºï¼Œæ— ä¸‰ç‚¹å…±çº¿`
 	static double theta[MAXN];
 	for (int i = 0; i < n; ++i) theta[i] = (list[(i + 1) % n] - list[i]).atan2();
 	double delta = theta[0];
@@ -15,7 +15,7 @@ int isPL(point a, point b, vector<point> &res) { // `µãÄæÊ±Õë¸ø³ö£¬ÎŞÈıµã¹²Ïß`
 		l %= n, r %= n;
 		if (sign(det(b - a, list[r] - list[l])) == 0) {
 			if (sign(det(b - a, list[l] - a)) == 0)
-			return -l; // `Ö±ÏßÓë $(list[l], list[r])$ ÖØºÏ`
+			return -l; // `ç›´çº¿ä¸ $(list[l], list[r])$ é‡åˆ`
 		}
 		else {
 			point p; lineIntersect(list[l], list[r], a, b, p);
