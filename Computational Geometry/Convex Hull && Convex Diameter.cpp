@@ -1,7 +1,7 @@
 vector<point> convexHull(int n, point ps[]) { // `counter-clockwise, strict`
 	static point qs[MAXN * 2];
 	sort(ps, ps + n, cmpByXY);
-	if (n <= 2) return vector(ps, ps + n);
+	if (n <= 2) return vector<point>(ps, ps + n);
 	int k = 0;
 	for (int i = 0; i < n; qs[k++] = ps[i++])
 		while (k > 1 && det(qs[k - 1] - qs[k - 2], ps[i] - qs[k - 1]) < EPS) --k;
