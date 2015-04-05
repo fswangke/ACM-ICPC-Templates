@@ -1,7 +1,7 @@
 namespace SuffixArrayDoubling {
 	int wa[MAXN], wb[MAXN], wv[MAXN], ws[MAXN];
 	int cmp(int *r, int a, int b, int l) { return r[a] == r[b] && r[a + l] == r[b + l]; }
-	void da(int *r, int *sa, int n, int m) {//the last char must be '$'
+	void da(int *r, int *sa, int n, int m) {
 		int i, j, p, *x = wa, *y = wb, *t; 
 		for (i = 0; i < m; i++) ws[i] = 0;
 		for (i = 0; i < n; i++) ws[x[i] = r[i]]++;
@@ -19,9 +19,24 @@ namespace SuffixArrayDoubling {
 				x[sa[i]] = cmp(y, sa[i - 1], sa[i], j) ? p - 1 : p++;
 }}}
 namespace CalcHeight {
-	int rank[MAXN], height[MAXN]; //if you add '$', remove
-	void calheight(int *r, int *sa, int n) { //it before call this function
+	int rank[MAXN], height[MAXN];
+	void calheight(int *r, int *sa, int n) { 
 		int i, j, k = 0; for (i = 1; i <= n; i++) rank[sa[i]] = i;
 		for (i = 0; i < n; height[rank[i++]] = k)
 			for (k ? k-- : 0, j = sa[rank[i] - 1]; r[i + k] == r[j + k]; k++);
 }}
+//Sample
+int r[MAXN]; char s[MAXN];
+int main()
+{
+	int len;
+	scanf("%s", s);
+	len = strlen(s);
+	for(int i = 0; i < len; ++i) r[i] = s[i] - 'a' + 1;
+	r[len] = 0;
+	SuffixArrayDoubling::da(strr, sa, n + 1, 30);
+	CalcHeight::calheight(strr, sa, n);
+	//Then the value of sa[0~len-1] is 1 ~ n, so init RMQ carefully(1~n not 0~n-1)
+	return 0;
+}
+}
