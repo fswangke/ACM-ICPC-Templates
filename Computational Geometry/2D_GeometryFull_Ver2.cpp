@@ -1,3 +1,5 @@
+//Not checked, dangerous!!!!
+
 #include <cstdio>
 #include <cmath>
 #include <algorithm> 
