@@ -282,6 +282,7 @@ inline point center(int n,point a[])
 {
 	point ret(0,0);
 	double area=0;
+	a[0] = a[n];
 	for (int i=1;i<=n;i++)
 	{
 		ret=ret+center(point(0,0),a[i-1],a[i])*det(a[i-1],a[i]);
