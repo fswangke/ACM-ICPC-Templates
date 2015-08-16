@@ -24,7 +24,13 @@ namespace CalcHeight {
 		int i, j, k = 0; for (i = 1; i <= n; i++) rank[sa[i]] = i;
 		for (i = 0; i < n; height[rank[i++]] = k)
 			for (k ? k-- : 0, j = sa[rank[i] - 1]; r[i + k] == r[j + k]; k++);
-}}
+}
+	void init(int len)
+	{
+		for(int i = 0; i <= len + 10; ++i)
+			rank[i] = height[i] = 0;
+	}
+}
 //Sample
 int r[MAXN]; char s[MAXN];
 int main()
@@ -34,8 +40,8 @@ int main()
 	len = strlen(s);
 	for(int i = 0; i < len; ++i) r[i] = s[i] - 'a' + 1;
 	r[len] = 0;
-	SuffixArrayDoubling::da(strr, sa, n + 1, 30);
-	CalcHeight::calheight(strr, sa, n);
+	SuffixArrayDoubling::da(r, sa, n + 1, 30);
+	CalcHeight::calheight(r, sa, n);
 	//Then the value of sa[0~len-1] is 1 ~ n, so init RMQ carefully(1~n not 0~n-1)
 	return 0;
 }
