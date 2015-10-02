@@ -1,23 +1,19 @@
-struct node { int len; node *fa, *go[26]; } base[MAXNODE], *top = base, *root, *que[MAXNODE];
-typedef node *tree;
-inline tree newNode(int len) {
-	top->len = len; top->fa = NULL; memset(top->go, 0, sizeof(top->go)); return top++;
-} inline tree newNode(int len, tree fa, tree *go) {
-	top->len = len; top->fa = fa; memcpy(top->go, go, sizeof(top->go)); return top++;
-} void construct(char *A, int N) {
-	tree p = root = newNode(0), q, up, fa;
-	for (int i = 0; i < N; ++i) {
-		int w = A[i] - 'a'; up = p; p = newNode(i + 1);
-		for ( ; up && !up->go[w]; up = up->fa) up->go[w] = p;
-		if (!up) p->fa = root;
-		else { q = up->go[w];
-			if (up->len + 1 == q->len) p->fa = q;
-			else { fa = newNode(up->len + 1, q->fa, q->go);
-				for (p->fa = q->fa = fa; up && up->go[w] == q; up = up->fa) up->go[w] = fa;
-			}
-		}
-	} static int cnt[MAXLEN]; memset(cnt, 0, sizeof(int) * (N + 1));
-	for (tree i(base); i != top; ++i) ++cnt[i->len];
-	Rep(i, 1, N) cnt[i] += cnt[i - 1];
-	for (tree i(base); i != top; ++i) Q[ cnt[i->len]-- ] = i;
-}
+struct SAM {
+	int in[Maxn * 2 + 1][Sigma], fa[Maxn * 2 + 1], max[Maxn * 2 + 1], tot, last;
+	void init(int n) {
+		tot = last = 0;
+		for(int i = 0; i <= 2 * n + 1; ++i)
+			memset(in[i], -1, sizeof in[i]), fa[i] = -1;
+	}
+	void add(int x) {
+		int v = last; ++tot, last = tot, max[last] = max[v] + 1;
+		while(v != -1 && in[v][x] == -1) in[v][x] = last, v = fa[v];
+		if(v == -1) { fa[last] = 0; return; }
+		int p = in[v][x];
+		if(max[p] == max[v] + 1) fa[last] = p;
+		else {
+			int np = ++tot;
+			max[np] = max[v] + 1; fa[np] = fa[p], fa[p] = np, fa[last] = np;
+			while(v != -1 && in[v][x] == p) in[v][x] = np, v = fa[v];
+			memcpy(in[np], in[p], sizeof in[p]);
+}}};
