@@ -17,7 +17,7 @@ inline double arcCos(const double &a) {
 	return acos(a);
 }
 
-struct point {
+`struct point {
 	double x, y;
 	point(): x(0.0), y(0.0) {}
 	point(const double &x, const double &y): x(x), y(y) {}
