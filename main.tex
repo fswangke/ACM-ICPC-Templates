@@ -1,4 +1,4 @@
-\documentclass[landscape, twocolumn, 8pt, a4paper, twoside]{extarticle}
+\documentclass[landscape, twocolumn, 8pt, a4paper, twoside, winfonts]{extarticle}
 
 \usepackage{ctex, amsmath, amsthm, graphicx, amsfonts, fancyhdr, ctable, pict2e, CJKulem, multirow, rotating, geometry, listings}
 \usepackage[CJKbookmarks, colorlinks = true, linkcolor = red, anchorcolor = blue, citecolor = blue, pdfstartview={FitH}]{hyperref}
@@ -195,7 +195,7 @@
   \subsection{环串最小表示}
     \input{"String Related/Minimial Representation Of A Cyclic String.tex"}
   \subsection{回文自动机}
-    \input{"String Related/Palindrome Automaton.tex"}
+    \input{"String Related/PA.tex"}
 \section{图论}
   \subsection{带花树}
     \input{"Graph Theory/Blossom Algorithm.tex"}
@@ -674,7 +674,7 @@
     \item 球同, 盒同, 无空: dp
     \item 球同, 盒同, 可空: dp
     \item 球同, 盒不同, 无空: $\binom{n - 1}{m - 1}$
-    \item 球同, 盒不同, 可空: $\binom{n + m - 1}{n - 1}$
+    \item 球同, 盒不同, 可空: $\binom{n + m - 1}{m - 1}$
     \item 球不同, 盒同, 无空: $S(n, m)$
     \item 球不同, 盒同, 可空: $\sum_{k = 1}^{m} S(n, k)$
     \item 球不同, 盒不同, 无空: $m! S(n, m)$
